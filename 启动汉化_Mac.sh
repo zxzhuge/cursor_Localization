@@ -83,8 +83,8 @@ echo "[信息] 用户数据: ${CURSOR_USER_DIR}"
 echo "[信息] Workbench: ${WORKBENCH_HTML}"
 echo
 echo "即将执行："
-echo "  安装/更新官方简体中文语言包（VSIX）"
 echo "  向 Cursor 安装目录注入/更新汉化脚本（会修改 workbench.html）"
+echo "  不要求安装官方简体中文语言包（Chinese Simplified Language Pack）"
 echo "  汉化完成后将询问是否自动启动 Cursor"
 echo
 read -r -p "确认继续？[Y/N]: " CONFIRM

@@ -41,7 +41,7 @@ if errorlevel 1 call :WaitKey & exit /b 1
 
 call :ShowInfo
 echo.
-echo 即将执行: 安装官方简体中文语言包、注入/更新汉化脚本并修改工作台文件; 完成后可选择是否自动启动 Cursor
+echo 即将执行: 注入/更新汉化脚本并修改工作台文件（不要求安装官方简体中文语言包）; 完成后可选择是否自动启动 Cursor
 echo.
 set /p "CONFIRM=确认继续？[Y/N]: "
 if /i not "%CONFIRM%"=="Y" if /i not "%CONFIRM%"=="YES" goto :UserCancelled

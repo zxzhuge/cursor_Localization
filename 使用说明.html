@@ -311,7 +311,7 @@
 <hr>
 <h2>工具介绍</h2>
 <p>Cursor 官方目前尚未提供中文界面或汉化包，常见做法是安装VSCode汉化插件实现部分汉化，菜单、通用设置等会变成中文，但智能体侧栏、Cursor 设置、插件市场等 <strong>Cursor 专有界面</strong> 往往仍是英文，给习惯使用中文界面的用户增加了学习和使用成本。</p>
-<p><strong>Cursor 完整汉化工具</strong> 的做法是在自动安装VSCode汉化包的同时，向工作台注入带词典的运行时脚本，把<strong>Cursor专有界面</strong>也替换成中文，让日常使用的界面尽量一眼能读懂。工具已实现编辑器模式（Editor）和智能体模式（Agent）两种界面的全面汉化。</p>
+<p><strong>Cursor 完整汉化工具</strong> 通过向工作台注入带词典的运行时脚本，把<strong>Cursor专有界面</strong>替换成中文，让日常使用的界面尽量一眼能读懂。<strong>不要求</strong>安装 Chinese (Simplified) Language Pack。工具已实现编辑器模式（Editor）和智能体模式（Agent）两种界面的全面汉化。</p>
 <h3>发布地址：</h3>
 <p><a href="https://www.vibepm.net/cursor/">https://www.vibepm.net/cursor/</a></p>
 <h3>覆盖区域：</h3>
@@ -323,9 +323,9 @@
 </ul>
 <h3>主要特点：</h3>
 <ul>
-<li><strong>自动安装VSCode汉化包</strong>：一键自动安装VSCode汉化扩展（覆盖标准菜单、通用设置等），如有更新，将自动根据版本下载匹配的语言包并安装，省去自己去扩展市场手动搜索、安装语言包的步骤。</li>
-<li><strong>双层汉化，覆盖面更全</strong>：通过注入脚本 + 本地词典，完整翻译 Cursor 专有界面，例如智能体侧栏、Cursor 设置（账户 / 模型 / 规则 / MCP）、插件市场、欢迎页、Git 面板及部分通知弹窗等。</li>
-<li><strong>不改动核心程序，可一键还原</strong>：只修改工作台相关文件（如 <code>workbench.html</code>），需要英文时运行「取消汉化」脚本即可恢复，已装的VsCode<strong>汉化包</strong>可保留。</li>
+<li><strong>无需官方语言包</strong>：默认不安装、不依赖 Chinese (Simplified) Language Pack；仅通过注入脚本完成汉化。</li>
+<li><strong>注入汉化，覆盖 Cursor 专有界面</strong>：通过注入脚本 + 本地词典，翻译智能体侧栏、Cursor 设置（账户 / 模型 / 规则 / MCP）、插件市场、欢迎页、Git 面板及部分通知弹窗等。</li>
+<li><strong>不改动核心程序，可一键还原</strong>：只修改工作台相关文件（如 <code>workbench.html</code>），需要英文时运行「取消汉化」脚本即可恢复。</li>
 <li><strong>维护成本低</strong>：Cursor 小版本更新后若有个别位置变回英文，再运行一次启动脚本即可，一般无需重装软件。</li>
 <li><strong>其它说明</strong>：日常点得到的界面大多已是中文；个别菜单、动态文案或新版本新增词条可能仍为英文，可在词典中补充后重新注入。Agent 对话与模型生成内容不属于界面汉化范围。</li>
 </ul>
@@ -336,7 +336,7 @@
 <ol>
 <li>下载并解压汉化工具（内含 <code>启动汉化_Win.bat</code> / <code>启动汉化_Mac.sh</code> 等）。</li>
 <li><strong>Windows</strong>：双击 <code>启动汉化_Win.bat</code>。<strong>Mac / Linux</strong>：在终端执行 <code>启动汉化_Mac.sh</code>。</li>
-<li>脚本会安装语言包并注入汉化，按提示可选打开 Cursor。</li>
+<li>脚本会注入汉化（<strong>不要求</strong>安装官方简体中文语言包），按提示可选打开 Cursor。</li>
 <li><strong>完全退出并重启</strong> Cursor（不要只重载窗口）。</li>
 </ol>
 <p><strong>Mac在终端中运行汉化脚本：</strong></p>
@@ -344,17 +344,11 @@
 <li>打开<strong>终端</strong>：按 <code>Cmd + 空格</code>，输入「终端」后回车。</li>
 <li>在终端输入 <code>bash</code>加空格，再把 <code>启动汉化_Mac.sh</code> 拖入窗口补全路径后回车，输入<code>Y</code>进行汉化。</li>
 </ol>
-<p><strong>若安装后顶部菜单仍为英文</strong>，请手动切换显示语言：</p>
-<ol>
-<li>按 <code>Ctrl+Shift+P</code>（macOS：<code>Cmd+Shift+P</code>）打开<strong>命令面板</strong></li>
-<li>输入 <code>Configure Display Language</code>，选择 <strong>配置显示语言</strong></li>
-<li>在列表中选择 <strong>中文(简体)</strong>（<code>zh-cn</code>）</li>
-<li>按提示<strong>完全退出并重启</strong> Cursor</li>
-</ol>
+<p>本工具<strong>不要求</strong>安装 <strong>Chinese (Simplified) Language Pack</strong>。</p>
 <hr>
 <h2>恢复英文</h2>
 <p>Windows 双击 <code>取消汉化_Win.bat</code>； Mac / Linux 运行 <code>取消汉化_Mac.sh</code>；</p>
-<p>同样要完全退出并重启。语言包会保留，只是撤销注入、恢复备份文件。</p>
+<p>同样要完全退出并重启。取消汉化只撤销注入并恢复备份文件。</p>
 <hr>
 <h2>常见问题</h2>
 <ul>
@@ -362,7 +356,7 @@
 <li><strong>已经执行汉化但是没有生效</strong>：确认已完全重启了 Cursor。</li>
 <li><strong>运行脚本报错 / 弹出 Microsoft Store / 汉化无输出</strong>：通常是未安装真正的 Python。运行 <code>where python</code>，若路径含 <code>Microsoft\WindowsApps</code>，请从 <a href="https://www.python.org/downloads/">python.org</a> 安装 Python 3 并勾选 <strong>Add python.exe to PATH</strong>，或执行 <code>winget install Python.Python.3.12</code>；安装后重开终端，用 <code>python --version</code> 确认。</li>
 <li><strong>提示「安装已损坏 / installation appears to be corrupt」</strong>：汉化会修改 <code>workbench.html</code>，Cursor 还会校验 <code>product.json</code> 中的<strong>全部</strong> checksum（约 6 个核心文件）。请运行 <code>修复校验_Win.bat</code>（Mac/Linux 用 <code>修复校验_Mac.sh</code>），或执行 <code>python Cursor_Localization_Tool.py --fix-checksum</code>。若提示权限不足，Windows 请右键<strong>以管理员身份运行</strong>；完成后完全退出并重启 Cursor。</li>
-<li><strong>汉化后顶部菜单仍是英文</strong>：按 <code>Ctrl+Shift+P</code>（Mac 用 <code>Cmd+Shift+P</code>）→ 输入「Configure Display Language」→ 选 <strong>中文(简体) / zh-cn</strong> → 再完全重启一次。如果没有中文(简体)选项，在扩展市场中搜索并“ Chinese (Simplified) Language Pack"后重新设置。</li>
+<li><strong>标准菜单仍是英文</strong>：本工具默认不安装官方语言包；若需要 VS Code 标准菜单也中文化，可自行安装 Language Pack，或运行 <code>python Cursor_Localization_Tool.py --install-langpack</code>（可选，非必需）。</li>
 <li>用记事本打开目录中的 <code>Cursor_Localization_Tool.py</code>，在文件开头 <code>cd /d "%~dp0"</code>后面增加一行，指定 Cursor 安装目录，保存后重新运行启动脚本。</li>
 </ul>
 <pre style="white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; max-width: 100%;"><code class="language-bat" style="display: block; white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; max-width: 100%;">set CURSOR_INSTALL_DIR=D:\Program Files\cursor   # 含 Cursor.exe 的安装文件夹

@@ -4,7 +4,8 @@ Cursor 汉化工具
 功能：将翻译脚本注入 Cursor 的 workbench.html，实现设置页面及常见界面中文化。
 
 用法：
-  python Cursor_Localization_Tool.py           安装语言包 + 注入/更新汉化
+  python Cursor_Localization_Tool.py           注入/更新汉化（不要求安装官方语言包）
+  python Cursor_Localization_Tool.py --install-langpack  可选：额外安装官方简体中文语言包后再注入
   python Cursor_Localization_Tool.py --restore  恢复原始文件
   python Cursor_Localization_Tool.py --fix-checksum  仅修复 product.json 校验（解决「安装已损坏」提示）
   python Cursor_Localization_Tool.py --check-python  检查 Python 环境（排查 Windows Store 占位程序）
@@ -12,8 +13,9 @@ Cursor 汉化工具
   Windows：启动汉化_Win.bat / 取消汉化_Win.bat
   macOS/Linux：./启动汉化_Mac.sh / ./取消汉化_Mac.sh
 
-官方简体中文语言包位于项目根目录 VSCode-language-pack-zh-hans.vsix；
-若与当前 Cursor 内置 VS Code 版本不匹配，会自动从市场下载对应版本并覆盖。
+默认仅依赖注入脚本汉化，不要求安装 Chinese (Simplified) Language Pack。
+若需顺带安装官方语言包，可加 --install-langpack（根目录
+VSCode-language-pack-zh-hans.vsix；版本不匹配时可选从市场下载）。
 广告弹窗翻译单独维护于 localization/Ad_Popup_Dictionary.json，注入时自动合并进词典。
 插件市场翻译单独维护于 localization/Plugin_Marketplace_Dictionary.json，注入时自动生成市场页 JS 词典。
 通用界面主词典与正则规则位于 localization/Core_Dictionary.json、localization/Pattern_Dictionary.json。
@@ -1561,32 +1563,39 @@ def ZhuChengXu():
         print(f"[提示] 请检查 CURSOR_AN_ZHUANG_LU_JING 是否正确: {CURSOR_AN_ZHUANG_LU_JING}")
         sys.exit(1)
 
-    print("\n[步骤 1/4] 安装/更新官方简体中文语言包...")
-    AnZhuang_GuanFang_YuYan_Bao()
+    AnZhuangYuYanBao = any(
+        CanShu in ("--install-langpack", "--anzhuang-yuyanbao")
+        for CanShu in sys.argv[1:]
+    )
+    if AnZhuangYuYanBao:
+        print("\n[步骤] 可选：安装/更新官方简体中文语言包...")
+        AnZhuang_GuanFang_YuYan_Bao()
+    else:
+        print("\n[步骤] 跳过官方语言包（不要求安装 Chinese Simplified Language Pack）")
 
-    print("\n[步骤 2/4] 更新 Cursor 私有扩展翻译桥接...")
+    print("\n[步骤 1/3] 更新 Cursor 私有扩展翻译桥接（若已有 zh-cn 语言包）...")
     XieRu_KuoZhan_FanYi_QiaoJie()
 
     # 检查是否已注入
     if JianCha_YiZhuRu():
-        print("\n[步骤 3/4] 脚本已注入，正在更新...")
+        print("\n[步骤 2/3] 脚本已注入，正在更新...")
         ShengJi_HTML_ZhuRu_If_Needed()
         XieRu_FanYi_JS()
         ShanChu_JiuBan_JS()
         GengXin_JiaoYan_Zhi()
-        print("\n[完成] 语言包与脚本已更新！请完全退出并重启 Cursor 生效。")
+        print("\n[完成] 汉化脚本已更新！请完全退出并重启 Cursor 生效。")
         return
 
     # 首次注入
-    print("\n[步骤 3/4] 创建备份并写入脚本...")
+    print("\n[步骤 2/3] 创建备份并写入脚本...")
     ChuangJian_BeiFen()
     XieRu_FanYi_JS()
 
-    print("[步骤 4/4] 注入 HTML 引用...")
+    print("[步骤 3/3] 注入 HTML 引用...")
     ZhuRu_HTML()
 
     print("\n" + "=" * 60)
-    print("  [完成] 语言包安装与汉化注入成功！")
+    print("  [完成] 汉化注入成功！（无需安装官方语言包扩展）")
     print("  请完全退出并重启 Cursor 以查看效果。")
     print("  如需恢复: python Cursor_Localization_Tool.py --restore")
     print("  如需更新词典: 重新运行本脚本即可")
