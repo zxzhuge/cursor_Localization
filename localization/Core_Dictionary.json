@@ -5297,8 +5297,12 @@
           "选项"
         ],
         [
+          "Thought",
+          "Thought"
+        ],
+        [
           "Thinking",
-          "思考"
+          "Thinking"
         ],
         [
           "Does the model use thinking to generate its response?",

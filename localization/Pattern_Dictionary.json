@@ -878,11 +878,6 @@
       "replacement": "$1% 折扣，截至 $2"
     },
     {
-      "regex": "^(.+?) \\(Thinking\\)$",
-      "flags": "",
-      "replacement": "$1（思考）"
-    },
-    {
       "regex": "^(.+) are moving to Customize$",
       "flags": "i",
       "replacement": "$1 已迁移至「自定义」"

@@ -285,6 +285,7 @@ BAO_LIU_YING_WEN_MO_SHI = frozenset({
     "^Stop\\s+(.+)$",
     "^Keep\\s+Ctrl",
     "^Undo\\s+Ctrl",
+    "^Thought (\\d+)s$",
 })
 
 
