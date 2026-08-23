@@ -605,7 +605,7 @@
         ['Replace Agent', '替换智能体'],
         ['Switch Model', '切换模型'],
         ['Cycle Effort', '切换强度'],
-        ['Switch to Auto', '切换到自动'],
+        ['Switch to Auto', '切换到 Auto'],
         ['Switch Model and Retry', '切换模型并重试']
     ];
 
@@ -2291,7 +2291,7 @@
             ["You've reached your limit. Responses may be slower. Upgrade to Pro+ for 3x more usage.", '您已达到用量上限。响应可能会变慢。升级到 Pro+ 可获得 3 倍用量。'],
             ['Get faster responses', '获得更快响应'],
             ['Increase limits for faster responses', '提高限额以获得更快响应'],
-            ["You're out of usage. Switch to Auto, or ask your admin to increase your limit to continue.", '您的用量已用尽。请切换到自动，或联系管理员提高限额以继续使用。'],
+            ["You're out of usage. Switch to Auto, or ask your admin to increase your limit to continue.", '您的用量已用尽。请切换到 Auto，或联系管理员提高限额以继续使用。'],
             ['Upgrade to Pro+', '升级到 Pro+'],
             ['Set new limit', '设置新限额'],
             ["Cursor's Smartest Model Yet", 'Cursor 迄今最智能的模型'],
@@ -2465,7 +2465,7 @@
             ["You've reached your limit. Responses may be slower. Upgrade to Pro+ for 3x more usage.", '您已达到用量上限。响应可能会变慢。升级到 Pro+ 可获得 3 倍用量。'],
             ['Get faster responses', '获得更快响应'],
             ['Increase limits for faster responses', '提高限额以获得更快响应'],
-            ["You're out of usage. Switch to Auto, or ask your admin to increase your limit to continue.", '您的用量已用尽。请切换到自动，或联系管理员提高限额以继续使用。'],
+            ["You're out of usage. Switch to Auto, or ask your admin to increase your limit to continue.", '您的用量已用尽。请切换到 Auto，或联系管理员提高限额以继续使用。'],
             ['Upgrade to Pro+', '升级到 Pro+'],
             ['Set new limit', '设置新限额'],
             ['Get Cursor Pro for more Agent usage, unlimited Tab, and more.', '升级到 Cursor Pro 以获取更多 Agent 用量、无限 Tab 等。'],
@@ -2650,7 +2650,7 @@
         var attrHints = [
             ['Switch Model', '切换模型'],
             ['Cycle Effort', '切换强度'],
-            ['Switch to Auto', '切换到自动'],
+            ['Switch to Auto', '切换到 Auto'],
             ['Switch Model and Retry', '切换模型并重试']
         ];
         var picks = document.querySelectorAll(

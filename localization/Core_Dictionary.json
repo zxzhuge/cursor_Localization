@@ -245,10 +245,6 @@
           "智能体"
         ],
         [
-          "Auto",
-          "自动"
-        ],
-        [
           "Composer",
           "Composer"
         ],
@@ -258,7 +254,7 @@
         ],
         [
           "Auto + Composer",
-          "自动 + Composer"
+          "Auto + Composer"
         ],
         [
           "API",
@@ -2295,10 +2291,6 @@
           "从不"
         ],
         [
-          "Auto",
-          "自动"
-        ],
-        [
           "Suggest Next Prompt",
           "建议下一个提示"
         ],
@@ -2754,7 +2746,7 @@
         ],
         [
           "auto (default)",
-          "自动（默认）"
+          "Auto（默认）"
         ],
         [
           "Requires pro (custom model). ",
@@ -3156,7 +3148,7 @@
         ],
         [
           "Model: Auto",
-          "模型：自动"
+          "模型：Auto"
         ],
         [
           "Default Model",
@@ -5138,7 +5130,7 @@
         ],
         [
           "Switch to Auto",
-          "切换到自动"
+          "切换到 Auto"
         ],
         [
           "Switch Model and Retry",
@@ -9376,7 +9368,7 @@
         ],
         [
           "You're out of usage. Switch to Auto, or ask your admin to increase your limit to continue.",
-          "您的用量已用尽。请切换到自动，或联系管理员提高限额以继续使用。"
+          "您的用量已用尽。请切换到 Auto，或联系管理员提高限额以继续使用。"
         ],
         [
           "Upgrade to Pro+",

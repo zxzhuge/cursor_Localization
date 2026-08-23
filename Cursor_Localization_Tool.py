@@ -270,6 +270,7 @@ BAO_LIU_YING_WEN_CI = frozenset({
     "Keep All", "Undo All", "Keep", "Undo",
     "Keep Ctrl+Shift+Y", "Undo Ctrl+N",
     "Confirm", "Review", "Stop",
+    "Auto",
 })
 # 含 File/Files 计数的正则不入 MoShi_FanYi（保留英文，如 5 Files、1 File Changed）
 BAO_LIU_YING_WEN_MO_SHI = frozenset({
