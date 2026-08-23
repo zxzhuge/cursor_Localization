@@ -464,6 +464,61 @@
         ['Show 1 more', '再显示 1 条']
     ];
 
+    var Composer_MoShi_DuanCi = {
+        Agent: 1, Plan: 1, Debug: 1, Ask: 1, Multitask: 1
+    };
+
+    var Composer_MoShi_XuanZeQi_XuanZeQi =
+        '[class*="prompt-barmode"], .prompt-bar-dropdown-trigger, ' +
+        '[class*="mode-picker"], [class*="agent-mode"], ' +
+        '[class*="ui-prompt-input"] [role="button"], ' +
+        '[class*="composer"] [class*="dropdown"]';
+
+    function Shi_Composer_MoShi_KongZhi(el) {
+        if (!el) return false;
+        try {
+            return !!el.closest(Composer_MoShi_XuanZeQi_XuanZeQi);
+        } catch (e) { return false; }
+    }
+
+    function HuoQu_Composer_MoShi_AnNiu_Gen() {
+        var roots = [];
+        var seen = new Set();
+        function tianJia(el) {
+            if (!el || seen.has(el)) return;
+            seen.add(el);
+            roots.push(el);
+        }
+        var zhiJie = document.querySelectorAll(
+            '[class*="prompt-barmode"], .prompt-bar-dropdown-trigger, ' +
+            '[class*="mode-picker"] button, [class*="mode-picker"] [role="button"], ' +
+            '[class*="agent-mode"] button, [class*="agent-mode"] [role="button"], ' +
+            '[class*="ui-prompt-input"] [role="button"], ' +
+            '[class*="composer"] [class*="dropdown"] button, ' +
+            '[class*="composer"] [class*="dropdown"] [role="button"]'
+        );
+        for (var i = 0; i < zhiJie.length; i++) tianJia(zhiJie[i]);
+        var pickers = document.querySelectorAll('[class*="model-picker"]');
+        for (var p = 0; p < pickers.length; p++) {
+            var toolbar = pickers[p].closest(
+                '[class*="composer"], [class*="aichat"], [class*="chat-input"], ' +
+                '[class*="ComposerInput"], [class*="ui-prompt-input"], ' +
+                '[class*="prompt-bar"], .inline-prompt-button-area'
+            );
+            if (!toolbar) continue;
+            var candidates = toolbar.querySelectorAll('button, [role="button"], span');
+            for (var c = 0; c < candidates.length; c++) {
+                var cand = candidates[c];
+                if (cand.closest('[class*="model-picker"]')) continue;
+                var raw = GuiYiHua_WenBen(cand.textContent || '');
+                if (!raw || raw.length > 24 || !Composer_MoShi_DuanCi[raw]) continue;
+                var ctl = cand.closest('button, [role="button"]') || cand;
+                tianJia(ctl);
+            }
+        }
+        return roots;
+    }
+
     var ZhiNengTi_MoShi_CaiDan_HINTS = [
         ['Switch Agent Mode', '切换智能体模式'],
         ['Agent Mode', '智能体模式'],
@@ -823,14 +878,13 @@
             );
             for (var j = 0; j < labels.length; j++) GengXin_CaiDan_WenBen(labels[j], hints);
         }
-        var modeBtns = document.querySelectorAll(
-            '[class*="prompt-barmode"], .prompt-bar-dropdown-trigger'
-        );
+        var modeBtns = HuoQu_Composer_MoShi_AnNiu_Gen();
         for (var b = 0; b < modeBtns.length; b++) {
             FanYi_ShuXing(modeBtns[b]);
             FanYi_PromptBar_WenBen(modeBtns[b], 40);
             GengXin_CaiDan_WenBen(modeBtns[b], hints);
         }
+        if (modeBtns.length) BianLi_XiaLa_WenBen(modeBtns, false);
     }
 
     function FanYi_WenBen_JieDian(node) {
@@ -1279,6 +1333,7 @@
             XiuZheng_DuiLie_XiaoXi();
             XiuZheng_TiJi_CaiDan();
             XiuZheng_MoXing_XuanZeQi();
+            XiuZheng_Composer_MoShi_XuanZeQi();
             XiuZheng_ZhiNengTi_MoShi();
         });
         run(QX_BIAN_JI_QI, function() {
@@ -1563,6 +1618,7 @@
             try { XiuZheng_ZhuTi_XuanZe(); } catch (e) {}
             try { XiuZheng_DuiLie_XiaoXi(); } catch (e) {}
             try { XiuZheng_MoXing_XuanZeQi(); } catch (e) {}
+            try { XiuZheng_Composer_MoShi_XuanZeQi(); } catch (e) {}
             try { XiuZheng_ZhiNengTi_MoShi(); } catch (e) {}
         }
         if (cssInspector) {
@@ -1622,7 +1678,9 @@
                     el.classList.contains('text-dropdown-foreground') ||
                     clsName.indexOf('action-label') >= 0 ||
                     clsName.indexOf('ui-menu__item') >= 0 ||
-                    clsName.indexOf('prompt-barmode') >= 0
+                    clsName.indexOf('prompt-barmode') >= 0 ||
+                    clsName.indexOf('mode-picker') >= 0 ||
+                    clsName.indexOf('agent-mode') >= 0
                 ));
                 var shiYeZi = !el.querySelector || !el.querySelector('*');
                 var shiCaiDanXiang = !!(el.closest && el.closest(
@@ -1635,7 +1693,16 @@
         var parent = el.parentElement;
         if (parent) {
             var parentText = GuiYiHua_WenBen(parent.textContent || '');
-            if (parentText && parentText === text) return false;
+            if (parentText && parentText === text) {
+                var shiMoShiAnNiuYeZi = false;
+                try {
+                    shiMoShiAnNiuYeZi = !!(
+                        Shi_Composer_MoShi_KongZhi(parent) &&
+                        (!el.querySelector || !el.querySelector('span, div, button'))
+                    );
+                } catch (e) {}
+                if (!shiMoShiAnNiuYeZi) return false;
+            }
         }
         el.textContent = text;
         return true;
@@ -2444,6 +2511,7 @@
                 if (!HuoQu_PromptBar_Gen_JieDian().length &&
                     !document.querySelector('.contentWidgets .pure-ai-prompt-bar')) return;
                 try { ZhiXing_ZhiNengTi_MoShi_FanYi(); } catch (e) {}
+                try { XiuZheng_Composer_MoShi_XuanZeQi(); } catch (e) {}
                 if (promptBarTimer) clearTimeout(promptBarTimer);
                 promptBarTimer = setTimeout(function() {
                     promptBarTimer = null;
@@ -2452,6 +2520,35 @@
             });
             obs.observe(document.body, { childList: true, subtree: true, characterData: true });
         }
+    }
+
+    function XiuZheng_Composer_MoShi_XuanZeQi() {
+        var attrHints = [
+            ['Switch Agent Mode', '切换智能体模式'],
+            ['Agent Mode', '智能体模式']
+        ];
+        var roots = HuoQu_Composer_MoShi_AnNiu_Gen();
+        for (var i = 0; i < roots.length; i++) {
+            FanYi_ShuXing(roots[i]);
+            GengXin_Shuxing_Hints(roots[i], attrHints);
+            GengXin_Shuxing_Hints(roots[i], ZhiNengTi_MoShi_CaiDan_HINTS);
+        }
+        if (roots.length) BianLi_XiaLa_WenBen(roots, false);
+    }
+
+    function AnZhuang_Composer_MoShi_GuanCha() {
+        if (window.__cursorComposerMoShiObs) return;
+        window.__cursorComposerMoShiObs = true;
+        var obs = new MutationObserver(function() {
+            if (ZhengZaiPiLiangFanYi) return;
+            if (!document.querySelector(
+                '[class*="composer"], [class*="aichat"], [class*="chat-input"], ' +
+                '[class*="ui-prompt-input"], [class*="model-picker"], ' +
+                '[class*="prompt-barmode"], [class*="mode-picker"], [class*="agent-mode"]'
+            )) return;
+            try { XiuZheng_Composer_MoShi_XuanZeQi(); } catch (e) {}
+        });
+        obs.observe(document.body, { childList: true, subtree: true, characterData: true });
     }
 
     function XiuZheng_MoXing_XuanZeQi() {
@@ -2466,6 +2563,15 @@
             '[class*="model-picker"] [title], [class*="model-picker"] [aria-label]'
         );
         for (var i = 0; i < picks.length; i++) GengXin_Shuxing_Hints(picks[i], attrHints);
+        var modelInputs = document.querySelectorAll(
+            '[class*="model-picker"] input[placeholder], [class*="model-picker"] textarea[placeholder]'
+        );
+        for (var mi = 0; mi < modelInputs.length; mi++) {
+            var ph = modelInputs[mi].getAttribute('placeholder');
+            if (!ph) continue;
+            var phTr = ChaZhao_FanYi(ph) || TiHuan_BuFen_WenBen(ph);
+            if (phTr && phTr !== ph) modelInputs[mi].setAttribute('placeholder', phTr);
+        }
         XiuZheng_XiaLaKuang_MianBan();
         var hovers = document.querySelectorAll('.monaco-hover, .monaco-hover-content, [role="tooltip"]');
         for (var h = 0; h < hovers.length; h++) {
@@ -2911,6 +3017,8 @@
             if (!hasModeUi) return;
         }
         FanYi_Gen_List_Hints(roots, hints, { maxLen: 200, needleLen: 8, leafOnly: true });
+        var modeBtns = HuoQu_Composer_MoShi_AnNiu_Gen();
+        if (modeBtns.length) BianLi_XiaLa_WenBen(modeBtns, false);
     }
 
     function HuoQu_LiuLanQi_Webview_FanYi_JiaoBen() {
@@ -3285,6 +3393,8 @@
             '.monaco-select-box-dropdown-container, .context-view, .monaco-list-row, ' +
             '[role="listbox"], [role="option"], .monaco-hover, .monaco-hover-content, ' +
             '[class*="model-picker"], [class*="premium-model"], [class*="upgrade"], ' +
+            '[class*="prompt-barmode"], .prompt-bar-dropdown-trigger, ' +
+            '[class*="mode-picker"], [class*="agent-mode"], ' +
             '.monaco-menu, .monaco-menu-container, [role="menu"], [role="menuitem"]'
         );
         BianLi_XiaLa_WenBen(scopes, false);

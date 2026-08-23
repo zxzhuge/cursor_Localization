@@ -58,7 +58,8 @@
             'Multitask', 'Systematically diagnose',
             'Ask Cursor questions', 'Using ', 'Plan, search',
             'implementation plan', 'root cause of an issue', 'Orchestrate multiple subagents',
-            'without making edits', 'Search skills, context'
+            'without making edits', 'Search skills, context',
+            'mode-picker', 'agent-mode', 'prompt-barmode'
         ],
         LIU_LAN_QI_URL: [
             'Enter a URL above', 'instruct the Agent', 'Enter URL or search', 'Search or enter URL'

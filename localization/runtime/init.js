@@ -19,6 +19,7 @@
         try { AnZhuang_Monaco_Hover_FanYi(); } catch (e) {}
         try { AnZhuang_LiuLanQi_Webview_GuanCha(); } catch (e) {}
         try { AnZhuang_CaiDan_DongTai_GuanCha(); } catch (e) {}
+        try { AnZhuang_Composer_MoShi_GuanCha(); } catch (e) {}
         try { AnZhuang_FuZhu_ChuangKou_FanYi(); } catch (e) {}
 
         setTimeout(function() {
