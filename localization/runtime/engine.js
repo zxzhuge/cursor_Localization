@@ -77,6 +77,7 @@
     function TiHuan_BuFen_WenBen(text) {
         if (!text) return null;
 
+        if (Shi_BaoLiu_YingWen(text.trim())) return null;
         if (Shi_BaoLiu_File_Files_WenBen(text)) return null;
 
         if (/^[a-z][\w-]*(?:\.[A-Za-z][\w-]*){1,}$/i.test(text)) {
@@ -895,6 +896,8 @@
         if (/^[\d\s.,;:!?@#$%^&*()\-+=<>\\/|~`'"[\]{}]+$/.test(trimmed)) return;
         try {
             if (node.parentElement && Shi_Markdown_YuLan_AnNiu(node.parentElement)) return;
+            if (node.parentElement && Shi_Agent_ShuRu_QuYu(node.parentElement)) return;
+            if (node.parentElement && Shi_Agent_DuiHua_NeiRong(node.parentElement)) return;
         } catch (e) {}
         try {
             if (node.parentElement && Shi_CaiDan_QuYu(node.parentElement) && !Shi_CaiDan_WenBen_JieDian(node)) return;
@@ -1209,9 +1212,84 @@
             return !!(el.closest(
                 '.prompt-bar-container, .pure-ai-prompt-bar, .inline-prompt-button-area, ' +
                 '.ui-prompt-input, [class*="ui-prompt-input"], [class*="prompt-bar"], [class*="pure-ai-prompt"], ' +
+                '.aislash-editor-input, [class*="aislash-editor"], ' +
+                '.chat-input, [class*="chat-input"], [class*="ComposerInput"], [class*="composer-input"], ' +
                 '.contentWidgets, .overlayWidgets'
             ));
         } catch (e) { return false; }
+    }
+
+    function Shi_Agent_ShuRu_QuYu(el) {
+        if (!el) return false;
+        try {
+            if (el.closest('.aislash-editor-input-readonly')) return false;
+            if (el.closest(
+                '.aislash-editor-input, [class*="aislash-editor-input"], ' +
+                '.chat-input, [class*="chat-input"], [class*="ComposerInput"], ' +
+                '[class*="composer-input"], [class*="prompt-input-editor"], ' +
+                '.ui-prompt-input-editor, [class*="ui-prompt-input-editor"], ' +
+                '.prompt-edit-input, [class*="prompt-edit-input"]'
+            )) return true;
+            if (el.closest(
+                '.ui-prompt-input .ProseMirror, .ui-prompt-input .tiptap, ' +
+                '.prompt-bar-container .ProseMirror, .pure-ai-prompt-bar .ProseMirror, ' +
+                '[class*="chat-input"] .ProseMirror, [class*="chat-input"] .tiptap, ' +
+                '[class*="composer-input"] .ProseMirror, [class*="composer-input"] .tiptap'
+            )) return true;
+            if (el.getAttribute && el.getAttribute('contenteditable') === 'true') {
+                if (el.closest(
+                    '[class*="composer"], [class*="aichat"], [class*="chat-input"], ' +
+                    '[class*="prompt"], .ui-prompt-input, [class*="ui-prompt-input"], ' +
+                    '.aislash-editor-input, [class*="aislash-editor-input"]'
+                )) return true;
+            }
+        } catch (e) {}
+        return false;
+    }
+
+    function Shi_Agent_DuiHua_UI_YuanSu(el) {
+        if (!el || !el.closest) return false;
+        try {
+            return !!el.closest(
+                'button, [role="button"], [role="menu"], [role="menuitem"], ' +
+                '[role="tab"], input, textarea, select, ' +
+                '[class*="toolbar"], [class*="Toolbar"], [class*="model-picker"], ' +
+                '[class*="mode-picker"], [class*="context-usage"], [class*="agent-changes"], ' +
+                '[class*="pending-changes"], [class*="review-control"], [class*="changes-header"], ' +
+                '[class*="feedback"], [class*="queue"], ' +
+                '[data-react-transcript-row-kind="turnActions"], ' +
+                '[data-react-transcript-row-kind="activity"], ' +
+                '[data-react-transcript-row-kind="tailStatus"], ' +
+                '[data-react-transcript-row-kind="workGroup"]'
+            );
+        } catch (e) { return false; }
+    }
+
+    function Shi_Agent_DuiHua_NeiRong(el) {
+        if (!el) return false;
+        try {
+            if (Shi_PromptBar_QuYu(el)) return false;
+            if (Shi_Agent_DuiHua_UI_YuanSu(el)) return false;
+            if (el.closest(
+                '.anysphere-markdown-container-root, .anysphere-markdown-container, ' +
+                '[class*="anysphere-markdown"], .markdown-section, .markdown-block-code'
+            )) return true;
+            if (el.closest('.aislash-editor-input-readonly')) return true;
+            var row = el.closest('[data-react-transcript-row-kind]');
+            if (row) {
+                var rk = row.getAttribute('data-react-transcript-row-kind') || '';
+                if (rk === 'assistantMarkdown' || rk === 'humanMarkdown' ||
+                    rk.indexOf('Markdown') >= 0 || rk.indexOf('markdown') >= 0) {
+                    return true;
+                }
+            }
+            var msg = el.closest('.composer-rendered-message, [data-message-id]');
+            if (msg) {
+                var role = msg.getAttribute('data-message-role') || '';
+                if (role === 'ai' || role === 'human' || role === 'user') return true;
+            }
+        } catch (e) {}
+        return false;
     }
 
     function Shi_QuickInput_QuYu(el) {
@@ -1229,7 +1307,9 @@
     function HuoQu_PromptBar_Gen_JieDian() {
         return document.querySelectorAll(
             '.pure-ai-prompt-bar, .prompt-bar-container, .inline-prompt-button-area, ' +
-            '.ui-prompt-input, [class*="ui-prompt-input"], [class*="prompt-bar"]'
+            '.ui-prompt-input, [class*="ui-prompt-input"], [class*="prompt-bar"], ' +
+            '.aislash-editor-input, [class*="aislash-editor-input"], ' +
+            '.chat-input, [class*="chat-input"], [class*="ComposerInput"], [class*="composer-input"]'
         );
     }
 
@@ -1250,7 +1330,9 @@
         var el = node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
         if (!el) return true;
         if (TiaoGuo_BiaoQian.has(el.tagName)) return true;
+        if (Shi_Agent_ShuRu_QuYu(el)) return true;
         if (Shi_PromptBar_QuYu(el)) return false;
+        if (Shi_Agent_DuiHua_NeiRong(el)) return true;
         if (Shi_ShiJianXian_KeFanYi(el)) return false;
         try { if (el.closest(TiaoGuo_XuanZeQi)) return true; } catch (e) {}
         return false;
@@ -1258,7 +1340,9 @@
 
     function YingGai_TiaoGuo_BianJiQi_YuanSu(el) {
         if (!el || el.nodeType !== 1) return true;
+        if (Shi_Agent_ShuRu_QuYu(el)) return true;
         if (Shi_PromptBar_QuYu(el)) return false;
+        if (Shi_Agent_DuiHua_NeiRong(el)) return true;
         if (Shi_ShiJianXian_KeFanYi(el)) return false;
         try { if (el.closest(TiaoGuo_XuanZeQi)) return true; } catch (e) {}
         return false;
@@ -1284,6 +1368,7 @@
                     if (node.classList && (node.classList.contains('overflow-guard') || node.classList.contains('view-lines') || node.classList.contains('editor-scrollable'))) continue;
                     if (node.getAttribute('contenteditable') === 'true') continue;
                 }
+                if (Shi_Agent_ShuRu_QuYu(node)) continue;
                 FanYi_ShuXing(node);
                 var children = node.childNodes;
                 for (var i = children.length - 1; i >= 0; i--) { stack.push(children[i]); }
@@ -1579,12 +1664,16 @@
                 var cls = node.classList[i];
                 if (!cls) continue;
                 if (cls.indexOf('prompt-bar') >= 0 || cls.indexOf('pure-ai-prompt') >= 0 ||
-                    cls.indexOf('ui-prompt-input') >= 0 || cls === 'inline-prompt-button-area') return true;
+                    cls.indexOf('ui-prompt-input') >= 0 || cls.indexOf('aislash-editor') >= 0 ||
+                    cls.indexOf('chat-input') >= 0 || cls.indexOf('composer-input') >= 0 ||
+                    cls === 'inline-prompt-button-area') return true;
             }
         }
         try {
             return !!(node.querySelector && node.querySelector(
-                '.pure-ai-prompt-bar, [class*="prompt-bar"], .ui-prompt-input, [class*="ui-prompt-input"]'
+                '.pure-ai-prompt-bar, [class*="prompt-bar"], .ui-prompt-input, [class*="ui-prompt-input"], ' +
+                '.aislash-editor-input, [class*="aislash-editor-input"], ' +
+                '.chat-input, [class*="chat-input"], [class*="composer-input"]'
             ));
         } catch (e) { return false; }
     }
@@ -1754,6 +1843,8 @@
         if (!el || !text) return false;
         if (text.length > 400) return false;
         if (Shi_Markdown_YuLan_AnNiu(el)) return false;
+        if (Shi_Agent_ShuRu_QuYu(el)) return false;
+        if (Shi_Agent_DuiHua_NeiRong(el)) return false;
         if (YingGai_TiaoGuo_BianJiQi_YuanSu(el)) return false;
         try {
             if (el.querySelector('input, textarea, select, button, [role="button"], [role="switch"], [contenteditable="true"]')) return false;
@@ -2505,6 +2596,7 @@
 
     function FanYi_PromptBar_WenBen(el, maxLen) {
         if (!el || !Shi_PromptBar_QuYu(el)) return false;
+        if (Shi_Agent_ShuRu_QuYu(el)) return false;
         if (el.closest('.monaco-editor .view-lines')) return false;
         maxLen = maxLen || 120;
         var raw = (el.textContent || '').trim();
@@ -2536,6 +2628,7 @@
         if (!node || node.nodeType !== Node.TEXT_NODE) return;
         var parent = node.parentElement;
         if (!parent || !Shi_PromptBar_QuYu(parent)) return;
+        if (Shi_Agent_ShuRu_QuYu(parent)) return;
         if (parent.closest('.monaco-editor .view-lines')) return;
         var text = node.textContent;
         if (!text) return;
@@ -2578,7 +2671,10 @@
             try {
                 var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
                 var tnode;
-                while ((tnode = walker.nextNode())) FanYi_PromptBar_WenBenJieDian(tnode);
+                while ((tnode = walker.nextNode())) {
+                    if (tnode.parentElement && Shi_Agent_ShuRu_QuYu(tnode.parentElement)) continue;
+                    FanYi_PromptBar_WenBenJieDian(tnode);
+                }
             } catch (e) {}
             var leaves = root.querySelectorAll(
                 'span, div, button, label, a, p, .ProseMirror p.is-editor-empty, ' +
@@ -2588,6 +2684,7 @@
             for (var li = 0; li < leaves.length; li++) {
                 var el = leaves[li];
                 if (el.closest('.monaco-editor .view-lines')) continue;
+                if (Shi_Agent_ShuRu_QuYu(el)) continue;
                 FanYi_ShuXing(el);
                 if (!el.querySelector('span, div, button')) FanYi_PromptBar_WenBen(el, 80);
             }
@@ -2702,7 +2799,7 @@
         for (var b = 0; b < btns.length; b++) GengXin_Shuxing_Hints(btns[b], attrHints);
         FanYi_Monaco_Hover_Content(document.body);
         var scopes = document.querySelectorAll(
-            '[class*="context-usage"], [class*="contextUsage"], [class*="composer"] div, ' +
+            '[class*="context-usage"], [class*="contextUsage"], ' +
             '[class*="agent-changes"], [class*="AgentChanges"], [class*="pending-changes"], [class*="review-control"], ' +
             '[class*="changes-header"], [class*="diff-against"], ' +
             '.context-view, .monaco-menu, [role="menu"], [role="menuitem"], ' +
@@ -2839,6 +2936,7 @@
             for (var i = 0; i < nodes.length; i++) {
                 var el = nodes[i];
                 if (el.closest('.monaco-editor .view-lines')) continue;
+                if (Shi_Agent_DuiHua_NeiRong(el)) continue;
                 FanYi_ShuXing(el);
                 if (el.querySelector('button, input, textarea, [contenteditable="true"]') && el.tagName !== 'BUTTON') continue;
                 var raw = (el.textContent || '').trim();
@@ -2895,11 +2993,15 @@
             '.prompt-bar-container [data-placeholder], .prompt-bar-container [placeholder], ' +
             '.prompt-bar-input [data-placeholder], .prompt-edit-input [data-placeholder], ' +
             '.pure-ai-prompt-bar [data-placeholder], .ui-prompt-input [data-placeholder], ' +
-            '.ui-prompt-input .ProseMirror, .ui-prompt-input .tiptap'
+            '.ui-prompt-input .ProseMirror, .ui-prompt-input .tiptap, ' +
+            '.aislash-editor-input [data-placeholder], [class*="aislash-editor-input"] [data-placeholder], ' +
+            '.chat-input [data-placeholder], [class*="chat-input"] [data-placeholder]'
         );
         for (var m = 0; m < prose.length; m++) {
             var pel2 = prose[m];
             if (pel2.closest('.monaco-editor')) continue;
+            if (Shi_Agent_ShuRu_QuYu(pel2) && !pel2.hasAttribute('data-placeholder') &&
+                !pel2.hasAttribute('placeholder')) continue;
             var dph = pel2.getAttribute('data-placeholder');
             if (!dph) continue;
             var dtr = ChaZhao_FanYi(dph) || TiHuan_BuFen_WenBen(dph);

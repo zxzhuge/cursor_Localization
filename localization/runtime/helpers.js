@@ -22,6 +22,8 @@
 
     function GengXin_WenBen_YeZi_Hints(el, hints, opts) {
         if (!el || el.closest('.monaco-editor .view-lines')) return;
+        if (Shi_Agent_ShuRu_QuYu(el)) return;
+        if (Shi_Agent_DuiHua_NeiRong(el)) return;
         opts = opts || {};
         var maxLen = opts.maxLen || 120;
         var needleLen = opts.needleLen || 8;
@@ -80,6 +82,8 @@
         for (var r = 0; r < roots.length; r++) {
             var el = roots[r];
             if (!el || el.closest('.monaco-editor .view-lines')) continue;
+            if (Shi_Agent_ShuRu_QuYu(el)) continue;
+            if (Shi_Agent_DuiHua_NeiRong(el)) continue;
             if (opts && opts.skipBianJiQi && YingGai_TiaoGuo_BianJiQi_YuanSu(el)) continue;
             if (opts && opts.skipMonacoEditor && el.closest('.monaco-editor')) continue;
             FanYi_ShuXing(el);
@@ -94,6 +98,8 @@
             var el = roots[r];
             if (!el) continue;
             if (el.closest('.monaco-editor .view-lines')) continue;
+            if (Shi_Agent_ShuRu_QuYu(el)) continue;
+            if (Shi_Agent_DuiHua_NeiRong(el)) continue;
             if (opts.skipEditor && el.closest('.monaco-editor')) continue;
             FanYi_ShuXing(el);
             var text = GuiYiHua_WenBen(el.textContent || '');
@@ -130,6 +136,8 @@
             for (var i = 0; i < els.length; i++) {
                 var el = els[i];
                 if (el.closest('.monaco-editor .view-lines')) continue;
+                if (Shi_Agent_ShuRu_QuYu(el)) continue;
+                if (Shi_Agent_DuiHua_NeiRong(el)) continue;
                 if (opts.skipHoverWidget && el.closest('.cursorHoverWidget')) continue;
                 if (opts.skipNestedInteractive) {
                     if (el.querySelector('button, a') && el.tagName !== 'BUTTON' && el.tagName !== 'A') continue;
