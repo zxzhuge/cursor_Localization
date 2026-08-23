@@ -953,7 +953,7 @@
     function FanYi_ShuXing(el) {
         if (!el || !el.getAttribute) return;
         if (Shi_Markdown_YuLan_AnNiu(el)) return;
-        var attrs = ['aria-label', 'alt', 'placeholder', 'aria-placeholder'];
+        var attrs = ['title', 'aria-label', 'alt', 'placeholder', 'aria-placeholder', 'data-tooltip', 'data-title'];
         for (var i = 0; i < attrs.length; i++) {
             var val = el.getAttribute(attrs[i]);
             if (!val) continue;
@@ -963,7 +963,53 @@
     }
 
     function FanYi_Cursor_Hover_Widget(root) {
-        return;
+        if (!root) return;
+        var list = [];
+        try {
+            if (root.nodeType === 1 && Shi_XuanFu_TiShi_JieDian(root)) list.push(root);
+            if (root.querySelectorAll) {
+                var found = root.querySelectorAll(
+                    '.cursorHoverWidget, [class*="cursor-hover"], [class*="cursorHover"], [class*="CursorHover"]'
+                );
+                for (var f = 0; f < found.length; f++) list.push(found[f]);
+            }
+        } catch (e) { return; }
+        var seen = new Set();
+        for (var h = 0; h < list.length; h++) {
+            var ht = list[h];
+            if (!ht || seen.has(ht)) continue;
+            seen.add(ht);
+            if (ht.closest && ht.closest('.monaco-editor .view-lines')) continue;
+            FanYi_ShuXing(ht);
+            try {
+                var walker = document.createTreeWalker(ht, NodeFilter.SHOW_TEXT, null);
+                var tnode;
+                while ((tnode = walker.nextNode())) {
+                    var text = tnode.textContent;
+                    if (!text) continue;
+                    var trimmed = text.trim();
+                    if (!trimmed || trimmed.length > 800) continue;
+                    var tr = ChaZhao_FanYi(trimmed) || FanYi_TiJiao_PingFen_WenBen(text) || FanYi_TiJiao_PingFen_WenBen(trimmed);
+                    if (!tr) tr = FanYi_TiShi_WenBen(text) || FanYi_TiShi_WenBen(trimmed);
+                    if (tr && tr !== text) {
+                        var idx = text.indexOf(trimmed);
+                        if (idx < 0) tnode.textContent = tr;
+                        else tnode.textContent = text.substring(0, idx) + tr + text.substring(idx + trimmed.length);
+                    }
+                }
+            } catch (e) {}
+            var leaves = ht.querySelectorAll ? ht.querySelectorAll('div, span, p, label') : [];
+            for (var n = 0; n < leaves.length; n++) {
+                var leaf = leaves[n];
+                if (!leaf || (leaf.querySelector && leaf.querySelector('div, span, p, label'))) continue;
+                var raw = (leaf.textContent || '').trim();
+                if (!raw || raw.length > 800) continue;
+                var plain = GuiYiHua_WenBen(raw);
+                var ltr = ChaZhao_FanYi(plain) || FanYi_TiJiao_PingFen_WenBen(raw) || FanYi_TiJiao_PingFen_WenBen(plain);
+                if (!ltr) ltr = FanYi_TiShi_WenBen(raw) || FanYi_TiShi_WenBen(plain);
+                if (ltr && ltr !== raw) KeYi_AnQuan_GaiXie_WenBen(leaf, ltr, [raw.slice(0, 10)]);
+            }
+        }
     }
 
   // 所有悬停 / tooltip 统一选择器（Monaco、Cursor 自定义、原生 title 浮层等）
@@ -977,7 +1023,11 @@
         ['[Alt] Replace Agent', '[Alt] 替换智能体'],
         ['[Alt]Replace Agent', '[Alt] 替换智能体'],
         ['Alt Replace Agent', 'Alt 替换智能体'],
-        ['Replace Agent', '替换智能体']
+        ['Replace Agent', '替换智能体'],
+        ['New Agent (Ctrl+N)\n[Alt] Replace Agent', '新建智能体 (Ctrl+N)\n[Alt] 替换智能体'],
+        ['New Agent (Ctrl+N)\r\n[Alt] Replace Agent', '新建智能体 (Ctrl+N)\r\n[Alt] 替换智能体'],
+        ['New Agent(Ctrl+N)\n[Alt] Replace Agent', '新建智能体 (Ctrl+N)\n[Alt] 替换智能体'],
+        ['New Agent(Ctrl+N)\r\n[Alt] Replace Agent', '新建智能体 (Ctrl+N)\r\n[Alt] 替换智能体']
     ];
 
     function Shi_XuanFu_TiShi_JieDian(el) {
@@ -1003,13 +1053,58 @@
     }
 
     function FanYi_Monaco_Hover_Content(root) {
-        return;
+        if (!root) return;
+        var list = [];
+        try {
+            if (root.nodeType === 1 && Shi_XuanFu_TiShi_JieDian(root)) list.push(root);
+            if (root.querySelectorAll) {
+                var found = root.querySelectorAll(XuanFu_TiShi_XuanZeQi);
+                for (var f = 0; f < found.length; f++) list.push(found[f]);
+            }
+        } catch (e) { return; }
+        var seen = new Set();
+        for (var h = 0; h < list.length; h++) {
+            var ht = list[h];
+            if (!ht || seen.has(ht)) continue;
+            seen.add(ht);
+            if (ht.closest && ht.closest('.monaco-editor .view-lines')) continue;
+            FanYi_ShuXing(ht);
+            try {
+                var walker = document.createTreeWalker(ht, NodeFilter.SHOW_TEXT, null);
+                var tnode;
+                while ((tnode = walker.nextNode())) {
+                    var text = tnode.textContent;
+                    if (!text) continue;
+                    var trimmed = GuiYiHua_WenBen(text);
+                    if (!trimmed || trimmed.length > 800) continue;
+                    var tr = FanYi_TiShi_WenBen(text) || FanYi_TiShi_WenBen(trimmed);
+                    if (tr && tr !== text) {
+                        var idx = text.indexOf(trimmed);
+                        if (idx < 0) tnode.textContent = tr;
+                        else {
+                            tnode.textContent = text.substring(0, idx) + tr + text.substring(idx + trimmed.length);
+                        }
+                    }
+                }
+            } catch (e) {}
+            var leaves = ht.querySelectorAll ? ht.querySelectorAll('span, div, p, label, a, button') : [];
+            for (var n = 0; n < leaves.length; n++) {
+                var leaf = leaves[n];
+                if (!leaf || leaf.closest('.monaco-editor .view-lines')) continue;
+                if (leaf.querySelector && leaf.querySelector('span, div, p, label')) continue;
+                FanYi_ShuXing(leaf);
+                var raw = leaf.textContent || '';
+                if (!raw || raw.length > 800) continue;
+                var plain = GuiYiHua_WenBen(raw);
+                var ltr = FanYi_TiShi_WenBen(raw) || FanYi_TiShi_WenBen(plain);
+                if (ltr && ltr !== raw) KeYi_AnQuan_GaiXie_WenBen(leaf, ltr, [plain.slice(0, 12)]);
+            }
+        }
     }
 
     function AnZhuang_Monaco_Hover_FanYi() {
         if (window.__cursorMonacoHoverI18n) return;
         window.__cursorMonacoHoverI18n = true;
-        return;
         var hoverTimer = null;
         var hoverRafId = 0;
         function PaiDui_Hover(scope) {
@@ -2724,12 +2819,7 @@
                 FanYi_ShuXing(label);
                 var raw = (label.textContent || '').trim();
                 if (raw && raw.length <= 80) {
-                    var tr = ChaZhao_FanYi(raw);
-                    if (!tr) {
-                        for (var j = 0; j < Agent_TiShi_WenBen.length; j++) {
-                            if (raw === Agent_TiShi_WenBen[j][0]) { tr = Agent_TiShi_WenBen[j][1]; break; }
-                        }
-                    }
+                    var tr = ChaZhao_FanYi(raw) || FanYi_TiShi_WenBen(raw);
                     if (tr && tr !== raw) label.textContent = tr;
                 }
             }
