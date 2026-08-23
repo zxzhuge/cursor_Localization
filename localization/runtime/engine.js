@@ -549,6 +549,7 @@
     var DuiHua_JieMian_Attr_Only_HINTS = [
         ['Replace Agent', '替换智能体'],
         ['Switch Model', '切换模型'],
+        ['Cycle Effort', '切换强度'],
         ['Switch to Auto', '切换到自动'],
         ['Switch Model and Retry', '切换模型并重试']
     ];
@@ -2456,6 +2457,7 @@
     function XiuZheng_MoXing_XuanZeQi() {
         var attrHints = [
             ['Switch Model', '切换模型'],
+            ['Cycle Effort', '切换强度'],
             ['Switch to Auto', '切换到自动'],
             ['Switch Model and Retry', '切换模型并重试']
         ];

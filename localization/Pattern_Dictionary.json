@@ -733,9 +733,24 @@
       "replacement": "在浏览器中打开 ($1)"
     },
     {
-      "regex": "^Switch Model \\((.+)\\)$",
+      "regex": "^Switch Model \\(([^)]+)\\)\\s*[·•]\\s*Cycle Effort \\(([^)]+)\\)$",
+      "flags": "",
+      "replacement": "切换模型 ($1) · 切换强度 ($2)"
+    },
+    {
+      "regex": "^切换模型 \\(([^)]+)\\)\\s*[·•]\\s*Cycle Effort \\(([^)]+)\\)$",
+      "flags": "",
+      "replacement": "切换模型 ($1) · 切换强度 ($2)"
+    },
+    {
+      "regex": "^Switch Model \\(([^)]+)\\)$",
       "flags": "",
       "replacement": "切换模型 ($1)"
+    },
+    {
+      "regex": "^Cycle Effort \\(([^)]+)\\)$",
+      "flags": "",
+      "replacement": "切换强度 ($1)"
     },
     {
       "regex": "^New Tab \\((.+)\\)$",

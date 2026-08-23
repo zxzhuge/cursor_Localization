@@ -5117,6 +5117,18 @@
           "切换模型"
         ],
         [
+          "Cycle Effort",
+          "切换强度"
+        ],
+        [
+          "Switch Model (Ctrl+/) · Cycle Effort (Ctrl+Alt+/)",
+          "切换模型 (Ctrl+/) · 切换强度 (Ctrl+Alt+/)"
+        ],
+        [
+          "切换模型 (Ctrl+/) · Cycle Effort (Ctrl+Alt+/)",
+          "切换模型 (Ctrl+/) · 切换强度 (Ctrl+Alt+/)"
+        ],
+        [
           "Select Model",
           "选择模型"
         ],
