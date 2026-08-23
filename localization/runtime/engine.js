@@ -3245,11 +3245,6 @@
                 if (combo && /send\s+right\s+away/i.test(combo.textContent || '')) return;
             } catch (e) {}
         }
-        var tierOnly = { 'medium': '中等', 'extra high': '超高', 'fast': '快速', 'low': '低', 'high': '高' };
-        if (tierOnly[trimmed.toLowerCase()]) {
-            node.textContent = tierOnly[trimmed.toLowerCase()];
-            return;
-        }
         var result = text;
         for (var i = 0; i < XiaLa_MianBan_SuiPian.length; i++) {
             result = result.split(XiaLa_MianBan_SuiPian[i][0]).join(XiaLa_MianBan_SuiPian[i][1]);

@@ -5313,22 +5313,6 @@
           "推理"
         ],
         [
-          "Low",
-          "低"
-        ],
-        [
-          "Medium",
-          "中等"
-        ],
-        [
-          "High",
-          "高"
-        ],
-        [
-          "Extra High",
-          "超高"
-        ],
-        [
           "Significantly faster but consumes more usage",
           "明显更快，但会消耗更多用量"
         ],
@@ -7163,10 +7147,6 @@
         [
           "Add Models",
           "添加模型"
-        ],
-        [
-          "Fast",
-          "快速"
         ],
         [
           "Conversation Density",

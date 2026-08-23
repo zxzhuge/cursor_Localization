@@ -203,36 +203,6 @@
       "replacement": "保留更改"
     },
     {
-      "regex": "^Composer (.+) Fast$",
-      "flags": "i",
-      "replacement": "Composer $1 快速"
-    },
-    {
-      "regex": "^(.+?) Extra High$",
-      "flags": "i",
-      "replacement": "$1 超高"
-    },
-    {
-      "regex": "^(.+?) Medium$",
-      "flags": "i",
-      "replacement": "$1 中等"
-    },
-    {
-      "regex": "^(.+?) Fast$",
-      "flags": "i",
-      "replacement": "$1 快速"
-    },
-    {
-      "regex": "^(.+?) High$",
-      "flags": "i",
-      "replacement": "$1 高"
-    },
-    {
-      "regex": "^(.+?) Low$",
-      "flags": "i",
-      "replacement": "$1 低"
-    },
-    {
       "regex": "^Editor Window\\s*↗?$",
       "flags": "i",
       "replacement": "编辑器窗口 ↗"
@@ -881,16 +851,6 @@
       "regex": "^(\\d+M) context window$",
       "flags": "i",
       "replacement": "$1 上下文窗口"
-    },
-    {
-      "regex": "^(.+?) \\(Fast\\)$",
-      "flags": "",
-      "replacement": "$1（快速）"
-    },
-    {
-      "regex": "^(.+?) \\(fast\\)$",
-      "flags": "",
-      "replacement": "$1（快速）"
     },
     {
       "regex": "^(\\d+)% off through (.+?)\\.?$",
