@@ -272,6 +272,8 @@ PLUGIN_MARKETPLACE_DICTIONARY_FILE = "Plugin_Marketplace_Dictionary.json"
 LOCALIZATION_DIR = os.path.join(JIAO_BEN_MU_LU, "localization")
 CORE_DICTIONARY_FILE = os.path.join(LOCALIZATION_DIR, "Core_Dictionary.json")
 PATTERN_DICTIONARY_FILE = os.path.join(LOCALIZATION_DIR, "Pattern_Dictionary.json")
+# 独立词保留英文，不写入 FanYi_CiDian
+BAO_LIU_YING_WEN_CI = frozenset({"File", "Files"})
 AD_POPUP_DICTIONARY_PATH = os.path.join(LOCALIZATION_DIR, AD_POPUP_DICTIONARY_FILE)
 PLUGIN_MARKETPLACE_DICTIONARY_PATH = os.path.join(
     LOCALIZATION_DIR, PLUGIN_MARKETPLACE_DICTIONARY_FILE
@@ -481,7 +483,7 @@ def DuQu_Zhu_CiDian():
 
     HeBing = {}
     for YingWen, ZhongWen in TiaoMu:
-        if YingWen and ZhongWen:
+        if YingWen and ZhongWen and YingWen not in BAO_LIU_YING_WEN_CI:
             HeBing[YingWen] = ZhongWen
     return [[YingWen, HeBing[YingWen]] for YingWen in HeBing]
 

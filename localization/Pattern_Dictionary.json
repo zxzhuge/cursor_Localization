@@ -1,6 +1,6 @@
 {
   "description": "动态文本正则替换（MoShi_FanYi）。",
-  "updatedAt": "2026-07-09",
+  "updatedAt": "2026-08-13",
   "patterns": [
     {
       "regex": "^(\\d+) requests? remaining$",
@@ -439,7 +439,7 @@
     },
     {
       "regex": "^files$",
-      "flags": "i",
+      "flags": "",
       "replacement": "个文件"
     },
     {
@@ -981,6 +981,221 @@
       "regex": "^([\\d,.]+(?:K|M)?)\\s+out of\\s+([\\d,.]+(?:K|M)?)\\s+tokens$",
       "flags": "i",
       "replacement": "$1 / $2 token"
+    },
+    {
+      "regex": "^Version (.+) \\(system setup\\)$",
+      "flags": "i",
+      "replacement": "版本 $1（系统安装）"
+    },
+    {
+      "regex": "^Version (.+) \\(user setup\\)$",
+      "flags": "i",
+      "replacement": "版本 $1（用户安装）"
+    },
+    {
+      "regex": "^\\(system setup\\)$",
+      "flags": "i",
+      "replacement": "（系统安装）"
+    },
+    {
+      "regex": "^\\(user setup\\)$",
+      "flags": "i",
+      "replacement": "（用户安装）"
+    },
+    {
+      "regex": "^Copyright © (\\d+) Anysphere\\. All rights reserved\\.?$",
+      "flags": "i",
+      "replacement": "版权所有 © $1 Anysphere。保留所有权利。"
+    },
+    {
+      "regex": "^Last (\\d+) Days?$",
+      "flags": "i",
+      "replacement": "最近 $1 天"
+    },
+    {
+      "regex": "^Resets\\s+(.+)$",
+      "flags": "i",
+      "replacement": "将于 $1 重置"
+    },
+    {
+      "regex": "^(\\d+)% used$",
+      "flags": "i",
+      "replacement": "已使用 $1%"
+    },
+    {
+      "regex": "^(\\d+) Files? Changed$",
+      "flags": "i",
+      "replacement": "已更改 $1 个文件"
+    },
+    {
+      "regex": "^Usage limits reset on (.+)$",
+      "flags": "i",
+      "replacement": "用量限额将于 $1 重置"
+    },
+    {
+      "regex": "^\\((\\d+) days? left\\)$",
+      "flags": "i",
+      "replacement": "（剩余 $1 天）"
+    },
+    {
+      "regex": "^\\$(\\d+)/mo$",
+      "flags": "i",
+      "replacement": "$1 美元/月"
+    },
+    {
+      "regex": "^Agent AI Stats \\(Today\\): ([\\d,]+)/([\\d,]+) lines \\((\\d+)%\\)$",
+      "flags": "i",
+      "replacement": "智能体 AI 统计（今日）：$1/$2 行（$3%）"
+    },
+    {
+      "regex": "^Agent Stats: ([\\d,]+)/([\\d,]+) \\((\\d+)%\\)$",
+      "flags": "i",
+      "replacement": "智能体统计：$1/$2（$3%）"
+    },
+    {
+      "regex": "^Tab AI Stats \\(Today\\): ([\\d,]+)/([\\d,]+) lines \\((\\d+)%\\)$",
+      "flags": "i",
+      "replacement": "Tab AI 统计（今日）：$1/$2 行（$3%）"
+    },
+    {
+      "regex": "^Tab Stats: ([\\d,]+)/([\\d,]+) \\((\\d+)%\\)$",
+      "flags": "i",
+      "replacement": "Tab 统计：$1/$2（$3%）"
+    },
+    {
+      "regex": "AI-Generated:\\s*([\\d.]+)%\\s*\\((\\d+)\\s*lines?\\)",
+      "flags": "i",
+      "replacement": "AI 生成：$1%（$2 行）"
+    },
+    {
+      "regex": "AI 生成：\\s*([\\d.]+)%\\s*\\((\\d+)\\s*lines?\\)",
+      "flags": "i",
+      "replacement": "AI 生成：$1%（$2 行）"
+    },
+    {
+      "regex": "- Tab:\\s*([\\d,]+)\\s*lines?\\s*\\(([\\d,]+)\\s*added,\\s*([\\d,]+)\\s*deleted\\)",
+      "flags": "i",
+      "replacement": "- Tab：$1 行（新增 $2，删除 $3）"
+    },
+    {
+      "regex": "- Composer:\\s*([\\d,]+)\\s*lines?\\s*\\(([\\d,]+)\\s*added,\\s*([\\d,]+)\\s*deleted\\)",
+      "flags": "i",
+      "replacement": "- Composer：$1 行（新增 $2，删除 $3）"
+    },
+    {
+      "regex": "Total Changes:\\s*([\\d,]+)\\s*added,\\s*([\\d,]+)\\s*deleted",
+      "flags": "i",
+      "replacement": "总变更：新增 $1，删除 $2"
+    },
+    {
+      "regex": "^([a-f0-9]{7,40})\\s+([\\d.]+)%\\s*AI$",
+      "flags": "i",
+      "replacement": "$1 $2% 由 AI 生成"
+    },
+    {
+      "regex": "^Repo: ([^\\n]+)$",
+      "flags": "i",
+      "replacement": "仓库：$1"
+    },
+    {
+      "regex": "^Branch: ([^\\n]+)$",
+      "flags": "i",
+      "replacement": "分支：$1"
+    },
+    {
+      "regex": "^Cursor Models · Includes (.+)$",
+      "flags": "i",
+      "replacement": "Cursor 模型 · 包含 $1"
+    },
+    {
+      "regex": "^Cursor 模型 · Includes (.+)$",
+      "flags": "i",
+      "replacement": "Cursor 模型 · 包含 $1"
+    },
+    {
+      "regex": "^Checked out · Updated (.+)$",
+      "flags": "i",
+      "replacement": "已检出 · $1前更新"
+    },
+    {
+      "regex": "^Checked out · (.+)$",
+      "flags": "i",
+      "replacement": "已检出 · $1"
+    },
+    {
+      "regex": "^The connection failed (\\d+) times?\\. Please check your network connection and try again\\.?$",
+      "flags": "i",
+      "replacement": "连接失败了 $1 次。请检查网络连接后重试。"
+    },
+    {
+      "regex": "^(\\d+) months? ago$",
+      "flags": "i",
+      "replacement": "$1 个月前"
+    },
+    {
+      "regex": "^(\\d+) years? ago$",
+      "flags": "i",
+      "replacement": "$1 年前"
+    },
+    {
+      "regex": "^\\((\\d+) months? ago\\)$",
+      "flags": "i",
+      "replacement": "（$1 个月前）"
+    },
+    {
+      "regex": "^\\((\\d+) years? ago\\)$",
+      "flags": "i",
+      "replacement": "（$1 年前）"
+    },
+    {
+      "regex": "^Edited (\\d+) files?, ran (\\d+) commands?$",
+      "flags": "i",
+      "replacement": "已编辑 $1 个文件，运行了 $2 条命令"
+    },
+    {
+      "regex": "^View More \\((\\d+)\\)$",
+      "flags": "i",
+      "replacement": "查看更多（$1）"
+    },
+    {
+      "regex": "^(.+) have moved to Customize$",
+      "flags": "i",
+      "replacement": "$1 已移至「自定义」"
+    },
+    {
+      "regex": "^Search Skills for (.+)\\.\\.\\.$",
+      "flags": "i",
+      "replacement": "搜索 $1 的技能..."
+    },
+    {
+      "regex": "^Search Plugins for (.+)\\.\\.\\.$",
+      "flags": "i",
+      "replacement": "搜索 $1 的插件..."
+    },
+    {
+      "regex": "^Search Rules for (.+)\\.\\.\\.$",
+      "flags": "i",
+      "replacement": "搜索 $1 的规则..."
+    },
+    {
+      "regex": "^Search Commands for (.+)\\.\\.\\.$",
+      "flags": "i",
+      "replacement": "搜索 $1 的命令..."
+    },
+    {
+      "regex": "^Search Hooks for (.+)\\.\\.\\.$",
+      "flags": "i",
+      "replacement": "搜索 $1 的钩子..."
+    },
+    {
+      "regex": "^Search MCP for (.+)\\.\\.\\.$",
+      "flags": "i",
+      "replacement": "搜索 $1 的 MCP..."
+    },
+    {
+      "regex": "^Search Subagents for (.+)\\.\\.\\.$",
+      "flags": "i",
+      "replacement": "搜索 $1 的子智能体..."
     }
   ]
 }

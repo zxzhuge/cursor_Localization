@@ -351,8 +351,40 @@
         }
     }
 
+    function Shi_Markdown_YuLan_AnNiu(el) {
+        if (!el) return false;
+        try {
+            var host = el.nodeType === 3 ? el.parentElement : el;
+            if (!host) return false;
+            if (host.closest && host.closest('.markdown-preview-editor')) return true;
+            var label = host;
+            if (host.classList && !host.classList.contains('action-label')) {
+                var inner = host.querySelector && host.querySelector('.action-label');
+                if (inner) label = inner;
+            }
+            var text = GuiYiHua_WenBen((label.textContent || '').trim());
+            if (text !== 'Preview') return false;
+            var actions = host.closest && host.closest(
+                '.tabs-and-actions-container, .editor-actions, .title-actions, .monaco-action-bar'
+            );
+            if (!actions) return false;
+            var group = host.closest('.editor-group-container');
+            if (!group) return false;
+            if (group.querySelector(
+                '.markdown-editor, [data-mode-id="markdown"], .markdown, .markdown-preview-editor'
+            )) return true;
+            var tab = group.querySelector('.tab.active, .tab.selected, .tab[aria-selected="true"]');
+            if (tab) {
+                var tabText = (tab.textContent || tab.getAttribute('aria-label') || '');
+                if (/\.md\b/i.test(tabText)) return true;
+            }
+        } catch (e) {}
+        return false;
+    }
+
     function YingGai_TiaoGuo_FanYi_ZiShu_YuanSu(el) {
         if (!el || el.nodeType !== 1) return false;
+        if (Shi_Markdown_YuLan_AnNiu(el)) return true;
         if (el.classList && el.classList.contains('monaco-editor')) return true;
         try {
             if (el.closest('.monaco-editor')) return true;

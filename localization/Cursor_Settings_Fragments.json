@@ -7,23 +7,72 @@
     "tail": "。更改此设置需要重启 Cursor。"
   },
   "mcpEntries": [
-    ["MCP tools that can run automatically.", "可以自动运行的 MCP 工具。"],
-    ["MCP tools that can run automatically", "可以自动运行的 MCP 工具"],
-    ["Format:", "格式："],
-    [" for all tools from a server,", " 表示某服务器的所有工具，"],
-    [" for all tools from a server", " 表示某服务器的所有工具"],
-    [" for a tool from any server,", " 表示任意服务器的某工具，"],
-    [" for a tool from any server", " 表示任意服务器的某工具"],
-    [", or '*:*' for all tools from all servers", "，或 '*:*' 表示所有服务器的所有工具"]
+    [
+      "MCP tools that can run automatically.",
+      "可以自动运行的 MCP 工具。"
+    ],
+    [
+      "MCP tools that can run automatically",
+      "可以自动运行的 MCP 工具"
+    ],
+    [
+      "Format:",
+      "格式："
+    ],
+    [
+      " for all tools from a server,",
+      " 表示某服务器的所有工具，"
+    ],
+    [
+      " for all tools from a server",
+      " 表示某服务器的所有工具"
+    ],
+    [
+      " for a tool from any server,",
+      " 表示任意服务器的某工具，"
+    ],
+    [
+      " for a tool from any server",
+      " 表示任意服务器的某工具"
+    ],
+    [
+      ", or '*:*' for all tools from all servers",
+      "，或 '*:*' 表示所有服务器的所有工具"
+    ]
   ],
   "domainEntries": [
-    ["Domains that Agent can fetch from automatically.", "Agent 可以自动获取的域名。"],
-    ["Domains that Agent can fetch from automatically", "Agent 可以自动获取的域名"],
-    ["Use '*' for all domains,", "使用 '*' 表示所有域名，"],
-    ["Use '*' for all domains", "使用 '*' 表示所有域名"],
-    ["'*.example.com' for wildcard subdomains.", "'*.example.com' 表示通配子域名。"],
-    ["'*.example.com' for wildcard subdomains", "'*.example.com' 表示通配子域名"],
-    ["Reason: Not in allowlist:", "原因：不在白名单中："],
-    ["Will allow:", "将允许："]
-  ]
+    [
+      "Domains that Agent can fetch from automatically.",
+      "Agent 可以自动获取的域名。"
+    ],
+    [
+      "Domains that Agent can fetch from automatically",
+      "Agent 可以自动获取的域名"
+    ],
+    [
+      "Use '*' for all domains,",
+      "使用 '*' 表示所有域名，"
+    ],
+    [
+      "Use '*' for all domains",
+      "使用 '*' 表示所有域名"
+    ],
+    [
+      "'*.example.com' for wildcard subdomains.",
+      "'*.example.com' 表示通配子域名。"
+    ],
+    [
+      "'*.example.com' for wildcard subdomains",
+      "'*.example.com' 表示通配子域名"
+    ],
+    [
+      "Reason: Not in allowlist:",
+      "原因：不在白名单中："
+    ],
+    [
+      "Will allow:",
+      "将允许："
+    ]
+  ],
+  "fragments": []
 }

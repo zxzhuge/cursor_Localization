@@ -8,14 +8,19 @@
             'Increase limits for faster', 'out of usage', 'ask your admin',
             'Total usage limit reached', 'on-demand limit', 'Upgrade to Pro+', 'Set new limit',
             'Smartest Model Yet', '50% Off Through', 'Try Grok',
-            'use subagents to break down tasks'
+            'use subagents to break down tasks',
+            'Plan Update', '2x Included Usage', 'High Load', 'high demand right now',
+            'Connect GitHub to Cursor', 'Let agents work with your Repos',
+            'have moved to Customize', 'new home for all the ways'
         ],
         HUAN_YING: [
             'Sign in', 'Log in', 'Sign Up', 'Sign up', 'The best way to code with AI',
             'Open Project', 'Clone Repository', 'Connect via SSH',
+            'Remote Machines', 'Publish to GitHub', 'Report Issue', 'Send Feedback', 'Code Intelligence',
             'Click to import all local VS Code extensions', "don't show again", 'Log in to use Cursor AI features',
             'Repositories', 'Message Cursor', 'Browse Files', 'No workspace folder open',
-            'Close Pane', 'Unable to load automations', "Let's kick something off"
+            'Close Pane', 'Unable to load automations', "Let's kick something off",
+            'Getting Started', 'Teach Cursor New Skills', 'have moved to Customize'
         ],
         YIN_YING_MOHU: [
             'Shadow & Blur', '阴影与模糊', 'Drop shadow', 'Inner shadow', 'Layer Blur', 'Backdrop Blur',
@@ -32,7 +37,7 @@
             'Usage limit reached', 'Get faster responses', 'Responses may be slower',
             'Increase limits for faster', 'out of usage', 'ask your admin',
             'Total usage limit reached', 'on-demand limit', 'Upgrade to Pro+', 'Set new limit',
-            'Get Cursor Pro for more Agent usage'
+            'Get Cursor Pro for more Agent usage', 'Plan Update', 'Included Usage'
         ],
         ZHI_NENG_TI_FAN_KUI: [
             'How did the agent do', 'Misunderstood task', 'Ignored constraint', 'Wrong scope',
@@ -50,7 +55,9 @@
         ],
         ZHI_NENG_TI_MO_SHI: [
             'Switch Agent Mode', 'Switch Model', 'Multitask', 'Systematically diagnose',
-            'Ask Cursor questions', 'Using ', 'Plan, search'
+            'Ask Cursor questions', 'Using ', 'Plan, search',
+            'implementation plan', 'root cause of an issue', 'Orchestrate multiple subagents',
+            'without making edits', 'Search skills, context'
         ],
         LIU_LAN_QI_URL: [
             'Enter a URL above', 'instruct the Agent', 'Enter URL or search', 'Search or enter URL'
@@ -61,12 +68,17 @@
             'Show Bookmark Bar', 'Inspect Element', 'Reload', 'Select All', '重新加载', '全选'
         ],
         LIU_LAN_QI_CUO_WU: [
-            'Connection Failed', 'Restart Browser', 'Show Details', 'browser-error', 'canvas-error-view',
+            'Connection Failed', 'Connection failed', 'Restart Browser', 'Show Details', 'browser-error', 'canvas-error-view',
             'Enter a URL above', 'instruct the Agent', 'Browser', 'ERR_CONNECTION',
             'Cursor Browser', "Don't Open", 'Opening '
         ],
         DUI_LIE: [
-            'Queued', 'Send now', 'Edit queued', 'Editing queued', 'Remove from queue', 'Attached image'
+            'Queued', 'Send now', 'Edit queued', 'Editing queued', 'Remove from queue', 'Attached image',
+            'Send After Current Message', 'Send Right Away'
+        ],
+        TI_JIAO_PING_FEN: [
+            'Most Recent Commit Scored', 'AI-Generated:', 'Total Changes:', 'Agent Stats:', 'Tab Stats:',
+            'No commit scored', 'No commit has been scored yet', '% AI'
         ]
     };
 
@@ -79,7 +91,7 @@
             '自动mation', 'Use with caution', 'Skip symlinks', 'cursorignore', '符号链接', 'cursor-settings',
             "Don't Ask Again", 'Hidden Dialogs', 'hidden dialogs'
         ],
-        ZHANG_HU: ['Current Plan', 'Resets on', '免费版', 'Manage', 'CURRENT']
+        ZHANG_HU: ['Current Plan', 'Resets on', 'Included Usage', 'Resets', 'Window Restoration', 'Last Used Windows', 'Cursor Models', 'Other Models', 'Default Model', 'Adjust Plan', 'Usage limits reset', 'Search Cursor settings', '免费版', 'Manage', 'CURRENT']
     };
 
     function QuanJu_BaoHan_GuanJianCi_BiaoQian(biaoQian) {

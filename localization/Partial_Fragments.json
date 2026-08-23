@@ -349,6 +349,10 @@
     [
       "This action cannot be undone",
       "此操作无法撤销"
+    ],
+    [
+      "have moved to Customize",
+      "已移至「自定义」"
     ]
   ]
 }
