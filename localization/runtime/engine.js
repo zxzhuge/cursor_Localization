@@ -39,11 +39,24 @@
         return false;
     }
 
+    var BaoLiu_YingWen_Ci = new Set([
+        'Keep All', 'Undo All', 'Keep', 'Undo',
+        'Keep Ctrl+Shift+Y', 'Undo Ctrl+N',
+        'Confirm', 'Review', 'Stop'
+    ]);
+
+    function Shi_BaoLiu_YingWen(text) {
+        if (!text) return false;
+        var t = text.trim();
+        if (BaoLiu_YingWen_Ci.has(t)) return true;
+        return Shi_BaoLiu_File_Files_WenBen(t);
+    }
+
     function ChaZhao_FanYi(text) {
         if (!text) return null;
 
         var trimmed = text.trim();
-        if (Shi_BaoLiu_File_Files_WenBen(trimmed)) return null;
+        if (Shi_BaoLiu_YingWen(trimmed)) return null;
         var normalized = GuiYiHua_WenBen(text);
         var quoteNorm = GuiYiHua_YinHao(normalized);
 
@@ -345,8 +358,6 @@
         ['Delete', '删除'],
         ['Rename', '重命名'],
         ['Rename Chat', '重命名对话'],
-        ['Keep All', '全部保留'],
-        ['Undo All', '全部撤销'],
         ['Archive', '归档'],
         ['Unarchive', '取消归档'],
         ['Fork Chat', '分叉对话'],
@@ -425,16 +436,9 @@
         ['Pending Changes', '待确认更改']
     ];
 
-    var Agent_BianGeng_WenBen_Extra_HINTS = Agent_BianGeng_Pending_HINTS.concat([
-        ['Keep', '保留'],
-        ['Keep Ctrl+Shift+Y', '保留 Ctrl+Shift+Y'],
-        ['Undo Ctrl+N', '撤销 Ctrl+N']
-    ]);
+    var Agent_BianGeng_WenBen_Extra_HINTS = Agent_BianGeng_Pending_HINTS.concat([]);
 
-    var Agent_BianGeng_Attr_Extra_HINTS = [
-        ['Keep', '保留'],
-        ['Keep Ctrl+Shift+Y', '保留 Ctrl+Shift+Y']
-    ];
+    var Agent_BianGeng_Attr_Extra_HINTS = [];
 
     var DuiHua_JieMian_GongYong_HINTS = [
         ['Show context usage', '显示上下文用量'],
@@ -448,8 +452,6 @@
         ['Pin', '固定'],
         ['Delete', '删除'],
         ['Rename', '重命名'],
-        ['Keep All', '全部保留'],
-        ['Undo All', '全部撤销'],
         ['Close Chat', '关闭对话'],
         ['Close Other Chats', '关闭其他对话'],
         ['How did the agent do?', '智能体表现如何？'],
@@ -660,7 +662,7 @@
     function FanYi_ShuXing(el) {
         if (!el || !el.getAttribute) return;
         if (Shi_Markdown_YuLan_AnNiu(el)) return;
-        var attrs = ['title', 'aria-label', 'alt', 'placeholder', 'aria-placeholder', 'data-tooltip', 'data-title'];
+        var attrs = ['aria-label', 'alt', 'placeholder', 'aria-placeholder'];
         for (var i = 0; i < attrs.length; i++) {
             var val = el.getAttribute(attrs[i]);
             if (!val) continue;
@@ -670,62 +672,7 @@
     }
 
     function FanYi_Cursor_Hover_Widget(root) {
-        if (!root) return;
-        var list = [];
-        try {
-            if (root.nodeType === 1 && Shi_XuanFu_TiShi_JieDian(root)) list.push(root);
-            if (root.querySelectorAll) {
-                var found = root.querySelectorAll('.cursorHoverWidget, [class*="cursor-hover"], [class*="cursorHover"], [class*="CursorHover"]');
-                for (var f = 0; f < found.length; f++) list.push(found[f]);
-            }
-        } catch (e) { return; }
-        var seen = new Set();
-        for (var h = 0; h < list.length; h++) {
-            var ht = list[h];
-            if (!ht || seen.has(ht)) continue;
-            seen.add(ht);
-            if (ht.closest && ht.closest('.monaco-editor .view-lines')) continue;
-            FanYi_ShuXing(ht);
-            try {
-                var walker = document.createTreeWalker(ht, NodeFilter.SHOW_TEXT, null);
-                var tnode;
-                while ((tnode = walker.nextNode())) {
-                    var text = tnode.textContent;
-                    if (!text) continue;
-                    var trimmed = text.trim();
-                    if (!trimmed || trimmed.length > 120) continue;
-                    var tr = ChaZhao_FanYi(trimmed);
-                    if (!tr) {
-                        for (var j = 0; j < Agent_TiShi_WenBen.length; j++) {
-                            if (trimmed === Agent_TiShi_WenBen[j][0]) {
-                                tr = Agent_TiShi_WenBen[j][1];
-                                break;
-                            }
-                        }
-                    }
-                    if (tr && tr !== text) {
-                        var idx = text.indexOf(trimmed);
-                        if (idx < 0) tnode.textContent = tr;
-                        else tnode.textContent = text.substring(0, idx) + tr + text.substring(idx + trimmed.length);
-                    }
-                }
-            } catch (e) {}
-            var leaves = ht.querySelectorAll ? ht.querySelectorAll('div, span, p, label') : [];
-            for (var n = 0; n < leaves.length; n++) {
-                var leaf = leaves[n];
-                if (!leaf || (leaf.querySelector && leaf.querySelector('div, span, p, label'))) continue;
-                var raw = (leaf.textContent || '').trim();
-                if (!raw || raw.length > 120) continue;
-                var plain = GuiYiHua_WenBen(raw);
-                var ltr = ChaZhao_FanYi(plain);
-                if (!ltr) {
-                    for (var k = 0; k < Agent_TiShi_WenBen.length; k++) {
-                        if (plain === Agent_TiShi_WenBen[k][0]) { ltr = Agent_TiShi_WenBen[k][1]; break; }
-                    }
-                }
-                if (ltr && ltr !== raw) KeYi_AnQuan_GaiXie_WenBen(leaf, ltr, [raw.slice(0, 10)]);
-            }
-        }
+        return;
     }
 
   // 所有悬停 / tooltip 统一选择器（Monaco、Cursor 自定义、原生 title 浮层等）
@@ -765,58 +712,13 @@
     }
 
     function FanYi_Monaco_Hover_Content(root) {
-        if (!root) return;
-        var list = [];
-        try {
-            if (root.nodeType === 1 && Shi_XuanFu_TiShi_JieDian(root)) list.push(root);
-            if (root.querySelectorAll) {
-                var found = root.querySelectorAll(XuanFu_TiShi_XuanZeQi);
-                for (var f = 0; f < found.length; f++) list.push(found[f]);
-            }
-        } catch (e) { return; }
-        var seen = new Set();
-        for (var h = 0; h < list.length; h++) {
-            var ht = list[h];
-            if (!ht || seen.has(ht)) continue;
-            seen.add(ht);
-            if (ht.closest && ht.closest('.monaco-editor .view-lines')) continue;
-            FanYi_ShuXing(ht);
-            try {
-                var walker = document.createTreeWalker(ht, NodeFilter.SHOW_TEXT, null);
-                var tnode;
-                while ((tnode = walker.nextNode())) {
-                    var text = tnode.textContent;
-                    if (!text) continue;
-                    var trimmed = GuiYiHua_WenBen(text);
-                    if (!trimmed || trimmed.length > 280) continue;
-                    var tr = FanYi_TiShi_WenBen(text) || FanYi_TiShi_WenBen(trimmed);
-                    if (tr && tr !== text) {
-                        var idx = text.indexOf(trimmed);
-                        if (idx < 0) tnode.textContent = tr;
-                        else {
-                            tnode.textContent = text.substring(0, idx) + tr + text.substring(idx + trimmed.length);
-                        }
-                    }
-                }
-            } catch (e) {}
-            var leaves = ht.querySelectorAll ? ht.querySelectorAll('span, div, p, label, a, button') : [];
-            for (var n = 0; n < leaves.length; n++) {
-                var leaf = leaves[n];
-                if (!leaf || leaf.closest('.monaco-editor .view-lines')) continue;
-                if (leaf.querySelector && leaf.querySelector('span, div, p, label')) continue;
-                FanYi_ShuXing(leaf);
-                var raw = leaf.textContent || '';
-                if (!raw || raw.length > 280) continue;
-                var plain = GuiYiHua_WenBen(raw);
-                var ltr = FanYi_TiShi_WenBen(raw) || FanYi_TiShi_WenBen(plain);
-                if (ltr && ltr !== raw) KeYi_AnQuan_GaiXie_WenBen(leaf, ltr, [plain.slice(0, 12)]);
-            }
-        }
+        return;
     }
 
     function AnZhuang_Monaco_Hover_FanYi() {
         if (window.__cursorMonacoHoverI18n) return;
         window.__cursorMonacoHoverI18n = true;
+        return;
         var hoverTimer = null;
         var hoverRafId = 0;
         function PaiDui_Hover(scope) {
@@ -1165,8 +1067,6 @@
             XiuZheng_XiaLaKuang_MianBan();
         });
         run(QX_HOVER, function() {
-            FanYi_Monaco_Hover_Content(document.body);
-            FanYi_Cursor_Hover_Widget(document.body);
             XiuZheng_TiJiao_PingFen();
         });
         try { XiuZheng_TiJiao_PingFen(); } catch (e) {}
@@ -2490,11 +2390,6 @@
                 if (el.querySelector('button, input, textarea, [contenteditable="true"]') && el.tagName !== 'BUTTON') continue;
                 var raw = (el.textContent || '').trim();
                 if (!raw || raw.length > 80) continue;
-                if (/^Stop\s/i.test(raw)) {
-                    var stopTr = raw.replace(/^Stop\s*/i, '停止 ');
-                    if (stopTr !== raw) el.textContent = stopTr;
-                    continue;
-                }
                 var tr = ChaZhao_FanYi(raw) || TiHuan_BuFen_WenBen(raw);
                 if (tr && tr !== raw) KeYi_AnQuan_GaiXie_WenBen(el, tr, [raw.slice(0, 8)]);
             }
@@ -2596,32 +2491,6 @@
             }
             return false;
         }
-        // Cursor 选区浮动条：.cursorHoverWidget > .hoverButton > .text
-        var hoverTexts = document.querySelectorAll('.cursorHoverWidget .hoverButton .text');
-        for (var h = 0; h < hoverTexts.length; h++) {
-            var ht = hoverTexts[h];
-            if (ht.closest('.view-lines')) continue;
-            var hraw = (ht.textContent || '').trim();
-            FanYi_ShuXing(ht.parentElement || ht);
-            for (var hj = 0; hj < labels.length; hj++) {
-                if (GengXin_BiaoQian(ht, labels[hj][0], labels[hj][1])) break;
-            }
-            if (!hraw) continue;
-            var htr = ChaZhao_FanYi(hraw);
-            if (htr && htr !== hraw) ht.textContent = htr;
-        }
-        var hoverButtons = document.querySelectorAll('.cursorHoverWidget .hoverButton');
-        for (var b = 0; b < hoverButtons.length; b++) {
-            var btn = hoverButtons[b];
-            FanYi_ShuXing(btn);
-            var title = btn.getAttribute('title') || btn.getAttribute('aria-label') || '';
-            for (var bj = 0; bj < labels.length; bj++) {
-                if (title === labels[bj][0]) {
-                    btn.setAttribute('title', labels[bj][1]);
-                    btn.setAttribute('aria-label', labels[bj][1]);
-                }
-            }
-        }
         var roots = document.querySelectorAll('.monaco-editor .contentWidgets, .monaco-editor .overlayWidgets, .context-view, .monaco-menu');
         for (var r = 0; r < roots.length; r++) {
             if (roots[r].classList && (roots[r].classList.contains('context-view') || roots[r].classList.contains('monaco-menu'))) {
@@ -2655,7 +2524,7 @@
         if (!menus.length) return;
         var panelHints = [
             'Pending Changes', 'Changes waiting to be confirmed', 'Keep All', 'Undo All',
-            'Find Issues', '待确认更改', '等待确认的更改', '全部保留', '全部撤销', '查找问题'
+            'Find Issues'
         ];
         if (!CaiDan_BaoHan_GuanJianCi(menus, panelHints) &&
             !document.querySelector('[class*="pending-changes"], [class*="agent-changes"], [class*="review-control"]')) {
@@ -2707,7 +2576,7 @@
             'Fork Chat', 'Mark as Unread', 'Archive Prior Chats', 'Delete', 'Rename',
             'Show more', 'Show 1 more',
             '已归档', '聊天历史', '搜索智能体', '今天', '昨天', '更早', '固定', '恢复', '草稿', '再显示',
-            '分叉对话', '标记为未读', '归档较早的对话', '全部保留', '全部撤销', '在新标签页中打开'
+            '分叉对话', '标记为未读', '归档较早的对话', '在新标签页中打开'
         ];
         var hasChatHistoryPanel = document.querySelector(
             '[class*="chat-history"], [class*="ChatHistory"], [class*="agent-history"], [class*="AgentHistory"], ' +

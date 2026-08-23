@@ -2239,10 +2239,6 @@
           "模型"
         ],
         [
-          "Stop",
-          "停止"
-        ],
-        [
           "Waiting for Approval",
           "等待审批中"
         ],
@@ -2253,22 +2249,6 @@
         [
           "Waiting for Approval...",
           "等待审批中..."
-        ],
-        [
-          "Undo All",
-          "全部撤销"
-        ],
-        [
-          "Keep All",
-          "全部保留"
-        ],
-        [
-          "Accept all changes",
-          "接受所有更改"
-        ],
-        [
-          "Accept All Changes",
-          "接受所有更改"
         ],
         [
           "Keep all changes",
@@ -2293,26 +2273,6 @@
         [
           "Review Next File",
           "审查下一个文件"
-        ],
-        [
-          "Undo",
-          "撤销"
-        ],
-        [
-          "Keep",
-          "保留"
-        ],
-        [
-          "Keep Ctrl+Shift+Y",
-          "保留 Ctrl+Shift+Y"
-        ],
-        [
-          "Undo Ctrl+N",
-          "撤销 Ctrl+N"
-        ],
-        [
-          "Confirm",
-          "确认"
         ],
         [
           "Adjust the default behavior of sending a message while Agent is running",
@@ -6181,10 +6141,6 @@
           "提交"
         ],
         [
-          "Confirm",
-          "确认"
-        ],
-        [
           "Continue",
           "继续"
         ],
@@ -7959,10 +7915,6 @@
           "退出"
         ],
         [
-          "Undo",
-          "撤销"
-        ],
-        [
           "Redo",
           "重做"
         ],
@@ -8297,10 +8249,6 @@
         [
           "Open in New Tab (Ctrl+Enter)",
           "在新标签页中打开 (Ctrl+Enter)"
-        ],
-        [
-          "Keep All",
-          "全部保留"
         ],
         [
           "Unpin",
@@ -9481,10 +9429,6 @@
         [
           "Revert last change",
           "撤销上次更改"
-        ],
-        [
-          "Review",
-          "审查"
         ],
         [
           "Review Changes",

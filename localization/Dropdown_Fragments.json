@@ -51,10 +51,6 @@
       "智能体更改"
     ],
     [
-      "Keep",
-      "保留"
-    ],
-    [
       "Keep This Computer Awake",
       "保持此电脑唤醒"
     ],
@@ -541,14 +537,6 @@
     [
       "Rename",
       "重命名"
-    ],
-    [
-      "Keep All",
-      "全部保留"
-    ],
-    [
-      "Undo All",
-      "全部撤销"
     ],
     [
       "Search Agents...",

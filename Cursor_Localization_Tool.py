@@ -272,8 +272,13 @@ PLUGIN_MARKETPLACE_DICTIONARY_FILE = "Plugin_Marketplace_Dictionary.json"
 LOCALIZATION_DIR = os.path.join(JIAO_BEN_MU_LU, "localization")
 CORE_DICTIONARY_FILE = os.path.join(LOCALIZATION_DIR, "Core_Dictionary.json")
 PATTERN_DICTIONARY_FILE = os.path.join(LOCALIZATION_DIR, "Pattern_Dictionary.json")
-# 独立词保留英文，不写入 FanYi_CiDian
-BAO_LIU_YING_WEN_CI = frozenset({"File", "Files"})
+# 独立词保留英文，不写入 FanYi_CiDian / 片段词典
+BAO_LIU_YING_WEN_CI = frozenset({
+    "File", "Files",
+    "Keep All", "Undo All", "Keep", "Undo",
+    "Keep Ctrl+Shift+Y", "Undo Ctrl+N",
+    "Confirm", "Review", "Stop",
+})
 # 含 File/Files 计数的正则不入 MoShi_FanYi（保留英文，如 5 Files、1 File Changed）
 BAO_LIU_YING_WEN_MO_SHI = frozenset({
     "^files$",
@@ -283,7 +288,19 @@ BAO_LIU_YING_WEN_MO_SHI = frozenset({
     "^(\\d+)\\s+files$",
     "^(\\d+)\\s+文件s$",
     "^(\\d+) Files? Changed$",
+    "^Stop$",
+    "^Stop \\((.+)\\)$",
+    "^Stop\\s+(.+)$",
+    "^Keep\\s+Ctrl",
+    "^Undo\\s+Ctrl",
 })
+
+
+def Shi_BaoLiu_YingWen(WenBen):
+    """保留英文、不写入词典或片段的词条。"""
+    if WenBen in BAO_LIU_YING_WEN_CI:
+        return True
+    return Shi_BaoLiu_File_Files_YingWen(WenBen)
 
 
 def Shi_BaoLiu_File_Files_YingWen(YingWen):
@@ -504,7 +521,7 @@ def DuQu_Zhu_CiDian():
 
     HeBing = {}
     for YingWen, ZhongWen in TiaoMu:
-        if YingWen and ZhongWen and not Shi_BaoLiu_File_Files_YingWen(YingWen):
+        if YingWen and ZhongWen and not Shi_BaoLiu_YingWen(YingWen):
             HeBing[YingWen] = ZhongWen
     return [[YingWen, HeBing[YingWen]] for YingWen in HeBing]
 
@@ -617,6 +634,8 @@ def ShengCheng_Fragment_Array_JS_From_List(BianLiangMing, TiaoMu):
         return f"    var {BianLiangMing} = [];"
     Hang = []
     for YingWen, ZhongWen in TiaoMu:
+        if Shi_BaoLiu_YingWen(YingWen):
+            continue
         Hang.append(
             f"        [{json.dumps(YingWen, ensure_ascii=False)}, "
             f"{json.dumps(ZhongWen, ensure_ascii=False)}],"
@@ -656,6 +675,8 @@ def ShengCheng_Fragment_Array_JS(BianLiangMing, WenJianMing):
         return f"    var {BianLiangMing} = [];"
     Hang = []
     for YingWen, ZhongWen in TiaoMu:
+        if Shi_BaoLiu_YingWen(YingWen):
+            continue
         Hang.append(
             f"        [{json.dumps(YingWen, ensure_ascii=False)}, "
             f"{json.dumps(ZhongWen, ensure_ascii=False)}],"

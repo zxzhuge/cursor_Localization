@@ -168,16 +168,6 @@
       "replacement": "$1 个更改"
     },
     {
-      "regex": "^Keep\\s+Ctrl",
-      "flags": "i",
-      "replacement": "保留 Ctrl"
-    },
-    {
-      "regex": "^Undo\\s+Ctrl",
-      "flags": "i",
-      "replacement": "撤销 Ctrl"
-    },
-    {
       "regex": "^Keep File$",
       "flags": "i",
       "replacement": "保留文件"
@@ -436,21 +426,6 @@
       "regex": "^Configured Hooks \\((\\d+)\\)$",
       "flags": "",
       "replacement": "已配置的钩子 ($1)"
-    },
-    {
-      "regex": "^Stop \\((.+)\\)$",
-      "flags": "",
-      "replacement": "停止 ($1)"
-    },
-    {
-      "regex": "^Stop\\s+(.+)$",
-      "flags": "i",
-      "replacement": "停止 $1"
-    },
-    {
-      "regex": "^Stop$",
-      "flags": "i",
-      "replacement": "停止"
     },
     {
       "regex": "^Add to Chat \\((.+)\\)$",
