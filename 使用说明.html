@@ -331,12 +331,23 @@
 </ul>
 <hr>
 <h2>如何使用</h2>
+<h3>前置步骤：安装 Chinese 语言包 1.105.0</h3>
+<p>运行汉化程序或 <code>修复校验_Win.bat</code> 前，请先在 Cursor 扩展市场中<strong>手动安装</strong> <strong>Chinese (Simplified) Language Pack for Visual Studio Code</strong> 的 <strong>1.105.0</strong> 版本：</p>
+<ol>
+<li>打开 Cursor，进入扩展市场。</li>
+<li>搜索 <strong>Chinese (Simplified) Language Pack for Visual Studio Code</strong>（发布者 MS-CEINTL）。</li>
+<li>点击扩展页「安装」旁的下拉箭头，选择 <strong>安装特定版本...</strong>。</li>
+<li>在版本列表中选择 <strong>1.105.0</strong> 并安装。</li>
+</ol>
+<p><img src="https://yzl-1324609991.cos.ap-guangzhou.myqcloud.com/Snipaste_2026-08-23_17-36-38.png" alt="安装 Chinese 语言包 1.105.0"></p>
+<p>安装完成后再运行 <code>启动汉化_Win.bat</code> / <code>启动汉化_Mac.sh</code> 或 <code>修复校验_Win.bat</code>。</p>
 <h3>环境要求</h3>
 <p>汉化工具依赖 <strong>Python 3.8+</strong>（Windows 通过 <code>启动汉化_Win.bat</code> 调用，Mac/Linux 通过 shell 脚本调用）。</p>
 <ol>
 <li>下载并解压汉化工具（内含 <code>启动汉化_Win.bat</code> / <code>启动汉化_Mac.sh</code> 等）。</li>
+<li>按上文<strong>前置步骤</strong>安装 Chinese 语言包 <strong>1.105.0</strong>。</li>
 <li><strong>Windows</strong>：双击 <code>启动汉化_Win.bat</code>。<strong>Mac / Linux</strong>：在终端执行 <code>启动汉化_Mac.sh</code>。</li>
-<li>脚本会注入汉化（<strong>不要求</strong>安装官方简体中文语言包），按提示可选打开 Cursor。</li>
+<li>脚本会注入汉化，按提示可选打开 Cursor。</li>
 <li><strong>完全退出并重启</strong> Cursor（不要只重载窗口）。</li>
 </ol>
 <p><strong>Mac在终端中运行汉化脚本：</strong></p>
@@ -355,7 +366,7 @@
 <li><strong>更新 Cursor 后汉化失效了</strong>：重新再运行一次汉化脚本即可。</li>
 <li><strong>已经执行汉化但是没有生效</strong>：确认已完全重启了 Cursor。</li>
 <li><strong>运行脚本报错 / 弹出 Microsoft Store / 汉化无输出</strong>：通常是未安装真正的 Python。运行 <code>where python</code>，若路径含 <code>Microsoft\WindowsApps</code>，请从 <a href="https://www.python.org/downloads/">python.org</a> 安装 Python 3 并勾选 <strong>Add python.exe to PATH</strong>，或执行 <code>winget install Python.Python.3.12</code>；安装后重开终端，用 <code>python --version</code> 确认。</li>
-<li><strong>提示「安装已损坏 / installation appears to be corrupt」</strong>：汉化会修改 <code>workbench.html</code>，Cursor 还会校验 <code>product.json</code> 中的<strong>全部</strong> checksum（约 6 个核心文件）。请运行 <code>修复校验_Win.bat</code>（Mac/Linux 用 <code>修复校验_Mac.sh</code>），或执行 <code>python Cursor_Localization_Tool.py --fix-checksum</code>。若提示权限不足，Windows 请右键<strong>以管理员身份运行</strong>；完成后完全退出并重启 Cursor。</li>
+<li><strong>提示「安装已损坏 / installation appears to be corrupt」</strong>：请先按上文<strong>前置步骤</strong>手动安装 Chinese 语言包 <strong>1.105.0</strong>，再运行 <code>修复校验_Win.bat</code>（Mac/Linux 用 <code>修复校验_Mac.sh</code>），或执行 <code>python Cursor_Localization_Tool.py --fix-checksum</code>。汉化会修改 <code>workbench.html</code>，Cursor 还会校验 <code>product.json</code> 中的<strong>全部</strong> checksum（约 6 个核心文件）。若提示权限不足，Windows 请右键<strong>以管理员身份运行</strong>；完成后完全退出并重启 Cursor。</li>
 <li><strong>标准菜单仍是英文</strong>：本工具默认不安装官方语言包；若需要 VS Code 标准菜单也中文化，可自行安装 Language Pack，或运行 <code>python Cursor_Localization_Tool.py --install-langpack</code>（可选，非必需）。</li>
 <li>用记事本打开目录中的 <code>Cursor_Localization_Tool.py</code>，在文件开头 <code>cd /d "%~dp0"</code>后面增加一行，指定 Cursor 安装目录，保存后重新运行启动脚本。</li>
 </ul>

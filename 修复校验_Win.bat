@@ -22,6 +22,7 @@ echo [ERROR] Cursor_Localization_Tool.py not found
 echo.
 if not "!EXIT_CODE!"=="0" (
     echo [TIP] If permission denied, run this script as Administrator.
+    call :ShowLangPackTip
 )
 echo Press any key to exit...
 pause >nul
@@ -47,4 +48,10 @@ if errorlevel 1 (
     echo [ERROR] python cannot run
     exit /b 1
 )
+exit /b 0
+
+:ShowLangPackTip
+echo [提示] 请先手动安装 Chinese (Simplified) Language Pack 的 1.105.0 版本，再运行汉化程序。
+echo        扩展市场中点击「安装特定版本...」选择 1.105.0；图示见 使用说明.md
+echo        https://yzl-1324609991.cos.ap-guangzhou.myqcloud.com/Snipaste_2026-08-23_17-36-38.png
 exit /b 0

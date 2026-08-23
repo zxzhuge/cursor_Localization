@@ -42,6 +42,9 @@ echo "[执行] 正在修复 product.json 校验值..."
 if ! (cd "$SCRIPT_DIR" && "$PYTHON_CMD" "$HANHUA_SCRIPT" --fix-checksum); then
   echo
   echo "[失败] 校验修复未完成，请查看上方输出。"
+  echo "[提示] 请先手动安装 Chinese (Simplified) Language Pack 的 1.105.0 版本，再运行汉化程序。"
+  echo "       扩展市场中点击「安装特定版本...」选择 1.105.0；图示见 使用说明.md"
+  echo "       https://yzl-1324609991.cos.ap-guangzhou.myqcloud.com/Snipaste_2026-08-23_17-36-38.png"
   exit 1
 fi
 
