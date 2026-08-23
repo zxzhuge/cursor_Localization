@@ -35,9 +35,9 @@ Cursor 官方目前尚未提供中文界面或汉化包。常见做法是安装 
 
 ## 如何使用
 
-### 前置步骤：安装 Chinese 语言包 1.105.0
+### 推荐（可选）：运行汉化前安装 Chinese 语言包 1.105.0
 
-运行汉化程序或 `修复校验_Win.bat` 前，请先在 Cursor 扩展市场中**手动安装** **Chinese (Simplified) Language Pack for Visual Studio Code** 的 **1.105.0** 版本：
+本工具**不要求**安装 **Chinese (Simplified) Language Pack** 即可完成汉化。若希望 VS Code 标准菜单、通用设置等也一并中文化，**建议在运行汉化前**在 Cursor 扩展市场中手动安装该扩展的 **1.105.0** 版本：
 
 1. 打开 Cursor，进入扩展市场。
 2. 搜索 **Chinese (Simplified) Language Pack for Visual Studio Code**（发布者 MS-CEINTL）。
@@ -46,14 +46,14 @@ Cursor 官方目前尚未提供中文界面或汉化包。常见做法是安装 
 
 ![安装 Chinese 语言包 1.105.0](https://yzl-1324609991.cos.ap-guangzhou.myqcloud.com/Snipaste_2026-08-23_17-36-38.png)
 
-安装完成后再运行 `启动汉化_Win.bat` / `启动汉化_Mac.sh` 或 `修复校验_Win.bat`。
+安装完成后界面覆盖更完整；**也可跳过此步**，直接运行 `启动汉化_Win.bat` / `启动汉化_Mac.sh` 或 `修复校验_Win.bat`。
 
 ### 环境要求
 
 汉化工具依赖 **Python 3.8+**（Windows 通过 `启动汉化_Win.bat` 调用，Mac/Linux 通过 shell 脚本调用）。
 
 1. 下载并解压汉化工具（内含 `启动汉化_Win.bat` / `启动汉化_Mac.sh` 等）。
-2. 按上文**前置步骤**安装 Chinese 语言包 **1.105.0**。
+2. **（可选）** 按上文推荐安装 Chinese 语言包 **1.105.0**。
 3. **Windows**：双击 `启动汉化_Win.bat`。**Mac / Linux**：在终端执行 `启动汉化_Mac.sh`。
 4. 脚本会注入汉化，按提示可选打开 Cursor。
 5. **完全退出并重启** Cursor（不要只重载窗口）。
@@ -200,6 +200,6 @@ Mac / Linux 可在 `启动汉化_Mac.sh` 开头增加 `export CURSOR_INSTALL_DIR
 | 现象 | 处理 |
 | --- | --- |
 | 运行脚本报错 / 弹出 Microsoft Store / 汉化无输出 | 多半是 **未安装真正的 Python**，仅有 Windows「应用执行别名」占位程序。运行 `where python`，若路径为 `...\Microsoft\WindowsApps\python.exe` 即属此情况。从 [python.org](https://www.python.org/downloads/) 安装 Python 3（勾选 **Add python.exe to PATH**），或 `winget install Python.Python.3.12`；安装后重开终端，用 `python --version` 验证。可选：在 **设置 → 应用 → 高级应用设置 → 应用执行别名** 关闭 `python.exe` / `python3.exe` 商店快捷方式 |
-| 提示 installation appears to be corrupt / 安装已损坏 | 请先按上文**前置步骤**手动安装 Chinese 语言包 **1.105.0**，再运行 `修复校验_Win.bat` 或 `python Cursor_Localization_Tool.py --fix-checksum`；若提示权限不足，Windows 请**以管理员身份运行**启动/修复脚本；完成后完全重启 Cursor |
+| 提示 installation appears to be corrupt / 安装已损坏 | 运行 `修复校验_Win.bat` 或 `python Cursor_Localization_Tool.py --fix-checksum`；若提示权限不足，Windows 请**以管理员身份运行**启动/修复脚本；完成后完全重启 Cursor。**（可选）** 若希望标准菜单也中文化，可按上文推荐安装 Chinese 语言包 **1.105.0** |
 | 部分英文未翻译 | 在对应词典中补充条目后重新注入 |
 | 需要恢复原版 | `取消汉化_Win.bat` 或 `--restore` |
