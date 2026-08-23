@@ -2095,6 +2095,50 @@
           "限制同时打开的对话标签页数量"
         ],
         [
+          "New Messages",
+          "新消息"
+        ],
+        [
+          "Choose the default behavior of messages sent while Agent is working",
+          "选择智能体工作时发送新消息的默认行为"
+        ],
+        [
+          "Send Immediately",
+          "立即发送"
+        ],
+        [
+          "Interrupt",
+          "中断"
+        ],
+        [
+          "Send after Agent finishes",
+          "待智能体完成后发送"
+        ],
+        [
+          "Send immediately without interrupting",
+          "立即发送（不中断）"
+        ],
+        [
+          "Steer the Agent without stopping it",
+          "引导智能体而不中断其工作"
+        ],
+        [
+          "Send immediately by interrupting",
+          "立即中断并发送"
+        ],
+        [
+          "Stop Agent and send message",
+          "停止智能体并发送消息"
+        ],
+        [
+          "Send New Messages without queuing?",
+          "新消息不再排队发送？"
+        ],
+        [
+          "New messages now steer Agent instead of interrupting",
+          "新消息现在会引导智能体，而不再中断其工作"
+        ],
+        [
           "Queue Messages",
           "消息队列"
         ],
