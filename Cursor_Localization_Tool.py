@@ -1606,7 +1606,6 @@ def ZhuChengXu():
         XieRu_FanYi_JS()
         ShanChu_JiuBan_JS()
         GengXin_JiaoYan_Zhi()
-        print("\n[完成] 汉化脚本已更新！请完全退出并重启 Cursor 生效。")
         return
 
     # 首次注入
