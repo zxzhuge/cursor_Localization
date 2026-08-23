@@ -229,14 +229,6 @@ INJECTION_MARKER_HTML = "<!-- CURSOR_LOCALIZATION_INJECTION -->"  # HTML 注入�
 LEGACY_INJECTION_MARKER_HTML = "<!-- CURSOR_HANHUA_INJECTION -->"  # 旧版注入标记
 BEI_FEN_HOU_ZHUI = ".bak"  # 备份文件后缀
 
-# product.json 中 workbench.html 可能的 checksum 键（不同 Cursor/VS Code 版本路径略有差异）
-WORKBENCH_CHECKSUM_KEY_HINTS = (
-    "vs/code/electron-sandbox/workbench/workbench.html",
-    "vs/code/electron-browser/workbench/workbench.html",
-    "out/vs/code/electron-sandbox/workbench/workbench.html",
-    "out/vs/code/electron-browser/workbench/workbench.html",
-)
-
 # Cursor 内置扩展的简中桥接翻译。
 # VS Code 官方语言包不会覆盖 anysphere.*，这里补上最常见的私有扩展元信息。
 KUO_ZHAN_FAN_YI_QIAO_JIE = {
@@ -663,11 +655,6 @@ def ShengCheng_Cursor_SheZhi_Fragments_JS():
     return "\n".join(BuFen)
 
 
-def DuQu_Partial_Fragments():
-    """读取设置页等长句部分匹配碎片。"""
-    return DuQu_Fragment_Entries("Partial_Fragments.json")
-
-
 def ShengCheng_Fragment_Array_JS(BianLiangMing, WenJianMing):
     """生成 var <BianLiangMing> = [[en, zh], ...];"""
     TiaoMu = DuQu_Fragment_Entries(WenJianMing)
@@ -837,24 +824,6 @@ def JiSuan_WenJian_JiaoYan_HaXi(LuJing):
     with open(LuJing, 'rb') as WenJian:
         ShuJu = WenJian.read()
     return base64.b64encode(hashlib.sha256(ShuJu).digest()).decode('utf-8').rstrip('=')
-
-
-def ZhaDao_Workbench_JiaoYan_Jian(Product):
-    """在 product.json.checksums 中查找所有 workbench.html 相关键。"""
-    Checksums = Product.get('checksums')
-    if not isinstance(Checksums, dict):
-        return []
-
-    MuBiao_Jian = []
-    for Key in Checksums:
-        if 'workbench.html' in Key.replace('\\', '/').lower():
-            MuBiao_Jian.append(Key)
-
-    for Key in WORKBENCH_CHECKSUM_KEY_HINTS:
-        if Key in Checksums and Key not in MuBiao_Jian:
-            MuBiao_Jian.append(Key)
-
-    return MuBiao_Jian
 
 
 def HuoQu_JiaoYan_WenJian_LuJing(AppGenMuLu, Key):

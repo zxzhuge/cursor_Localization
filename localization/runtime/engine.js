@@ -2478,19 +2478,6 @@
             ['Add Symbol to Current Chat', '将符号添加到当前对话'],
             ['Add Symbol to New Chat', '将符号添加到新对话']
         ];
-        function GengXin_BiaoQian(el, from, to) {
-            if (!el || !from || !to) return false;
-            var raw = (el.textContent || '').trim();
-            if (raw === from) {
-                el.textContent = to;
-                return true;
-            }
-            if (raw.indexOf(from) >= 0) {
-                var neo = raw.split(from).join(to);
-                if (neo !== raw) { el.textContent = neo; return true; }
-            }
-            return false;
-        }
         var roots = document.querySelectorAll('.monaco-editor .contentWidgets, .monaco-editor .overlayWidgets, .context-view, .monaco-menu');
         for (var r = 0; r < roots.length; r++) {
             if (roots[r].classList && (roots[r].classList.contains('context-view') || roots[r].classList.contains('monaco-menu'))) {

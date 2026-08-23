@@ -70,14 +70,6 @@
         }
     }
 
-    function FanYi_Scope_Form_Hints(scope, hints, opts) {
-        opts = opts || {};
-        opts.translatePlaceholder = true;
-        opts.skipChildQuery = opts.skipChildQuery || 'button, textarea, input';
-        opts.allowTags = opts.allowTags || ['BUTTON', 'TEXTAREA', 'INPUT'];
-        FanYi_Scope_YeZi_Hints(scope, hints, opts);
-    }
-
     function FanYi_Scope_List_Hints(scopeList, hints, opts) {
         for (var r = 0; r < scopeList.length; r++) {
             FanYi_Scope_YeZi_Hints(scopeList[r], hints, opts);
@@ -270,16 +262,6 @@
                 el.textContent = tr;
             }
         }
-    }
-
-    function HuoQu_Cursor_SheZhi_MiaoShu_Cfg() {
-        return {
-            symlinkZh: Cursor_SheZhi_Symlink_Zh,
-            symlinkZhAdmin: Cursor_SheZhi_Symlink_ZhAdmin,
-            symlinkTail: Cursor_SheZhi_Symlink_Tail,
-            mcpFragments: Cursor_SheZhi_MCP_SuiPian,
-            domainFragments: Cursor_SheZhi_Domain_SuiPian
-        };
     }
 
     function FanYi_Cursor_SheZhi_BiaoQian(root) {
