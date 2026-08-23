@@ -2103,6 +2103,14 @@
           "选择智能体工作时发送新消息的默认行为"
         ],
         [
+          "Manually Sent Messages from Queue",
+          "队列手动发送"
+        ],
+        [
+          "Choose the default behavior of messages sent from the queue",
+          "选择从队列手动发送消息的默认行为"
+        ],
+        [
           "Send Immediately",
           "立即发送"
         ],

@@ -74,7 +74,8 @@
         ],
         DUI_LIE: [
             'Queued', 'Send now', 'Edit queued', 'Editing queued', 'Remove from queue', 'Attached image',
-            'Send After Current Message', 'Send Right Away', 'New Messages', 'Send Immediately',
+            'Send After Current Message', 'Send Right Away', 'New Messages',
+            'Manually Sent Messages from Queue', 'Send Immediately',
             'Interrupt', 'Send after Agent finishes'
         ],
         TI_JIAO_PING_FEN: [
