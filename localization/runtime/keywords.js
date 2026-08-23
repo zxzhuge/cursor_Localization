@@ -54,7 +54,8 @@
             '文件和文件夹', '历史对话', '分支（与主分支的差异）', '提及', '暂无可用选项'
         ],
         ZHI_NENG_TI_MO_SHI: [
-            'Switch Agent Mode', 'Switch Model', 'Multitask', 'Systematically diagnose',
+            'Switch Agent Mode', 'Switch Model', 'Agent Mode', 'Agent', 'Plan', 'Debug', 'Ask',
+            'Multitask', 'Systematically diagnose',
             'Ask Cursor questions', 'Using ', 'Plan, search',
             'implementation plan', 'root cause of an issue', 'Orchestrate multiple subagents',
             'without making edits', 'Search skills, context'
