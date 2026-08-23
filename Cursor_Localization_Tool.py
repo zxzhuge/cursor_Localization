@@ -274,6 +274,27 @@ CORE_DICTIONARY_FILE = os.path.join(LOCALIZATION_DIR, "Core_Dictionary.json")
 PATTERN_DICTIONARY_FILE = os.path.join(LOCALIZATION_DIR, "Pattern_Dictionary.json")
 # 独立词保留英文，不写入 FanYi_CiDian
 BAO_LIU_YING_WEN_CI = frozenset({"File", "Files"})
+# 含 File/Files 计数的正则不入 MoShi_FanYi（保留英文，如 5 Files、1 File Changed）
+BAO_LIU_YING_WEN_MO_SHI = frozenset({
+    "^files$",
+    "^(\\d+) files?$",
+    "^(\\d+) Files$",
+    "^(\\d+) 文件s$",
+    "^(\\d+)\\s+files$",
+    "^(\\d+)\\s+文件s$",
+    "^(\\d+) Files? Changed$",
+})
+
+
+def Shi_BaoLiu_File_Files_YingWen(YingWen):
+    """独立 File/Files 及计数句式保留英文，不写入词典。"""
+    if YingWen in BAO_LIU_YING_WEN_CI:
+        return True
+    if re.match(r"^\d+\s+files?$", YingWen, re.I):
+        return True
+    if re.match(r"^\d+\s+files?\s+changed", YingWen, re.I):
+        return True
+    return False
 AD_POPUP_DICTIONARY_PATH = os.path.join(LOCALIZATION_DIR, AD_POPUP_DICTIONARY_FILE)
 PLUGIN_MARKETPLACE_DICTIONARY_PATH = os.path.join(
     LOCALIZATION_DIR, PLUGIN_MARKETPLACE_DICTIONARY_FILE
@@ -483,7 +504,7 @@ def DuQu_Zhu_CiDian():
 
     HeBing = {}
     for YingWen, ZhongWen in TiaoMu:
-        if YingWen and ZhongWen and YingWen not in BAO_LIU_YING_WEN_CI:
+        if YingWen and ZhongWen and not Shi_BaoLiu_File_Files_YingWen(YingWen):
             HeBing[YingWen] = ZhongWen
     return [[YingWen, HeBing[YingWen]] for YingWen in HeBing]
 
@@ -520,7 +541,7 @@ def DuQu_MoShi_CiDian():
             continue
         Regex = ZhengLi_ZhengZe_MoShi(str(Xiang.get("regex") or ""))
         TiHuan = Xiang.get("replacement")
-        if not Regex or TiHuan is None:
+        if not Regex or TiHuan is None or Regex in BAO_LIU_YING_WEN_MO_SHI:
             continue
         JieGuo.append({
             "regex": Regex,

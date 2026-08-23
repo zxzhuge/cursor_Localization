@@ -438,26 +438,6 @@
       "replacement": "已配置的钩子 ($1)"
     },
     {
-      "regex": "^files$",
-      "flags": "",
-      "replacement": "个文件"
-    },
-    {
-      "regex": "^(\\d+) files?$",
-      "flags": "i",
-      "replacement": "$1 个文件"
-    },
-    {
-      "regex": "^(\\d+) Files$",
-      "flags": "i",
-      "replacement": "$1 个文件"
-    },
-    {
-      "regex": "^(\\d+) 文件s$",
-      "flags": "i",
-      "replacement": "$1 个文件"
-    },
-    {
       "regex": "^Stop \\((.+)\\)$",
       "flags": "",
       "replacement": "停止 ($1)"
@@ -696,16 +676,6 @@
       "regex": "^(\\d+)%\\s+context$",
       "flags": "i",
       "replacement": "$1% 上下文"
-    },
-    {
-      "regex": "^(\\d+)\\s+files$",
-      "flags": "i",
-      "replacement": "$1 个文件"
-    },
-    {
-      "regex": "^(\\d+)\\s+文件s$",
-      "flags": "i",
-      "replacement": "$1 个文件"
     },
     {
       "regex": "^Toggle Agents \\((.+)\\)$",
@@ -1021,11 +991,6 @@
       "regex": "^(\\d+)% used$",
       "flags": "i",
       "replacement": "已使用 $1%"
-    },
-    {
-      "regex": "^(\\d+) Files? Changed$",
-      "flags": "i",
-      "replacement": "已更改 $1 个文件"
     },
     {
       "regex": "^Usage limits reset on (.+)$",

@@ -30,11 +30,20 @@
         return changed ? result : null;
     }
 
+    function Shi_BaoLiu_File_Files_WenBen(text) {
+        if (!text) return false;
+        var t = text.trim();
+        if (t === 'File' || t === 'Files') return true;
+        if (/^\d+\s+files?$/i.test(t)) return true;
+        if (/^\d+\s+files?\s+changed/i.test(t)) return true;
+        return false;
+    }
+
     function ChaZhao_FanYi(text) {
         if (!text) return null;
 
         var trimmed = text.trim();
-        if (trimmed === 'File' || trimmed === 'Files') return null;
+        if (Shi_BaoLiu_File_Files_WenBen(trimmed)) return null;
         var normalized = GuiYiHua_WenBen(text);
         var quoteNorm = GuiYiHua_YinHao(normalized);
 
@@ -54,6 +63,8 @@
 
     function TiHuan_BuFen_WenBen(text) {
         if (!text) return null;
+
+        if (Shi_BaoLiu_File_Files_WenBen(text)) return null;
 
         if (/^[a-z][\w-]*(?:\.[A-Za-z][\w-]*){1,}$/i.test(text)) {
             return null;
