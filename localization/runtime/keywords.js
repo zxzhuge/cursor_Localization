@@ -46,6 +46,7 @@
         AGENT_GENG_GAI: [
             'All Changes', 'Pending Changes', 'Changes waiting to be confirmed', 'Keep Ctrl', ' of ',
             'Undo File', 'Keep File', 'Accept all changes', 'Keep all changes', 'Keep changes', 'Review Next File',
+            'Click again to confirm undo',
             'No Uncommitted Changes', 'Branch Commits', 'Find in Changes', 'Refresh Changes'
         ],
         TI_JI_CAI_DAN: [

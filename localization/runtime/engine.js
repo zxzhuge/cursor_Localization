@@ -561,7 +561,8 @@
 
     var Agent_BianGeng_Pending_HINTS = [
         ['Changes waiting to be confirmed', '等待确认的更改'],
-        ['Pending Changes', '待确认更改']
+        ['Pending Changes', '待确认更改'],
+        ['Click again to confirm undo', '再次点击以确认撤销']
     ];
 
     var Agent_BianGeng_WenBen_Extra_HINTS = Agent_BianGeng_Pending_HINTS.concat([]);

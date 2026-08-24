@@ -2271,6 +2271,10 @@
           "审查下一个文件"
         ],
         [
+          "Click again to confirm undo",
+          "再次点击以确认撤销"
+        ],
+        [
           "Adjust the default behavior of sending a message while Agent is running",
           "调整 Agent 运行时发送消息的默认行为"
         ],
