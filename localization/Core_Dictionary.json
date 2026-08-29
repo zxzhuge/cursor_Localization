@@ -4233,6 +4233,10 @@
           "允许智能体在不先询问的情况下切换模式，例如从智能体切换到计划模式或调试模式。关闭后，Cursor 会在切换前询问。"
         ],
         [
+          "Allow agent to switch to modes like Plan or Debug without asking. When off, Cursor asks first, but skips if unanswered within 15 seconds.",
+          "允许智能体无需询问即可切换到计划、调试等模式。关闭后，Cursor 会先询问，但若 15 秒内未回应则跳过。"
+        ],
+        [
           "Compact Terminal Tool Calls",
           "紧凑显示终端工具调用"
         ],
