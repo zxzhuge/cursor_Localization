@@ -758,19 +758,9 @@
       "replacement": "新建标签页 ($1)"
     },
     {
-      "regex": "^New Agent \\((.+)\\)$",
+      "regex": "^New Agent in (.+)$",
       "flags": "",
-      "replacement": "新建智能体 ($1)"
-    },
-    {
-      "regex": "^New Agent\\((.+)\\)$",
-      "flags": "",
-      "replacement": "新建智能体 ($1)"
-    },
-    {
-      "regex": "^\\[Alt\\]\\s*Replace Agent$",
-      "flags": "i",
-      "replacement": "[Alt] 替换智能体"
+      "replacement": "在 $1 中新建智能体"
     },
     {
       "regex": "^Enter Full Screen \\((.+)\\)$",
@@ -851,11 +841,6 @@
       "regex": "^Draft: (.+)$",
       "flags": "i",
       "replacement": "草稿：$1"
-    },
-    {
-      "regex": "^New Agent in (.+)$",
-      "flags": "",
-      "replacement": "在 $1 中新建智能体"
     },
     {
       "regex": "^(.+) is not supported$",

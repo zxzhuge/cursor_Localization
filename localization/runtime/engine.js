@@ -1207,9 +1207,44 @@
         }, true);
     }
 
+    function Shi_Agent_XiaoXi_NeiRong_BiaoJi(el) {
+        if (!el || !el.closest) return false;
+        try {
+            if (el.closest('.aislash-editor-input-readonly, [class*="aislash-editor-input-readonly"]')) {
+                return true;
+            }
+            if (el.closest(
+                '.anysphere-markdown-container-root, .anysphere-markdown-container, ' +
+                '[class*="anysphere-markdown"], .markdown-section, .markdown-block-code, ' +
+                '.composer-rendered-message, [class*="composer-rendered-message"], ' +
+                '[class*="human-message"], [class*="user-message"], ' +
+                '[class*="assistant-message"], [class*="ai-message"], ' +
+                '[class*="bubble"], [class*="Bubble"], ' +
+                '[class*="transcript-message"], [class*="TranscriptMessage"]'
+            )) return true;
+            var row = el.closest('[data-react-transcript-row-kind]');
+            if (row) {
+                var rk = row.getAttribute('data-react-transcript-row-kind') || '';
+                if (rk === 'assistantMarkdown' || rk === 'humanMarkdown' ||
+                    rk.indexOf('Markdown') >= 0 || rk.indexOf('markdown') >= 0 ||
+                    rk === 'human' || rk === 'user' || rk === 'assistant' || rk === 'ai') {
+                    return true;
+                }
+            }
+            var msg = el.closest('[data-message-id], [data-message-role]');
+            if (msg) {
+                var role = msg.getAttribute('data-message-role') || '';
+                if (!role || role === 'ai' || role === 'human' || role === 'user' ||
+                    role === 'assistant') return true;
+            }
+        } catch (e) {}
+        return false;
+    }
+
     function Shi_PromptBar_QuYu(el) {
         if (!el) return false;
         try {
+            if (Shi_Agent_XiaoXi_NeiRong_BiaoJi(el)) return false;
             return !!(el.closest(
                 '.prompt-bar-container, .pure-ai-prompt-bar, .inline-prompt-button-area, ' +
                 '.ui-prompt-input, [class*="ui-prompt-input"], [class*="prompt-bar"], [class*="pure-ai-prompt"], ' +
@@ -1223,7 +1258,7 @@
     function Shi_Agent_ShuRu_QuYu(el) {
         if (!el) return false;
         try {
-            if (el.closest('.aislash-editor-input-readonly')) return false;
+            if (Shi_Agent_XiaoXi_NeiRong_BiaoJi(el)) return false;
             if (el.closest(
                 '.aislash-editor-input, [class*="aislash-editor-input"], ' +
                 '.chat-input, [class*="chat-input"], [class*="ComposerInput"], ' +
@@ -1269,26 +1304,10 @@
     function Shi_Agent_DuiHua_NeiRong(el) {
         if (!el) return false;
         try {
+            // 已发送的用户消息可能挂在 aislash-editor 下，须先于 PromptBar 判定
+            if (Shi_Agent_XiaoXi_NeiRong_BiaoJi(el)) return true;
             if (Shi_PromptBar_QuYu(el)) return false;
             if (Shi_Agent_DuiHua_UI_YuanSu(el)) return false;
-            if (el.closest(
-                '.anysphere-markdown-container-root, .anysphere-markdown-container, ' +
-                '[class*="anysphere-markdown"], .markdown-section, .markdown-block-code'
-            )) return true;
-            if (el.closest('.aislash-editor-input-readonly')) return true;
-            var row = el.closest('[data-react-transcript-row-kind]');
-            if (row) {
-                var rk = row.getAttribute('data-react-transcript-row-kind') || '';
-                if (rk === 'assistantMarkdown' || rk === 'humanMarkdown' ||
-                    rk.indexOf('Markdown') >= 0 || rk.indexOf('markdown') >= 0) {
-                    return true;
-                }
-            }
-            var msg = el.closest('.composer-rendered-message, [data-message-id]');
-            if (msg) {
-                var role = msg.getAttribute('data-message-role') || '';
-                if (role === 'ai' || role === 'human' || role === 'user') return true;
-            }
         } catch (e) {}
         return false;
     }
@@ -1332,8 +1351,8 @@
         if (!el) return true;
         if (TiaoGuo_BiaoQian.has(el.tagName)) return true;
         if (Shi_Agent_ShuRu_QuYu(el)) return true;
-        if (Shi_PromptBar_QuYu(el)) return false;
         if (Shi_Agent_DuiHua_NeiRong(el)) return true;
+        if (Shi_PromptBar_QuYu(el)) return false;
         if (Shi_ShiJianXian_KeFanYi(el)) return false;
         try { if (el.closest(TiaoGuo_XuanZeQi)) return true; } catch (e) {}
         return false;
@@ -1342,8 +1361,8 @@
     function YingGai_TiaoGuo_BianJiQi_YuanSu(el) {
         if (!el || el.nodeType !== 1) return true;
         if (Shi_Agent_ShuRu_QuYu(el)) return true;
-        if (Shi_PromptBar_QuYu(el)) return false;
         if (Shi_Agent_DuiHua_NeiRong(el)) return true;
+        if (Shi_PromptBar_QuYu(el)) return false;
         if (Shi_ShiJianXian_KeFanYi(el)) return false;
         try { if (el.closest(TiaoGuo_XuanZeQi)) return true; } catch (e) {}
         return false;
@@ -2598,6 +2617,7 @@
     function FanYi_PromptBar_WenBen(el, maxLen) {
         if (!el || !Shi_PromptBar_QuYu(el)) return false;
         if (Shi_Agent_ShuRu_QuYu(el)) return false;
+        if (Shi_Agent_DuiHua_NeiRong(el)) return false;
         if (el.closest('.monaco-editor .view-lines')) return false;
         maxLen = maxLen || 120;
         var raw = (el.textContent || '').trim();
@@ -2630,6 +2650,7 @@
         var parent = node.parentElement;
         if (!parent || !Shi_PromptBar_QuYu(parent)) return;
         if (Shi_Agent_ShuRu_QuYu(parent)) return;
+        if (Shi_Agent_DuiHua_NeiRong(parent)) return;
         if (parent.closest('.monaco-editor .view-lines')) return;
         var text = node.textContent;
         if (!text) return;
@@ -2674,6 +2695,7 @@
                 var tnode;
                 while ((tnode = walker.nextNode())) {
                     if (tnode.parentElement && Shi_Agent_ShuRu_QuYu(tnode.parentElement)) continue;
+                    if (tnode.parentElement && Shi_Agent_DuiHua_NeiRong(tnode.parentElement)) continue;
                     FanYi_PromptBar_WenBenJieDian(tnode);
                 }
             } catch (e) {}
@@ -2686,6 +2708,7 @@
                 var el = leaves[li];
                 if (el.closest('.monaco-editor .view-lines')) continue;
                 if (Shi_Agent_ShuRu_QuYu(el)) continue;
+                if (Shi_Agent_DuiHua_NeiRong(el)) continue;
                 FanYi_ShuXing(el);
                 if (!el.querySelector('span, div, button')) FanYi_PromptBar_WenBen(el, 80);
             }
@@ -2933,13 +2956,25 @@
         for (var r = 0; r < scopes.length; r++) {
             var scope = scopes[r];
             if (scope.closest('.monaco-editor .view-lines')) continue;
-            var nodes = scope.querySelectorAll('button, span, div, label, .monaco-keybinding, [class*="keybinding"]');
+            var nodes = scope.querySelectorAll(
+                'button, [role="button"], .action-label, label, ' +
+                '.monaco-keybinding, [class*="keybinding"], ' +
+                '[class*="toolbar"] span, [class*="Toolbar"] span'
+            );
             for (var i = 0; i < nodes.length; i++) {
                 var el = nodes[i];
                 if (el.closest('.monaco-editor .view-lines')) continue;
+                if (Shi_Agent_ShuRu_QuYu(el)) continue;
                 if (Shi_Agent_DuiHua_NeiRong(el)) continue;
+                if (el.closest(
+                    '.ProseMirror, .tiptap, [contenteditable="true"], ' +
+                    '[class*="markdown"], [class*="Markdown"], ' +
+                    '[class*="bubble"], [class*="Bubble"], ' +
+                    '.aislash-editor-input-readonly, [class*="aislash-editor-input-readonly"]'
+                )) continue;
                 FanYi_ShuXing(el);
-                if (el.querySelector('button, input, textarea, [contenteditable="true"]') && el.tagName !== 'BUTTON') continue;
+                if (el.querySelector('button, input, textarea, [contenteditable="true"]') &&
+                    el.tagName !== 'BUTTON') continue;
                 var raw = (el.textContent || '').trim();
                 if (!raw || raw.length > 80) continue;
                 var tr = ChaZhao_FanYi(raw) || TiHuan_BuFen_WenBen(raw);
