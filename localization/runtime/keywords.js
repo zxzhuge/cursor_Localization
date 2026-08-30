@@ -20,7 +20,7 @@
             'Click to import all local VS Code extensions', "don't show again", 'Log in to use Cursor AI features',
             'Repositories', 'Message Cursor', 'Browse Files', 'No workspace folder open',
             'Close Pane', 'Unable to load automations', "Let's kick something off",
-            'Getting Started', 'Teach Cursor New Skills', 'have moved to Customize'
+            'Getting Started', 'have moved to Customize'
         ],
         YIN_YING_MOHU: [
             'Shadow & Blur', '阴影与模糊', 'Drop shadow', 'Inner shadow', 'Layer Blur', 'Backdrop Blur',

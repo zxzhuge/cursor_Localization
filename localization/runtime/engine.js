@@ -1763,6 +1763,23 @@
         var huiDiaoQiZhi = 0;
         for (var i = 0; i < mutations.length; i++) {
             var m = mutations[i];
+            if (m.type === 'characterData') {
+                if (piLiang) continue;
+                var cdTarget = m.target;
+                var cdEl = cdTarget && (cdTarget.nodeType === 1 ? cdTarget : cdTarget.parentElement);
+                if (cdEl && cdEl.closest) {
+                    try {
+                        if (cdEl.closest(
+                            '.view-lines, .editor-scrollable, .overflow-guard, textarea, input, ' +
+                            '[contenteditable="true"], .monaco-editor'
+                        )) continue;
+                    } catch (eCd) {}
+                }
+                if (cdTarget && (cdTarget.nodeType === Node.TEXT_NODE || cdTarget.nodeType === Node.ELEMENT_NODE)) {
+                    TianJia_DaiChuLi(cdTarget);
+                }
+                continue;
+            }
             if (m.type === 'childList') {
                 var added = m.addedNodes;
                 for (var j = 0; j < added.length; j++) {

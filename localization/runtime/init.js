@@ -14,7 +14,7 @@
         if (oldMarketToast) oldMarketToast.remove();
 
         var GuanChaQi = new MutationObserver(GuanCha_HuiDiao);
-        GuanChaQi.observe(target, { childList: true, subtree: true });
+        GuanChaQi.observe(target, { childList: true, subtree: true, characterData: true });
         try { AnZhuang_SheZhi_XiaLa_GuanCha(); } catch (e) {}
         try { AnZhuang_Monaco_Hover_FanYi(); } catch (e) {}
         try { AnZhuang_LiuLanQi_Webview_GuanCha(); } catch (e) {}
