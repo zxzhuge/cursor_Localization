@@ -538,6 +538,16 @@
       "replacement": "已达到总用量上限"
     },
     {
+      "regex": "^Other Models usage limit reached$",
+      "flags": "i",
+      "replacement": "已达到其他模型用量上限"
+    },
+    {
+      "regex": "^Switched to Auto after reaching Other Models usage limit\\.?$",
+      "flags": "i",
+      "replacement": "已达到其他模型用量上限，已切换到 Auto。"
+    },
+    {
       "regex": "^You've reached your monthly limit\\. Set a new on-demand limit to continue\\.?$",
       "flags": "i",
       "replacement": "您已达到本月用量上限。请设置新的按需用量限额以继续使用。"

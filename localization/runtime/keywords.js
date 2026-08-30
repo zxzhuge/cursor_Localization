@@ -7,6 +7,7 @@
             'Usage limit reached', 'Get faster responses', 'Responses may be slower',
             'Increase limits for faster', 'out of usage', 'ask your admin',
             'Total usage limit reached', 'on-demand limit', 'Upgrade to Pro+', 'Set new limit',
+            'Other Models usage limit', 'Switched to Auto after reaching',
             'Smartest Model Yet', '50% Off Through', 'Try Grok',
             'use subagents to break down tasks',
             'Plan Update', '2x Included Usage', 'High Load', 'high demand right now',
@@ -39,6 +40,7 @@
             'Usage limit reached', 'Get faster responses', 'Responses may be slower',
             'Increase limits for faster', 'out of usage', 'ask your admin',
             'Total usage limit reached', 'on-demand limit', 'Upgrade to Pro+', 'Set new limit',
+            'Other Models usage limit', 'Switched to Auto after reaching',
             'Get Cursor Pro for more Agent usage', 'Plan Update', 'Included Usage'
         ],
         ZHI_NENG_TI_FAN_KUI: [

@@ -1255,10 +1255,23 @@
         } catch (e) { return false; }
     }
 
+    function Shi_Composer_JingGao_TanChuang(el) {
+        if (!el || !el.closest) return false;
+        try {
+            return !!el.closest(
+                '.composer-warning-popup, [class*="composer-warning-popup"], ' +
+                '.composer-error-title, [class*="composer-error-title"], ' +
+                '.composer-warning-message-with-title, [class*="composer-warning-message"]'
+            );
+        } catch (e) { return false; }
+    }
+
     function Shi_Agent_ShuRu_QuYu(el) {
         if (!el) return false;
         try {
             if (Shi_Agent_XiaoXi_NeiRong_BiaoJi(el)) return false;
+            // 用量/模型限额提示挂在 composer-input-blur-wrapper 内，不能当输入区跳过
+            if (Shi_Composer_JingGao_TanChuang(el)) return false;
             if (el.closest(
                 '.aislash-editor-input, [class*="aislash-editor-input"], ' +
                 '.chat-input, [class*="chat-input"], [class*="ComposerInput"], ' +
@@ -1524,6 +1537,7 @@
         run(QX_COMPOSER, function() {
             XiuZheng_Composer_Placeholder();
             XiuZheng_Composer_GongJuTiao();
+            XiuZheng_Composer_JingGao();
             XiuZheng_Editor_BiaoTi_TiShi();
             XiuZheng_KuaiSuBianJi_CmdK();
             XiuZheng_DuiHua_JieMian();
@@ -1721,17 +1735,22 @@
 
     function JieDian_You_TongZhi_TanChuang(node) {
         if (!node || node.nodeType !== Node.ELEMENT_NODE) return false;
+        if (Shi_Composer_JingGao_TanChuang(node)) return true;
         if (node.classList) {
             for (var i = 0; i < node.classList.length; i++) {
                 var cls = node.classList[i];
                 if (!cls) continue;
                 if (cls.indexOf('notification') >= 0 || cls.indexOf('toast') >= 0 ||
-                    cls.indexOf('promo') >= 0 || cls.indexOf('upsell') >= 0) return true;
+                    cls.indexOf('promo') >= 0 || cls.indexOf('upsell') >= 0 ||
+                    cls.indexOf('composer-warning') >= 0 || cls.indexOf('composer-error-title') >= 0) {
+                    return true;
+                }
             }
         }
         try {
             return !!(node.querySelector && node.querySelector(
-                '.monaco-notification, [class*="notification-toast"], [class*="promo"], [class*="upsell"]'
+                '.monaco-notification, [class*="notification-toast"], [class*="promo"], [class*="upsell"], ' +
+                '.composer-warning-popup, [class*="composer-warning-popup"]'
             ));
         } catch (e) { return false; }
     }
@@ -1849,6 +1868,7 @@
         if (promptBar || tongZhiTanChuang) {
             try { XiuZheng_Composer_Placeholder(); } catch (e) {}
             try { XiuZheng_Composer_GongJuTiao(); } catch (e) {}
+            try { XiuZheng_Composer_JingGao(); } catch (e) {}
             try { XiuZheng_Editor_BiaoTi_TiShi(); } catch (e) {}
         }
         if (tongZhiTanChuang) {
@@ -2392,11 +2412,29 @@
         }
     }
 
+    function XiuZheng_Composer_JingGao() {
+        var roots = document.querySelectorAll(
+            '.composer-warning-popup, [class*="composer-warning-popup"]'
+        );
+        if (!roots.length) return;
+        for (var i = 0; i < roots.length; i++) {
+            try { FanYi_ZiShu(roots[i]); } catch (e) {}
+        }
+        FanYi_Scope_ZiDian_Only(Array.prototype.slice.call(roots), {
+            maxLen: 600,
+            needleLen: 14,
+            skipHoverWidget: true,
+            skipNestedInteractive: false
+        });
+    }
+
     function XiuZheng_GuangGao_TanChuang() {
+        try { XiuZheng_Composer_JingGao(); } catch (e0) {}
         var roots = document.querySelectorAll(
             '.monaco-notification, .notifications-list-container, .notification-list-item, ' +
             '[class*="notification-toast"], [class*="notification-toast-item"], [class*="promo"], ' +
-            '[class*="upsell"], [class*="feature-card"], [class*="toast-container"]'
+            '[class*="upsell"], [class*="feature-card"], [class*="toast-container"], ' +
+            '.composer-warning-popup, [class*="composer-warning-popup"]'
         );
         var scopes = roots.length ? Array.prototype.slice.call(roots) : [document.body];
         FanYi_Scope_ZiDian_Only(scopes, {
@@ -2413,6 +2451,9 @@
             ["You've hit your usage limit", '您已达到用量上限'],
             ['Usage limit reached', '已达用量上限'],
             ['Total usage limit reached', '已达到总用量上限'],
+            ['Other Models usage limit reached', '已达到其他模型用量上限'],
+            ['Switched to Auto after reaching Other Models usage limit.', '已达到其他模型用量上限，已切换到 Auto。'],
+            ['Switched to Auto after reaching Other Models usage limit', '已达到其他模型用量上限，已切换到 Auto'],
             ["You've reached your monthly limit. Set a new on-demand limit to continue.", '您已达到本月用量上限。请设置新的按需用量限额以继续使用。'],
             ["You've reached your monthly limit. Set a new on-demand limit to continue", '您已达到本月用量上限。请设置新的按需用量限额以继续使用'],
             ["You've reached your limit. Responses may be slower. Upgrade for more usage.", '您已达到用量上限。响应可能会变慢。升级以获取更多用量。'],
@@ -2603,6 +2644,9 @@
             ["You're approaching your usage limit", '您的用量即将达到上限'],
             ['Usage limit reached', '已达用量上限'],
             ['Total usage limit reached', '已达到总用量上限'],
+            ['Other Models usage limit reached', '已达到其他模型用量上限'],
+            ['Switched to Auto after reaching Other Models usage limit.', '已达到其他模型用量上限，已切换到 Auto。'],
+            ['Switched to Auto after reaching Other Models usage limit', '已达到其他模型用量上限，已切换到 Auto'],
             ["You've reached your monthly limit. Set a new on-demand limit to continue.", '您已达到本月用量上限。请设置新的按需用量限额以继续使用。'],
             ["You've reached your monthly limit. Set a new on-demand limit to continue", '您已达到本月用量上限。请设置新的按需用量限额以继续使用'],
             ["You've reached your limit. Responses may be slower. Upgrade for more usage.", '您已达到用量上限。响应可能会变慢。升级以获取更多用量。'],

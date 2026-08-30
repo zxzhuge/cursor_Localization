@@ -9383,6 +9383,18 @@
           "已达到总用量上限"
         ],
         [
+          "Other Models usage limit reached",
+          "已达到其他模型用量上限"
+        ],
+        [
+          "Switched to Auto after reaching Other Models usage limit.",
+          "已达到其他模型用量上限，已切换到 Auto。"
+        ],
+        [
+          "Switched to Auto after reaching Other Models usage limit",
+          "已达到其他模型用量上限，已切换到 Auto"
+        ],
+        [
           "You've reached your monthly limit. Set a new on-demand limit to continue.",
           "您已达到本月用量上限。请设置新的按需用量限额以继续使用。"
         ],
