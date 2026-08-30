@@ -27,6 +27,10 @@
           "插件"
         ],
         [
+          "Plugin",
+          "插件"
+        ],
+        [
           "Rules, Skills, Subagents",
           "规则、技能、子智能体"
         ],
@@ -3205,6 +3209,10 @@
           "浏览市场"
         ],
         [
+          "Browse",
+          "浏览"
+        ],
+        [
           "Plugin MCP Servers",
           "插件 MCP 服务器"
         ],
@@ -3419,6 +3427,18 @@
         [
           "Search Plugins for User...",
           "搜索用户插件..."
+        ],
+        [
+          "From Marketplace",
+          "从市场"
+        ],
+        [
+          "From GitHub Repository",
+          "从 GitHub 仓库"
+        ],
+        [
+          "From Local Repository",
+          "从本地仓库"
         ],
         [
           "Search Plugins, Skills, MCPs...",
@@ -4829,6 +4849,18 @@
         [
           "Search Plugins for User...",
           "搜索用户插件..."
+        ],
+        [
+          "From Marketplace",
+          "从市场"
+        ],
+        [
+          "From GitHub Repository",
+          "从 GitHub 仓库"
+        ],
+        [
+          "From Local Repository",
+          "从本地仓库"
         ],
         [
           "Search or Paste Link",
@@ -6638,7 +6670,11 @@
         ],
         [
           "Filter by",
-          "筛选"
+          "筛选方式"
+        ],
+        [
+          "Filter By",
+          "筛选方式"
         ],
         [
           "Sort By",
@@ -6647,6 +6683,10 @@
         [
           "Sort by",
           "排序方式"
+        ],
+        [
+          "Plugin",
+          "插件"
         ],
         [
           "Most Used",

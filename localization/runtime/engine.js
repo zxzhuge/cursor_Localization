@@ -2492,6 +2492,13 @@
             ['Memories', '记忆'],
             ['Extend Cursor with Plugins', '通过插件扩展 Cursor'],
             ['Search Plugins for User...', '搜索用户插件...'],
+            ['Browse Marketplace', '浏览市场'],
+            ['Browse 市场', '浏览市场'],
+            ['浏览 市场', '浏览市场'],
+            ['Browse', '浏览'],
+            ['From Marketplace', '从市场'],
+            ['From GitHub Repository', '从 GitHub 仓库'],
+            ['From Local Repository', '从本地仓库'],
             ['Click to import all local VS Code extensions', '点击以导入所有本地 VS Code 扩展'],
             ['Click to import all local VS Code extensions.', '点击以导入所有本地 VS Code 扩展。'],
             ["(don't show again)", '（不再显示）'],
@@ -2504,6 +2511,15 @@
             ),
             hints,
             { maxLen: 160, needleLen: 12, leafOnly: true }
+        );
+        FanYi_Gen_List_Hints(
+            document.querySelectorAll('button, a, [role="button"]'),
+            [
+                ['Browse Marketplace', '浏览市场'],
+                ['Browse 市场', '浏览市场'],
+                ['浏览 市场', '浏览市场']
+            ],
+            { maxLen: 40, needleLen: 6, leafOnly: false }
         );
     }
 

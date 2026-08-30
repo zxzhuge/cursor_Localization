@@ -95,7 +95,7 @@
         if (/[\u4e00-\u9fff]/.test(trimmed)) return false;
         if (!/[A-Za-z]/.test(trimmed) || trimmed.indexOf(' ') === -1) return false;
         if (/^[\w.-]+$/.test(trimmed)) return false;
-        if (/^(Search|Get|Add to Cursor|Browse Marketplace|Suggested|Featured|Documentation)$/i.test(trimmed)) return false;
+        if (/^(Search|Get|Add to Cursor|Browse Marketplace|Browse 市场|浏览市场|Suggested|Featured|Documentation)$/i.test(trimmed)) return false;
         return true;
     }
 
@@ -166,6 +166,9 @@
             text.indexOf('Suggested') !== -1 ||
             text.indexOf('Search or Paste Link') !== -1 ||
             text.indexOf('Browse Marketplace') !== -1 ||
+            text.indexOf('Browse 市场') !== -1 ||
+            text.indexOf('浏览市场') !== -1 ||
+            text.indexOf('通过插件扩展') !== -1 ||
             text.indexOf('No Result') !== -1 ||
             text.indexOf('View source code') !== -1 ||
             text.indexOf('Last updated') !== -1 ||

@@ -91,6 +91,18 @@
       "筛选"
     ],
     [
+      "Filter by",
+      "筛选方式"
+    ],
+    [
+      "Filter By",
+      "筛选方式"
+    ],
+    [
+      "Plugin",
+      "插件"
+    ],
+    [
       "Created",
       "创建时间"
     ],
@@ -237,6 +249,18 @@
     [
       "Plugins bundle rules, skills, subagents, commands, MCP servers, and hooks into one installable package.",
       "插件将规则、技能、子智能体、命令、MCP 服务器和钩子打包为一个可安装的包。"
+    ],
+    [
+      "From Marketplace",
+      "从市场"
+    ],
+    [
+      "From GitHub Repository",
+      "从 GitHub 仓库"
+    ],
+    [
+      "From Local Repository",
+      "从本地仓库"
     ],
     [
       "Type @ for tools, / for commands...",
@@ -907,7 +931,15 @@
       "搜索插件、技能、MCP..."
     ],
     [
+      "Browse Marketplace",
+      "浏览市场"
+    ],
+    [
       "Browse 市场",
+      "浏览市场"
+    ],
+    [
+      "浏览 市场",
       "浏览市场"
     ],
     [

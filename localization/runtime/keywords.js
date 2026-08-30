@@ -11,7 +11,8 @@
             'use subagents to break down tasks',
             'Plan Update', '2x Included Usage', 'High Load', 'high demand right now',
             'Connect GitHub to Cursor', 'Let agents work with your Repos',
-            'have moved to Customize', 'new home for all the ways'
+            'have moved to Customize', 'new home for all the ways',
+            'From Marketplace', 'From GitHub Repository', 'From Local Repository'
         ],
         HUAN_YING: [
             'Sign in', 'Log in', 'Sign Up', 'Sign up', 'The best way to code with AI',
@@ -20,7 +21,8 @@
             'Click to import all local VS Code extensions', "don't show again", 'Log in to use Cursor AI features',
             'Repositories', 'Message Cursor', 'Browse Files', 'No workspace folder open',
             'Close Pane', 'Unable to load automations', "Let's kick something off",
-            'Getting Started', 'have moved to Customize'
+            'Getting Started', 'have moved to Customize',
+            'Extend Cursor with Plugins', 'Browse Marketplace', 'Browse 市场', '通过插件扩展'
         ],
         YIN_YING_MOHU: [
             'Shadow & Blur', '阴影与模糊', 'Drop shadow', 'Inner shadow', 'Layer Blur', 'Backdrop Blur',
