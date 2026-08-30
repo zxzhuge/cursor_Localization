@@ -4,8 +4,7 @@ Cursor 汉化工具
 功能：将翻译脚本注入 Cursor 的 workbench.html，实现设置页面及常见界面中文化。
 
 用法：
-  python Cursor_Localization_Tool.py           注入/更新汉化（不要求安装官方语言包）
-  python Cursor_Localization_Tool.py --install-langpack  可选：额外安装官方简体中文语言包后再注入
+  python Cursor_Localization_Tool.py           注入/更新汉化
   python Cursor_Localization_Tool.py --restore  恢复原始文件
   python Cursor_Localization_Tool.py --fix-checksum  仅修复 product.json 校验（解决「安装已损坏」提示）
   python Cursor_Localization_Tool.py --check-python  检查 Python 环境（排查 Windows Store 占位程序）
@@ -13,9 +12,7 @@ Cursor 汉化工具
   Windows：启动汉化_Win.bat / 取消汉化_Win.bat
   macOS/Linux：./启动汉化_Mac.sh / ./取消汉化_Mac.sh
 
-默认仅依赖注入脚本汉化，不要求安装 Chinese (Simplified) Language Pack。
-若需顺带安装官方语言包，可加 --install-langpack（根目录
-VSCode-language-pack-zh-hans.vsix；版本不匹配时可选从市场下载）。
+仅通过注入脚本 + 本地词典汉化，不安装、不依赖官方 Chinese Language Pack。
 广告弹窗翻译单独维护于 localization/Ad_Popup_Dictionary.json，注入时自动合并进词典。
 插件市场翻译单独维护于 localization/Plugin_Marketplace_Dictionary.json，注入时自动生成市场页 JS 词典。
 通用界面主词典与正则规则位于 localization/Core_Dictionary.json、localization/Pattern_Dictionary.json。
@@ -30,12 +27,7 @@ import hashlib  # 哈希计算
 import base64  # Base64 编码（校验哈希）
 import json  # JSON 读写
 import re  # 正则校验
-import subprocess  # 调用 Cursor CLI 安装扩展
-import gzip  # 市场 VSIX 下载解压
-import io  # 内存字节流
-import zipfile  # 读取/校验 VSIX
-import urllib.request  # 从 VS Code 市场下载语言包
-import urllib.error  # 网络错误处理
+import subprocess  # node --check 校验生成的 JS
 
 
 def Shi_MacOS():
@@ -196,18 +188,6 @@ def HuoQu_Cursor_KeZhiXing_LuJing(GenMuLu=None):
     return os.path.join(GenMuLu, "Cursor.exe")
 
 
-def HuoQu_Cursor_CLI_LuJing(GenMuLu=None):
-    """返回 Cursor CLI（cursor / cursor.cmd），用于扩展管理。"""
-    GenMuLu = GenMuLu or CURSOR_AN_ZHUANG_LU_JING
-    if Shi_MacOS():
-        LuJing = os.path.join(GenMuLu, "Contents", "Resources", "app", "bin", "cursor")
-    else:
-        LuJing = os.path.join(GenMuLu, "resources", "app", "bin", "cursor.cmd")
-    if os.path.isfile(LuJing):
-        return LuJing
-    return HuoQu_Cursor_KeZhiXing_LuJing(GenMuLu)
-
-
 # ============================================================
 # ★★★ 用户配置区域 ★★★
 # ============================================================
@@ -217,7 +197,7 @@ def HuoQu_Cursor_CLI_LuJing(GenMuLu=None):
 #   set CURSOR_INSTALL_DIR=D:\Tools\cursor
 CURSOR_AN_ZHUANG_LU_JING = CaiCe_Cursor_AnZhuang_LuJing()
 
-# Cursor 用户数据目录（languagepacks.json、locale.json 等）
+# Cursor 用户数据目录（启动脚本 --user-data-dir 等）。
 # 如果使用 --user-data-dir 自定义了目录，可通过 CURSOR_USER_DATA_DIR 覆盖。
 CURSOR_SHU_JU_LU_JING = CaiCe_Cursor_ShuJu_LuJing()
 
@@ -228,35 +208,6 @@ LEGACY_LOCALIZATION_JS_FILE = "cursor_hanhua.js"  # 旧版脚本名（升级时�
 INJECTION_MARKER_HTML = "<!-- CURSOR_LOCALIZATION_INJECTION -->"  # HTML 注入标记
 LEGACY_INJECTION_MARKER_HTML = "<!-- CURSOR_HANHUA_INJECTION -->"  # 旧版注入标记
 BEI_FEN_HOU_ZHUI = ".bak"  # 备份文件后缀
-
-# Cursor 内置扩展的简中桥接翻译。
-# VS Code 官方语言包不会覆盖 anysphere.*，这里补上最常见的私有扩展元信息。
-KUO_ZHAN_FAN_YI_QIAO_JIE = {
-    "anysphere.cursor-always-local": {
-        "package": {
-            "displayName": "Cursor 始终本地",
-            "description": "为 Cursor 提供实验性本地功能。"
-        }
-    },
-    "anysphere.cursor-retrieval": {
-        "package": {
-            "displayName": "Cursor 检索",
-            "description": "处理 Cursor 的索引与检索能力。"
-        }
-    },
-    "anysphere.cursor-shadow-workspace": {
-        "package": {
-            "displayName": "Cursor 影子工作区",
-            "description": "管理一个供 AI 智能体在展示前整理代码的隐藏本地窗口。"
-        }
-    },
-    "inspecta.inspecta-ide-integration": {
-        "package": {
-            "displayName": "Inspecta IDE 集成",
-            "description": "将 Inspecta CSS 更改与 Cursor IDE 和 VS Code AI 智能体集成。"
-        }
-    }
-}
 
 JIAO_BEN_MU_LU = os.path.dirname(os.path.abspath(__file__))
 AD_POPUP_DICTIONARY_FILE = "Ad_Popup_Dictionary.json"
@@ -310,19 +261,6 @@ AD_POPUP_DICTIONARY_PATH = os.path.join(LOCALIZATION_DIR, AD_POPUP_DICTIONARY_FI
 PLUGIN_MARKETPLACE_DICTIONARY_PATH = os.path.join(
     LOCALIZATION_DIR, PLUGIN_MARKETPLACE_DICTIONARY_FILE
 )
-LANGUAGE_PACK_VSIX_FILE = "VSCode-language-pack-zh-hans.vsix"
-LANGUAGE_PACK_ID = "ms-ceintl.vscode-language-pack-zh-hans"
-LANGUAGE_PACK_PUBLISHER = "MS-CEINTL"
-LANGUAGE_PACK_EXTENSION = "vscode-language-pack-zh-hans"
-LANGUAGE_PACK_BUNDLED_VERSION = "1.105.2025101509"  # 离线兜底版本号
-LANGUAGE_PACK_MARKETPLACE_QUERY = (
-    "https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery"
-)
-LANGUAGE_PACK_MARKETPLACE_DOWNLOAD = (
-    "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/"
-    "MS-CEINTL/vsextensions/vscode-language-pack-zh-hans/{version}/vspackage"
-)
-XUAN_SHI_YU_YAN = "zh-cn"
 
 
 def HuoQu_CiDian_WenJian_LuJing(WenJianMing, MoRenMuLu=None):
@@ -1114,382 +1052,6 @@ def GengXin_JiaoYan_Zhi():
     return False
 
 
-def HuoQu_Bundled_VSIX_LuJing():
-    """查找根目录下的简体中文语言包 VSIX。"""
-    GuDingLuJing = os.path.join(JIAO_BEN_MU_LU, LANGUAGE_PACK_VSIX_FILE)
-    if os.path.isfile(GuDingLuJing):
-        return GuDingLuJing
-
-    HouXuan = []
-    try:
-        for WenJian in os.listdir(JIAO_BEN_MU_LU):
-            if WenJian.lower().endswith(".vsix") and "language-pack-zh-hans" in WenJian.lower():
-                HouXuan.append(os.path.join(JIAO_BEN_MU_LU, WenJian))
-    except OSError:
-        return None
-
-    if not HouXuan:
-        return None
-    return sorted(HouXuan, reverse=True)[0]
-
-
-def HuoQu_Cursor_VSCode_BanBen(GenMuLu=None):
-    """读取 Cursor product.json 中的 vscodeVersion。"""
-    LuJing = os.path.join(HuoQu_App_GenMuLu_LuJing(GenMuLu or CURSOR_AN_ZHUANG_LU_JING), "product.json")
-    try:
-        with open(LuJing, "r", encoding="utf-8") as WenJian:
-            return json.load(WenJian).get("vscodeVersion")
-    except Exception as CuoWu:
-        print(f"[语言包] 读取 vscodeVersion 失败: {CuoWu}")
-        return None
-
-
-def JieXi_ZhuCiYao_BanBen(BanBen):
-    """从版本字符串提取 major.minor，如 1.105.1 -> 1.105。"""
-    if not BanBen:
-        return None
-    BuFen = str(BanBen).strip().split(".")
-    if len(BuFen) < 2:
-        return None
-    try:
-        int(BuFen[0])
-        int(BuFen[1])
-        return f"{BuFen[0]}.{BuFen[1]}"
-    except ValueError:
-        return None
-
-
-def YuYan_Bao_BanBen_PiPei(YuYanBaoBanBen, CursorVSCodeBanBen):
-    """语言包版本是否与 Cursor 内置 VS Code 主版本匹配。"""
-    QianZhui = JieXi_ZhuCiYao_BanBen(CursorVSCodeBanBen)
-    if not QianZhui or not YuYanBaoBanBen:
-        return False
-    return str(YuYanBaoBanBen).startswith(QianZhui + ".")
-
-
-def DuQu_VSIX_BanBen(VsixLuJing):
-    """从 VSIX 内 package.json 读取扩展版本号。"""
-    try:
-        with zipfile.ZipFile(VsixLuJing, "r") as YaSuoBao:
-            with YaSuoBao.open("extension/package.json") as WenJian:
-                return json.load(WenJian).get("version")
-    except Exception:
-        return None
-
-
-def ChaXun_ShiChang_BanBenLieBiao():
-    """从 VS Code 市场查询简体中文语言包全部版本（新到旧）。"""
-    QingQiuTi = json.dumps({
-        "filters": [{
-            "criteria": [{
-                "filterType": 7,
-                "value": f"{LANGUAGE_PACK_PUBLISHER}.{LANGUAGE_PACK_EXTENSION}",
-            }],
-        }],
-        "flags": 1,
-    }).encode("utf-8")
-    QingQiu = urllib.request.Request(
-        LANGUAGE_PACK_MARKETPLACE_QUERY,
-        data=QingQiuTi,
-        headers={
-            "Accept": "application/json;api-version=7.2-preview.1",
-            "Content-Type": "application/json",
-            "User-Agent": "Cursor-Localization-Tool",
-        },
-        method="POST",
-    )
-    with urllib.request.urlopen(QingQiu, timeout=90) as XiangYing:
-        ShuJu = json.load(XiangYing)
-
-    KuoZhanLieBiao = ShuJu.get("results", [{}])[0].get("extensions", [])
-    if not KuoZhanLieBiao:
-        return []
-    return [Xiang.get("version") for Xiang in KuoZhanLieBiao[0].get("versions", []) if Xiang.get("version")]
-
-
-def XuanZe_PiPei_ShiChang_BanBen(CursorVSCodeBanBen, BanBenLieBiao):
-    """在市场版本列表中选取与 Cursor vscodeVersion 主版本匹配的最新包。"""
-    QianZhui = JieXi_ZhuCiYao_BanBen(CursorVSCodeBanBen)
-    if not QianZhui:
-        return None
-    for BanBen in BanBenLieBiao:
-        if str(BanBen).startswith(QianZhui + "."):
-            return BanBen
-    return None
-
-
-def XiaZai_ShiChang_VSIX(BanBen, MuBiaoLuJing):
-    """从 VS Code 市场下载指定版本 VSIX 并保存到目标路径。"""
-    Url = LANGUAGE_PACK_MARKETPLACE_DOWNLOAD.format(version=BanBen)
-    QingQiu = urllib.request.Request(
-        Url,
-        headers={
-            "User-Agent": "Cursor-Localization-Tool",
-            "Accept": "application/octet-stream",
-        },
-    )
-    LinShiLuJing = MuBiaoLuJing + ".download"
-    with urllib.request.urlopen(QingQiu, timeout=120) as XiangYing:
-        YuanShi = XiangYing.read()
-
-    if YuanShi[:2] == b"\x1f\x8b":
-        YuanShi = gzip.decompress(YuanShi)
-
-    with zipfile.ZipFile(io.BytesIO(YuanShi), "r") as YaSuoBao:
-        if YaSuoBao.testzip() is not None:
-            raise ValueError("下载的 VSIX 压缩包校验失败")
-
-    with open(LinShiLuJing, "wb") as WenJian:
-        WenJian.write(YuanShi)
-    os.replace(LinShiLuJing, MuBiaoLuJing)
-
-
-def QueBao_PiPei_YuYan_Bao_VSIX():
-    """确保根目录 VSIX 与当前 Cursor 内置 VS Code 版本匹配，必要时自动下载。"""
-    MuBiaoLuJing = os.path.join(JIAO_BEN_MU_LU, LANGUAGE_PACK_VSIX_FILE)
-    CursorBanBen = HuoQu_Cursor_VSCode_BanBen()
-    BenDiLuJing = HuoQu_Bundled_VSIX_LuJing()
-
-    if not CursorBanBen:
-        print("[语言包] 无法读取 Cursor 的 vscodeVersion，使用本地 VSIX（如有）")
-        return BenDiLuJing
-
-    print(f"[语言包] Cursor 内置 VS Code 版本: {CursorBanBen}")
-    QianZhui = JieXi_ZhuCiYao_BanBen(CursorBanBen)
-
-    if BenDiLuJing:
-        BenDiBanBen = DuQu_VSIX_BanBen(BenDiLuJing)
-        if BenDiBanBen and YuYan_Bao_BanBen_PiPei(BenDiBanBen, CursorBanBen):
-            print(f"[语言包] 本地 VSIX 版本匹配: {BenDiBanBen}")
-            return BenDiLuJing
-        if BenDiBanBen:
-            print(f"[语言包] 本地 VSIX 版本不匹配: {BenDiBanBen}（需要 {QianZhui}.x）")
-    else:
-        print("[语言包] 未找到本地 VSIX")
-
-    print(f"[语言包] 正在从 VS Code 市场下载匹配版本 ({QianZhui}.x)...")
-    try:
-        ShiChangBanBenLieBiao = ChaXun_ShiChang_BanBenLieBiao()
-        MuBiaoBanBen = XuanZe_PiPei_ShiChang_BanBen(CursorBanBen, ShiChangBanBenLieBiao)
-        if not MuBiaoBanBen:
-            print(f"[语言包] 市场未找到与 {CursorBanBen} 匹配的语言包")
-            if BenDiLuJing:
-                print("[语言包] 将尝试使用不匹配的本地 VSIX")
-                return BenDiLuJing
-            return None
-
-        XiaZai_ShiChang_VSIX(MuBiaoBanBen, MuBiaoLuJing)
-        print(f"[语言包] 已下载并保存: {MuBiaoLuJing} ({MuBiaoBanBen})")
-        return MuBiaoLuJing
-    except urllib.error.URLError as CuoWu:
-        print(f"[语言包] 网络下载失败: {CuoWu}")
-    except Exception as CuoWu:
-        print(f"[语言包] 自动下载失败: {CuoWu}")
-
-    if BenDiLuJing:
-        print("[语言包] 将尝试使用本地 VSIX")
-        return BenDiLuJing
-    return None
-
-
-def SheZhi_XianShi_YuYan():
-    """写入 User/locale.json，将显示语言设为简体中文。"""
-    UserMuLu = os.path.join(CURSOR_SHU_JU_LU_JING, "User")
-    os.makedirs(UserMuLu, exist_ok=True)
-    LuJing = os.path.join(UserMuLu, "locale.json")
-    MuBiao = {"locale": XUAN_SHI_YU_YAN}
-
-    if os.path.exists(LuJing):
-        try:
-            with open(LuJing, "r", encoding="utf-8") as WenJian:
-                DangQian = json.load(WenJian)
-            if DangQian.get("locale") == XUAN_SHI_YU_YAN:
-                print(f"[语言包] 显示语言已是 {XUAN_SHI_YU_YAN}，跳过 locale.json")
-                return True
-        except Exception:
-            pass
-
-    with open(LuJing, "w", encoding="utf-8") as WenJian:
-        json.dump(MuBiao, WenJian, ensure_ascii=False, indent=2)
-        WenJian.write("\n")
-    print(f"[语言包] 已设置显示语言: {LuJing} -> {XUAN_SHI_YU_YAN}")
-    return True
-
-
-def AnZhuang_GuanFang_YuYan_Bao():
-    """确保语言包版本匹配、安装 VSIX，并设置显示语言为 zh-cn。"""
-    VsixLuJing = QueBao_PiPei_YuYan_Bao_VSIX()
-    if not VsixLuJing:
-        print(f"[语言包] 未找到可用 VSIX（目标: {LANGUAGE_PACK_VSIX_FILE}）")
-        print("[语言包] 请检查网络连接，或手动将语言包放入脚本根目录")
-        print("[语言包] 跳过官方语言包安装，继续执行注入汉化...")
-        return False
-
-    CliLuJing = HuoQu_Cursor_CLI_LuJing()
-    if not os.path.isfile(CliLuJing):
-        print(f"[语言包] 未找到 Cursor CLI: {CliLuJing}")
-        print("[语言包] 跳过官方语言包安装，继续执行注入汉化...")
-        return False
-
-    MingLing = [
-        CliLuJing,
-        "--install-extension", VsixLuJing,
-        "--force",
-        f"--user-data-dir={CURSOR_SHU_JU_LU_JING}",
-    ]
-    print(f"[语言包] 正在安装: {os.path.basename(VsixLuJing)}")
-    BanBen = DuQu_VSIX_BanBen(VsixLuJing) or LANGUAGE_PACK_BUNDLED_VERSION
-    print(f"[语言包] 包内版本: {BanBen}")
-    print(f"[语言包] CLI: {CliLuJing}")
-
-    try:
-        JieGuo = subprocess.run(
-            MingLing,
-            capture_output=True,
-            text=True,
-            timeout=120,
-            check=False,
-        )
-    except Exception as CuoWu:
-        print(f"[语言包] 安装失败: {CuoWu}")
-        print("[语言包] 可手动安装 VSIX，或关闭 Cursor 后重试")
-        return False
-
-    ShuChu = ((JieGuo.stdout or "") + (JieGuo.stderr or "")).strip()
-    if ShuChu:
-        for Hang in ShuChu.splitlines():
-            if Hang.strip():
-                print(f"[语言包] {Hang.strip()}")
-
-    if JieGuo.returncode != 0:
-        print(f"[语言包] CLI 退出码 {JieGuo.returncode}，安装可能未成功")
-        print("[语言包] 可手动执行: Extensions: Install from VSIX...")
-        return False
-
-    if "successfully installed" not in ShuChu.lower() and "already installed" not in ShuChu.lower():
-        # 部分版本 CLI 成功时 stdout 较少，以退出码为准
-        if JieGuo.returncode == 0:
-            print("[语言包] 扩展安装命令已执行")
-
-    SheZhi_XianShi_YuYan()
-    return True
-
-
-def HuoQu_YuYan_Bao_PeiZhi_LuJing():
-    """获取 Cursor 用户数据目录中的 languagepacks.json 路径"""
-    return os.path.join(CURSOR_SHU_JU_LU_JING, "languagepacks.json")
-
-
-def DuQu_YuYan_Bao_PeiZhi():
-    """读取 languagepacks.json"""
-    LuJing = HuoQu_YuYan_Bao_PeiZhi_LuJing()
-    if not os.path.exists(LuJing):
-        print(f"[语言包] 未找到 languagepacks.json: {LuJing}")
-        return None, LuJing
-
-    try:
-        with open(LuJing, 'r', encoding='utf-8') as WenJian:
-            return json.load(WenJian), LuJing
-    except Exception as CuoWu:
-        print(f"[语言包] 读取 languagepacks.json 失败: {CuoWu}")
-        return None, LuJing
-
-
-def HuoQu_JianTiZhongWen_PeiZhi(XinXi):
-    """从 languagepacks.json 中查找 zh-cn 配置"""
-    if not XinXi:
-        return None, None
-
-    for Jian in ("zh-cn", "zh-CN"):
-        if Jian in XinXi:
-            return Jian, XinXi[Jian]
-
-    print("[语言包] 未找到 zh-cn 语言包配置，跳过 Cursor 私有扩展翻译桥接")
-    return None, None
-
-
-def XieRu_KuoZhan_FanYi_QiaoJie():
-    """把 Cursor 私有扩展翻译接到现有 zh-cn 语言包通道"""
-    XinXi, LuJing = DuQu_YuYan_Bao_PeiZhi()
-    Jian, PeiZhi = HuoQu_JianTiZhongWen_PeiZhi(XinXi)
-    if not Jian or not PeiZhi:
-        return
-
-    FanYiLieBiao = PeiZhi.setdefault("translations", {})
-    ZhuFanYi = FanYiLieBiao.get("vscode")
-    if not ZhuFanYi:
-        print("[语言包] zh-cn 配置缺少 vscode 主翻译路径，跳过私有扩展翻译桥接")
-        return
-
-    KuoZhanMuLu = os.path.dirname(ZhuFanYi)
-    os.makedirs(KuoZhanMuLu, exist_ok=True)
-
-    ShiFouGengXin = False
-    for KuoZhanId, FanYiNeiRong in KUO_ZHAN_FAN_YI_QIAO_JIE.items():
-        WenJianMing = KuoZhanId.replace('/', '.').replace('\\', '.') + ".i18n.json"
-        WenJianLuJing = os.path.join(KuoZhanMuLu, WenJianMing)
-        BiaoZhunNeiRong = {
-            "": [
-                "Generated by Cursor_Localization_Tool.py for Cursor private extensions."
-            ],
-            "version": "1.0.0",
-            "contents": FanYiNeiRong
-        }
-
-        YuanYou = None
-        if os.path.exists(WenJianLuJing):
-            try:
-                with open(WenJianLuJing, 'r', encoding='utf-8') as WenJian:
-                    YuanYou = json.load(WenJian)
-            except Exception:
-                YuanYou = None
-
-        if YuanYou != BiaoZhunNeiRong:
-            with open(WenJianLuJing, 'w', encoding='utf-8') as WenJian:
-                json.dump(BiaoZhunNeiRong, WenJian, ensure_ascii=False, indent=2)
-                WenJian.write('\n')
-            print(f"[语言包] 已写入私有扩展翻译: {WenJianLuJing}")
-            ShiFouGengXin = True
-
-        if FanYiLieBiao.get(KuoZhanId) != WenJianLuJing:
-            FanYiLieBiao[KuoZhanId] = WenJianLuJing
-            ShiFouGengXin = True
-
-    if ShiFouGengXin:
-        with open(LuJing, 'w', encoding='utf-8') as WenJian:
-            json.dump(XinXi, WenJian, ensure_ascii=False, indent=2)
-            WenJian.write('\n')
-        print("[语言包] 已更新 languagepacks.json，重启 Cursor 后私有扩展简中生效")
-    else:
-        print("[语言包] Cursor 私有扩展翻译桥接已是最新状态")
-
-
-def YiChu_KuoZhan_FanYi_QiaoJie():
-    """移除脚本添加的 Cursor 私有扩展翻译桥接"""
-    XinXi, LuJing = DuQu_YuYan_Bao_PeiZhi()
-    Jian, PeiZhi = HuoQu_JianTiZhongWen_PeiZhi(XinXi)
-    if not Jian or not PeiZhi:
-        return
-
-    FanYiLieBiao = PeiZhi.get("translations", {})
-    ShiFouGengXin = False
-
-    for KuoZhanId in KUO_ZHAN_FAN_YI_QIAO_JIE:
-        WenJianLuJing = FanYiLieBiao.get(KuoZhanId)
-        if WenJianLuJing and os.path.exists(WenJianLuJing):
-            os.remove(WenJianLuJing)
-            print(f"[语言包] 已删除私有扩展翻译: {WenJianLuJing}")
-        if KuoZhanId in FanYiLieBiao:
-            del FanYiLieBiao[KuoZhanId]
-            ShiFouGengXin = True
-
-    if ShiFouGengXin:
-        with open(LuJing, 'w', encoding='utf-8') as WenJian:
-            json.dump(XinXi, WenJian, ensure_ascii=False, indent=2)
-            WenJian.write('\n')
-        print("[语言包] 已从 languagepacks.json 移除私有扩展翻译桥接")
-
-
 def HuiFu_JiaoYan_Zhi():
     """恢复 product.json 的原始校验值"""
     LuJing_Product = os.path.join(HuoQu_App_GenMuLu_LuJing(CURSOR_AN_ZHUANG_LU_JING), "product.json")
@@ -1534,8 +1096,6 @@ def HuiFu_YuanShi():
 
     ShanChu_SuoYou_ZhuRu_JS()
 
-    YiChu_KuoZhan_FanYi_QiaoJie()
-
     print("[完成] 已恢复原始状态")
 
 
@@ -1578,22 +1138,9 @@ def ZhuChengXu():
         print(f"[提示] 请检查 CURSOR_AN_ZHUANG_LU_JING 是否正确: {CURSOR_AN_ZHUANG_LU_JING}")
         sys.exit(1)
 
-    AnZhuangYuYanBao = any(
-        CanShu in ("--install-langpack", "--anzhuang-yuyanbao")
-        for CanShu in sys.argv[1:]
-    )
-    if AnZhuangYuYanBao:
-        print("\n[步骤] 可选：安装/更新官方简体中文语言包...")
-        AnZhuang_GuanFang_YuYan_Bao()
-    else:
-        print("\n[步骤] 跳过官方语言包（不要求安装 Chinese Simplified Language Pack）")
-
-    print("\n[步骤 1/3] 更新 Cursor 私有扩展翻译桥接（若已有 zh-cn 语言包）...")
-    XieRu_KuoZhan_FanYi_QiaoJie()
-
     # 检查是否已注入
     if JianCha_YiZhuRu():
-        print("\n[步骤 2/3] 脚本已注入，正在更新...")
+        print("\n[步骤 1/2] 脚本已注入，正在更新...")
         ShengJi_HTML_ZhuRu_If_Needed()
         XieRu_FanYi_JS()
         ShanChu_JiuBan_JS()
@@ -1601,15 +1148,15 @@ def ZhuChengXu():
         return
 
     # 首次注入
-    print("\n[步骤 2/3] 创建备份并写入脚本...")
+    print("\n[步骤 1/2] 创建备份并写入脚本...")
     ChuangJian_BeiFen()
     XieRu_FanYi_JS()
 
-    print("[步骤 3/3] 注入 HTML 引用...")
+    print("[步骤 2/2] 注入 HTML 引用...")
     ZhuRu_HTML()
 
     print("\n" + "=" * 60)
-    print("  [完成] 汉化注入成功！（无需安装官方语言包扩展）")
+    print("  [完成] 汉化注入成功！")
     print("  请完全退出并重启 Cursor 以查看效果。")
     print("  如需恢复: python Cursor_Localization_Tool.py --restore")
     print("  如需更新词典: 重新运行本脚本即可")
