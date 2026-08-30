@@ -105,7 +105,15 @@
     "Search skills, rules, subagents": "搜索技能、规则与子智能体",
     "Search or Paste Link": "搜索或粘贴链接",
     "claude-plugins-official": "Claude 官方插件源",
-    "Remove Marketplace": "移除市场"
+    "Remove Marketplace": "移除市场",
+    "Design": "设计",
+    "Inbox and Collaboration": "收件与协作",
+    "Scheduling": "日程",
+    "Documents and Files": "文档与文件",
+    "Sales": "销售",
+    "Customer Support": "客户支持",
+    "Finance and Legal": "财务与法务",
+    "Research": "研究"
   },
   "uiFragments": [
     [
