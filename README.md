@@ -1,14 +1,27 @@
 # Cursor 汉化
 
-参考：[VibePM Cursor 汉化](https://www.vibepm.net/cursor/)
+参考：[VibePM Cursor 汉化](https://www.vibepm.net/cursor/) 
 
-## 推荐
+目前为：windows操作系统、安装在 D 盘、cursor 版本：3.18.9
+
+## 如何汉化
 
 1. 先安装 **Chinese (Simplified) (简体中文) Language Pack `1.105.0`** 
+
+![Snipaste_2026-08-31_22-33-06.png](https://yzl-1324609991.cos.ap-guangzhou.myqcloud.com/Snipaste_2026-08-31_22-33-06.png)
+
 2. 完全退出 Cursor（含托盘）
 3. 运行 `启动汉化_Win.bat` 
 
+![Snipaste_2026-08-31_22-34-56.png](https://yzl-1324609991.cos.ap-guangzhou.myqcloud.com/Snipaste_2026-08-31_22-34-56.png)
+
+![Snipaste_2026-08-31_22-36-11.png](https://yzl-1324609991.cos.ap-guangzhou.myqcloud.com/Snipaste_2026-08-31_22-36-11.png)
+
 ## 实现
+
+![Snipaste_2026-08-31_22-40-37.png](https://yzl-1324609991.cos.ap-guangzhou.myqcloud.com/Snipaste_2026-08-31_22-40-37.png)
+
+![Snipaste_2026-08-31_22-41-15.png](https://yzl-1324609991.cos.ap-guangzhou.myqcloud.com/Snipaste_2026-08-31_22-41-15.png)
 
 相对安装根目录（默认 `D:\cursor`）
 
