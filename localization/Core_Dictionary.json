@@ -10685,6 +10685,14 @@
           "连接模型提供商时遇到问题。这可能是暂时性的，请稍后重试"
         ],
         [
+          "We're having trouble finding the resource you requested. If the problem persists, please contact support.",
+          "找不到您请求的资源。如果问题持续存在，请联系支持。"
+        ],
+        [
+          "We're having trouble finding the resource you requested. If the problem persists, please contact support",
+          "找不到您请求的资源。如果问题持续存在，请联系支持"
+        ],
+        [
           "Copy request",
           "复制请求"
         ],

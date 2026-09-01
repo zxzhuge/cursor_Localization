@@ -331,6 +331,18 @@
       "这可能是暂时性的，请稍后重试。"
     ],
     [
+      "We're having trouble finding the resource you requested.",
+      "找不到您请求的资源。"
+    ],
+    [
+      "If the problem persists, please contact support.",
+      "如果问题持续存在，请联系支持。"
+    ],
+    [
+      "If the problem persists, please contact support",
+      "如果问题持续存在，请联系支持"
+    ],
+    [
       "This model provider is not supported in your region.",
       "此模型提供商在您所在的地区不受支持。"
     ],
