@@ -1041,6 +1041,18 @@
           "在网页和桌面端选择 GitHub 或 Graphite 作为 Pull 请求链接提供商。"
         ],
         [
+          "Choose Origin (cursor.com/codebase), GitHub, or Graphite for pull request links on web and desktop",
+          "在网页和桌面端选择 Origin（cursor.com/codebase）、GitHub 或 Graphite 作为 Pull 请求链接提供商"
+        ],
+        [
+          "Choose Origin (cursor.com/codebase), GitHub, or Graphite for pull request links on web and desktop.",
+          "在网页和桌面端选择 Origin（cursor.com/codebase）、GitHub 或 Graphite 作为 Pull 请求链接提供商。"
+        ],
+        [
+          "Choose Origin (cursor.com/codebase),GitHub,or Graphite for pull request links on web and desktop",
+          "在网页和桌面端选择 Origin（cursor.com/codebase）、GitHub 或 Graphite 作为 Pull 请求链接提供商"
+        ],
+        [
           "PR Link Destination",
           "PR 链接打开方式"
         ],
