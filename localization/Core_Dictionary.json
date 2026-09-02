@@ -3817,6 +3817,18 @@
           "收到提示时无限期等待身份验证。关闭后，30 秒后将跳过身份验证提示。"
         ],
         [
+          "Sync Skills for Cloud Agents",
+          "为云端智能体同步技能"
+        ],
+        [
+          "Cursor syncs your local skills so they can be used with Cloud Agents. Turn this off to disable syncing.",
+          "Cursor 会同步您的本地技能，以便在云端智能体中使用。关闭此选项可禁用同步。"
+        ],
+        [
+          "Cursor syncs your local skills so they can be used with Cloud Agents. Turn this off to disable syncing",
+          "Cursor 会同步您的本地技能，以便在云端智能体中使用。关闭此选项可禁用同步"
+        ],
+        [
           "Resources",
           "资源"
         ],
