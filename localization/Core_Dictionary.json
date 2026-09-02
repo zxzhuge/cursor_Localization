@@ -111,10 +111,6 @@
           "优化 Cursor 启动器启动路径"
         ],
         [
-          "Pro Plan",
-          "专业版计划"
-        ],
-        [
           "Code Intelligence",
           "代码智能"
         ],
@@ -258,7 +254,7 @@
         ],
         [
           "Upgrade to Pro",
-          "升级到专业版"
+          "升级到 Pro"
         ],
         [
           "Upgrade to unlock premium models",
@@ -270,7 +266,7 @@
         ],
         [
           "Upgrade to Pro now",
-          "立即升级到专业版"
+          "立即升级到 Pro"
         ],
         [
           "Upgrade for extended limits and full model access",
@@ -286,7 +282,7 @@
         ],
         [
           "Upgrade to a Pro account",
-          "升级到专业版账户"
+          "升级到 Pro 账户"
         ],
         [
           "Upgrade Plan",
@@ -299,10 +295,6 @@
         [
           "Free Plan",
           "免费版"
-        ],
-        [
-          "Pro",
-          "专业版"
         ],
         [
           "Business",
@@ -378,7 +370,7 @@
         ],
         [
           "Start Pro Now",
-          "立即开始专业版"
+          "立即开始 Pro"
         ],
         [
           "Start Pro+ Now",
@@ -1526,11 +1518,11 @@
         ],
         [
           "Dev Login (Pro)",
-          "开发登录（专业版）"
+          "开发登录（Pro）"
         ],
         [
           "Dev Login (Pro Trial)",
-          "开发登录（专业版试用）"
+          "开发登录（Pro 试用）"
         ],
         [
           "Dev Login (Pro Plus)",
@@ -1554,11 +1546,11 @@
         ],
         [
           "Login with Pro plan for local development",
-          "使用专业版登录进行本地开发"
+          "使用 Pro 登录进行本地开发"
         ],
         [
           "Login with Pro Trial for local development",
-          "使用专业版试用登录进行本地开发"
+          "使用 Pro 试用登录进行本地开发"
         ],
         [
           "Login with Pro Plus for local development",
@@ -1586,7 +1578,7 @@
         ],
         [
           "Pro Login",
-          "专业版登录"
+          "Pro 登录"
         ],
         [
           "Pro Plus Login",
@@ -1598,7 +1590,7 @@
         ],
         [
           "Pro Trial Login",
-          "专业版试用登录"
+          "Pro 试用登录"
         ],
         [
           "Ultra Login",
@@ -2722,7 +2714,7 @@
         ],
         [
           "Requires pro (custom model). ",
-          "需要专业版（自定义模型）。"
+          "需要 Pro（自定义模型）。"
         ],
         [
           "Upgrade here.",
@@ -7410,11 +7402,11 @@
         ],
         [
           "We're experiencing high demand right now. Please upgrade to Pro or try again in a few moments.",
-          "当前需求量很大。请升级到专业版，或稍后再试。"
+          "当前需求量很大。请升级到 Pro，或稍后再试。"
         ],
         [
           "We're experiencing high demand right now. Please upgrade to Pro or try again in a few moments",
-          "当前需求量很大。请升级到专业版，或稍后再试"
+          "当前需求量很大。请升级到 Pro，或稍后再试"
         ],
         [
           "We're experiencing high demand right now. Please try again in a few moments.",

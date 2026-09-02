@@ -2668,8 +2668,8 @@
             ['Upgrade for extended limits and full model access', '升级以获取扩展限额和完整模型访问权限'],
             ['Upgrade for extended usage & faster responses', '升级以获取扩展用量和更快响应'],
             ['Upgrade for 3x usage & faster responses', '升级以获取 3 倍用量和更快响应'],
-            ['Upgrade to a Pro account', '升级到专业版账户'],
-            ['Upgrade to Pro', '升级到专业版']
+            ['Upgrade to a Pro account', '升级到 Pro 账户'],
+            ['Upgrade to Pro', '升级到 Pro']
         ];
         FanYi_Gen_List_Substring_Hints(
             document.querySelectorAll('.monaco-hover, .monaco-hover-content, .upgrade-pro-button, .glass-sidebar-upgrade-pro-cta, div, span, p'),
