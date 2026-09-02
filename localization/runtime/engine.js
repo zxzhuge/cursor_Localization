@@ -911,6 +911,11 @@
                 if (comboStop && /send\s+right\s+away/i.test(comboStop.textContent || '')) return;
             } catch (e) {}
         }
+        if (trimmed === 'Auto' && Shi_YongLiang_ZhaiYao_Auto(node)) {
+            var autoIdx = text.indexOf('Auto');
+            node.textContent = text.substring(0, autoIdx) + '自动' + text.substring(autoIdx + 4);
+            return;
+        }
 
         if (Shi_QuickInput_QuYu(node.parentElement)) {
             if (YiFanYi_ZhuTi_Ming(trimmed)) return;
@@ -3642,6 +3647,31 @@
     // __DROPDOWN_FRAGMENTS_BLOCK__
 
 
+    // 用量摘要下拉：仅在该选项组把独立 Auto → 自动（不碰模型名 Auto）
+    function Shi_YongLiang_ZhaiYao_Auto(node) {
+        if (!node || !node.parentElement) return false;
+        try {
+            var el = node.parentElement;
+            for (var depth = 0; depth < 10 && el; depth++) {
+                var t = el.textContent || '';
+                if (t.indexOf('Usage Summary') !== -1 || t.indexOf('用量摘要') !== -1) return true;
+                if (t.indexOf('When to show the usage summary') !== -1 ||
+                    t.indexOf('何时在聊天面板底部显示用量摘要') !== -1) return true;
+                el = el.parentElement;
+            }
+            var list = node.parentElement.closest(
+                '[role="listbox"], .monaco-select-box-dropdown-container, .monaco-list'
+            );
+            if (!list) return false;
+            var lt = list.textContent || '';
+            var hasAlways = lt.indexOf('Always') !== -1 || lt.indexOf('始终') !== -1;
+            var hasNever = lt.indexOf('Never') !== -1 || lt.indexOf('从不') !== -1;
+            return hasAlways && hasNever;
+        } catch (e) {
+            return false;
+        }
+    }
+
     function FanYi_XiaLa_WenBen(node, sheZhiMoShi) {
         if (!node || Shi_BianJiQi_QuYu(node)) return;
         if (Shi_QuickInput_QuYu(node.parentElement)) return;
@@ -3652,6 +3682,12 @@
         if (!text || text.length > 200) return;
         var trimmed = GuiYiHua_WenBen(text);
         if (!trimmed) return;
+        if (trimmed === 'Auto' && Shi_YongLiang_ZhaiYao_Auto(node)) {
+            var autoPrefix = text.substring(0, text.indexOf('Auto'));
+            var autoSuffix = text.substring(text.indexOf('Auto') + 4);
+            node.textContent = autoPrefix + '自动' + autoSuffix;
+            return;
+        }
         if (sheZhiMoShi && trimmed === 'Stop') {
             try {
                 var combo = node.parentElement && node.parentElement.closest(
