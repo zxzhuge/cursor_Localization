@@ -1883,6 +1883,14 @@
           "白名单"
         ],
         [
+          "Commands that are allowlisted will run automatically.",
+          "白名单中的命令将自动运行。"
+        ],
+        [
+          "Commands that are allowlisted will run automatically",
+          "白名单中的命令将自动运行"
+        ],
+        [
           "Auto-Approved Mode Transitions",
           "自动批准模式切换"
         ],
