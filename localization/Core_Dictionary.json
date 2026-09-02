@@ -2403,6 +2403,22 @@
           "可以自动运行的 MCP 工具。格式：'server:tool'、'server:*' 表示某服务器的所有工具、'*:tool' 表示任意服务器的某工具、'*:*' 表示所有服务器的所有工具"
         ],
         [
+          "MCP tools that can run automatically. Format: 'server:tool', 'server:*' for all tools from a server, '*:tool' for a tool from any server, or '*.*' for all tools from all servers",
+          "可以自动运行的 MCP 工具。格式：'server:tool'、'server:*' 表示某服务器的所有工具、'*:tool' 表示任意服务器的某工具、'*.*' 表示所有服务器的所有工具"
+        ],
+        [
+          "or '*:*' for all tools from all servers",
+          "或 '*:*' 表示所有服务器的所有工具"
+        ],
+        [
+          "or '*.*' for all tools from all servers",
+          "或 '*.*' 表示所有服务器的所有工具"
+        ],
+        [
+          "for all tools from all servers",
+          "表示所有服务器的所有工具"
+        ],
+        [
           "Agent Review",
           "Agent 审查"
         ],

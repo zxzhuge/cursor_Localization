@@ -38,6 +38,22 @@
     [
       ", or '*:*' for all tools from all servers",
       "，或 '*:*' 表示所有服务器的所有工具"
+    ],
+    [
+      " or '*:*' for all tools from all servers",
+      " 或 '*:*' 表示所有服务器的所有工具"
+    ],
+    [
+      ", or '*.*' for all tools from all servers",
+      "，或 '*.*' 表示所有服务器的所有工具"
+    ],
+    [
+      " or '*.*' for all tools from all servers",
+      " 或 '*.*' 表示所有服务器的所有工具"
+    ],
+    [
+      " for all tools from all servers",
+      " 表示所有服务器的所有工具"
     ]
   ],
   "domainEntries": [
