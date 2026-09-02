@@ -1807,6 +1807,14 @@
           "选择 Explore 子智能体用于初步研究的模型。"
         ],
         [
+          "Default chooses an Explore model based on availability and cost",
+          "默认会根据可用性与成本选择探索模型"
+        ],
+        [
+          "Default chooses an Explore model based on availability and cost.",
+          "默认会根据可用性与成本选择探索模型。"
+        ],
+        [
           "Auto-Run Mode",
           "自动运行模式"
         ],
