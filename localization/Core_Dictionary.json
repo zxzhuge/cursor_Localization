@@ -31,18 +31,6 @@
           "插件"
         ],
         [
-          "Rules, Skills, Subagents",
-          "规则、技能、子智能体"
-        ],
-        [
-          "Tools & MCP",
-          "工具与 MCP"
-        ],
-        [
-          "Tools & MCPs",
-          "工具与 MCP"
-        ],
-        [
           "Tools",
           "工具"
         ],
@@ -247,22 +235,6 @@
         [
           "Agent",
           "智能体"
-        ],
-        [
-          "Composer",
-          "Composer"
-        ],
-        [
-          "Composer 2.5",
-          "Composer 2.5"
-        ],
-        [
-          "Auto + Composer",
-          "Auto + Composer"
-        ],
-        [
-          "API",
-          "API"
         ],
         [
           "API used",
@@ -959,50 +931,6 @@
         [
           "Abyss",
           "深渊 Abyss"
-        ],
-        [
-          "Cursor Dark",
-          "Cursor 深色 Cursor Dark"
-        ],
-        [
-          "Cursor Dark Midnight",
-          "Cursor 深色午夜 Cursor Dark Midnight"
-        ],
-        [
-          "Cursor Dark High Contrast",
-          "Cursor 深色高对比度 Cursor Dark High Contrast"
-        ],
-        [
-          "Cursor Light",
-          "Cursor 浅色 Cursor Light"
-        ],
-        [
-          "Kimbie Dark",
-          "金比深色 Kimbie Dark"
-        ],
-        [
-          "Monokai",
-          "莫奈奇 Monokai"
-        ],
-        [
-          "Monokai Dimmed",
-          "莫奈奇淡化 Monokai Dimmed"
-        ],
-        [
-          "Solarized Dark",
-          "Solarized 深色 Solarized Dark"
-        ],
-        [
-          "Solarized Light",
-          "Solarized 浅色 Solarized Light"
-        ],
-        [
-          "Tomorrow Night Blue",
-          "明日之夜蓝 Tomorrow Night Blue"
-        ],
-        [
-          "Quiet Light",
-          "静谧浅色 Quiet Light"
         ],
         [
           "+ Browse other color themes...",
@@ -1711,14 +1639,6 @@
         [
           "Other Models",
           "其他模型"
-        ],
-        [
-          "Cursor Models · Includes Cursor Grok 4.5 and Composer 2.5",
-          "Cursor 模型 · 包含 Cursor Grok 4.5 和 Composer 2.5"
-        ],
-        [
-          "Includes Cursor Grok 4.5 and Composer 2.5",
-          "包含 Cursor Grok 4.5 和 Composer 2.5"
         ],
         [
           "Additional usage beyond limits consumes Other Models quota or on-demand spend.",
@@ -5133,14 +5053,6 @@
           "Google API 密钥"
         ],
         [
-          "Azure OpenAI",
-          "Azure OpenAI"
-        ],
-        [
-          "AWS Bedrock",
-          "AWS Bedrock"
-        ],
-        [
           "Deployment Name",
           "部署名称"
         ],
@@ -5179,10 +5091,6 @@
         [
           "Test Model",
           "测试模型"
-        ],
-        [
-          "DeepSeek V4 Pro",
-          "DeepSeek V4 Pro"
         ],
         [
           "Add or search model",
@@ -5385,24 +5293,12 @@
           "选项"
         ],
         [
-          "Thought",
-          "Thought"
-        ],
-        [
-          "Thinking",
-          "Thinking"
-        ],
-        [
           "Does the model use thinking to generate its response?",
           "模型是否使用思考来生成回复？"
         ],
         [
           "Effort",
           "强度"
-        ],
-        [
-          "Max",
-          "Max"
         ],
         [
           "Context size the model has available.",
@@ -7073,16 +6969,8 @@
           "Cursor 解析助手"
         ],
         [
-          "Cursor Socket",
-          "Cursor Socket"
-        ],
-        [
           "MCP Logs",
           "MCP 日志"
-        ],
-        [
-          "MCP OAuth",
-          "MCP OAuth"
         ],
         [
           "Mcp FileSystem Writer",
@@ -7095,10 +6983,6 @@
         [
           "Bugbot Autofix",
           "Bugbot 自动修复"
-        ],
-        [
-          "Bugbot",
-          "Bugbot"
         ],
         [
           "Review your code",
@@ -7119,14 +7003,6 @@
         [
           "Review my code",
           "审查我的代码"
-        ],
-        [
-          "Slack",
-          "Slack"
-        ],
-        [
-          "GitHub / GitLab",
-          "GitHub / GitLab"
         ],
         [
           "Frontend QA",
@@ -7415,10 +7291,6 @@
         [
           "All commands will run without approval, classification or sandboxing.",
           "所有命令都将在无需批准、分类或沙盒的情况下运行。"
-        ],
-        [
-          "10",
-          "10"
         ],
         [
           "All Files",
@@ -9571,10 +9443,6 @@
           "标准版与快速版均比其他领先模型包含更多用量"
         ],
         [
-          "Try Composer 2.5",
-          "试用 Composer 2.5"
-        ],
-        [
           "New Model",
           "新模型"
         ],
@@ -9595,10 +9463,6 @@
           "以更高的每 token 成本获得相同质量与能力，响应更快"
         ],
         [
-          "Try Opus 4.8",
-          "试用 Opus 4.8"
-        ],
-        [
           "Cursor's Smartest Model Yet",
           "Cursor 迄今最智能的模型"
         ],
@@ -9607,28 +9471,8 @@
           "隆重推出 Grok 4.5，Cursor 迄今最强的模型"
         ],
         [
-          "Extending 50% Off Cursor Grok 4.5",
-          "延长 Cursor Grok 4.5 五折优惠"
-        ],
-        [
-          "We're extending the Cursor Grok 4.5 promotion for another week. Enjoy double usage through July 21 across desktop, web, iOS, CLI, and our SDK.",
-          "我们将 Cursor Grok 4.5 促销活动再延长一周。截至 7 月 21 日，在桌面端、网页、iOS、CLI 和 SDK 上享双倍用量。"
-        ],
-        [
-          "Trained jointly with SpaceXAI, Grok 4.5 can handle long-running tasks beyond coding",
-          "与 SpaceXAI 联合训练，Grok 4.5 可处理超出编码范围的长时任务"
-        ],
-        [
-          "50% Off Through July 14",
-          "7 月 14 日前五折优惠"
-        ],
-        [
           "Get double the usage for the first week across desktop, web, iOS, CLI, and SDK",
           "首周在桌面端、网页、iOS、CLI 和 SDK 上享双倍用量"
-        ],
-        [
-          "Try Grok 4.5",
-          "试用 Grok 4.5"
         ],
         [
           "Connection failed",
@@ -9883,22 +9727,6 @@
         [
           "Connection was refused",
           "连接被拒绝"
-        ],
-        [
-          "ERR_CONNECTION_REFUSED",
-          "ERR_CONNECTION_REFUSED"
-        ],
-        [
-          "ERR_CONNECTION_RESET",
-          "ERR_CONNECTION_RESET"
-        ],
-        [
-          "ERR_CONNECTION_TIMED_OUT",
-          "ERR_CONNECTION_TIMED_OUT"
-        ],
-        [
-          "ERR_ADDRESS_UNREACHABLE",
-          "ERR_ADDRESS_UNREACHABLE"
         ],
         [
           "Certificate Error",
