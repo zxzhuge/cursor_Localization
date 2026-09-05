@@ -1815,6 +1815,14 @@
           "白名单"
         ],
         [
+          "About Allowlist",
+          "关于白名单"
+        ],
+        [
+          "Only commands you've added to your allowlist will run automatically. Other commands will require user approval. Be cautious of potential prompt injection risks.",
+          "只有您添加到白名单的命令才会自动运行。其他命令需要用户批准。请注意潜在的提示注入风险。"
+        ],
+        [
           "Commands that are allowlisted will run automatically.",
           "白名单中的命令将自动运行。"
         ],
