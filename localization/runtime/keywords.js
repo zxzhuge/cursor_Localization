@@ -83,7 +83,8 @@
             'Queued', 'Send now', 'Edit queued', 'Editing queued', 'Remove from queue', 'Attached image',
             'Send After Current Message', 'Send Right Away', 'New Messages',
             'Manually Sent Messages from Queue', 'Send Immediately',
-            'Interrupt', 'Send after Agent finishes'
+            'Interrupt', 'Send after Agent finishes', 'Steer',
+            'Steer the agent without stopping it', 'Stop the agent and send the message'
         ],
         TI_JIAO_PING_FEN: [
             'Most Recent Commit Scored', 'AI-Generated:', 'Total Changes:', 'Agent Stats:', 'Tab Stats:',
