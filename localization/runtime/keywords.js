@@ -61,10 +61,10 @@
         ZHI_NENG_TI_MO_SHI: [
             'Switch Agent Mode', 'Switch Model', 'Cycle Effort', 'Agent Mode', 'Agent', 'Plan', 'Debug', 'Ask',
             'Multitask', 'Systematically diagnose',
-            'Ask Cursor questions', 'Using ', 'Plan, search',
-            'implementation plan', 'root cause of an issue', 'Orchestrate multiple subagents',
-            'without making edits', 'Search skills, context',
-            'mode-picker', 'agent-mode', 'prompt-barmode'
+            'Ask Cursor questions', 'Using ', 'Plan, search', 'build anything',
+            'Recommended', 'implementation plan', 'root cause of an issue',
+            'Orchestrate multiple subagents', 'without making edits',
+            'Search skills, context', 'mode-picker', 'agent-mode', 'prompt-barmode'
         ],
         LIU_LAN_QI_URL: [
             'Enter a URL above', 'instruct the Agent', 'Enter URL or search', 'Search or enter URL'
