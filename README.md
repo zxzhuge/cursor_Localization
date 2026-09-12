@@ -2,7 +2,7 @@
 
 在：[VibePM Cursor 汉化](https://www.vibepm.net/cursor/) 基础上进行优化
 
-测试环境：windows 11、cursor 安装在 D 盘、cursor 版本：3.19.13、IDE(非 Agent) 模式
+测试环境：windows 11、cursor 安装在 D 盘、cursor 版本：3.20.14、IDE(非 Agent) 模式
 
 ## 如何汉化
 
