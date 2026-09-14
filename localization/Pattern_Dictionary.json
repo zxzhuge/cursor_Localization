@@ -410,7 +410,7 @@
     {
       "regex": "^Switch Agent Mode \\((.+)\\)$",
       "flags": "",
-      "replacement": "切换智能体模式 ($1)"
+      "replacement": "切换智能体模式 (Shift+Tab)"
     },
     {
       "regex": "^Using image$",
