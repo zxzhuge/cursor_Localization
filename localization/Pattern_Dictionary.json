@@ -228,6 +228,11 @@
       "replacement": "解锁 Agent $1 倍用量及更多"
     },
     {
+      "regex": "^Get maximum value with (\\d+)x usage limits and early access to advanced features\\.?$",
+      "flags": "i",
+      "replacement": "尽享 $1 倍用量限额，并抢先体验高级功能。"
+    },
+    {
       "regex": "^Updated (.+) ago$",
       "flags": "i",
       "replacement": "$1前更新"
