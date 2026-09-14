@@ -2,10 +2,10 @@
 setlocal EnableExtensions EnableDelayedExpansion
 chcp 65001 >nul 2>&1
 cd /d "%~dp0"
-title Cursor 汉化启动器 - by VibePM.net
+title Cursor 汉化
 
 echo ============================================================
-echo   Cursor 汉化启动器 - by VibePM.net
+echo   Cursor 汉化
 echo   自动注入/更新汉化脚本，可选启动 Cursor
 echo ============================================================
 echo.
