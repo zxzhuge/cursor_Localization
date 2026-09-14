@@ -1,6 +1,6 @@
 {
   "description": "动态文本正则替换（MoShi_FanYi）。",
-  "updatedAt": "2026-08-13",
+  "updatedAt": "2026-09-14",
   "patterns": [
     {
       "regex": "^(\\d+) requests? remaining$",
@@ -933,9 +933,14 @@
       "replacement": "用量限额将于 $1 重置"
     },
     {
-      "regex": "^\\((\\d+) days? left\\)$",
+      "regex": "\\((\\d+) days? left\\)",
       "flags": "i",
       "replacement": "（剩余 $1 天）"
+    },
+    {
+      "regex": "(\\d+) days? left",
+      "flags": "i",
+      "replacement": "剩余 $1 天"
     },
     {
       "regex": "^\\$(\\d+)/mo$",
