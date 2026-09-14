@@ -245,6 +245,10 @@
           "超出限额的额外用量会产生按需消费。您的计划至少包含 20 美元 API 用量。"
         ],
         [
+          "Additional usage beyond limits consumes on-demand spend.",
+          "超出限额的额外用量会产生按需消费。"
+        ],
+        [
           "Upgrade",
           "升级"
         ],
