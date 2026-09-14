@@ -858,16 +858,6 @@
       "replacement": "$1 不受支持"
     },
     {
-      "regex": "^(\\d+k) context window$",
-      "flags": "i",
-      "replacement": "$1 上下文窗口"
-    },
-    {
-      "regex": "^(\\d+M) context window$",
-      "flags": "i",
-      "replacement": "$1 上下文窗口"
-    },
-    {
       "regex": "^(\\d+)% off through (.+?)\\.?$",
       "flags": "i",
       "replacement": "$1% 折扣，截至 $2"
