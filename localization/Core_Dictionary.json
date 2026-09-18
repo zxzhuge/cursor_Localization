@@ -1217,6 +1217,14 @@
           "当 Agent 完成或需要关注时显示系统通知"
         ],
         [
+          "Cloud Agent Approval Banners While Focused",
+          "聚焦时显示云端智能体审批横幅"
+        ],
+        [
+          "Also show the approval banner while Cursor is focused; the request card in the agent conversation always shows",
+          "Cursor 聚焦时也显示审批横幅；智能体对话中的请求卡片始终会显示"
+        ],
+        [
           "Warning Notifications",
           "警告通知"
         ],
@@ -7051,6 +7059,14 @@
         [
           "Show system notifications when Agent completes or needs attention",
           "当智能体完成或需要关注时显示系统通知"
+        ],
+        [
+          "Cloud Agent Approval Banners While Focused",
+          "聚焦时显示云端智能体审批横幅"
+        ],
+        [
+          "Also show the approval banner while Cursor is focused; the request card in the agent conversation always shows",
+          "Cursor 聚焦时也显示审批横幅；智能体对话中的请求卡片始终会显示"
         ],
         [
           "System Tray Icon",
