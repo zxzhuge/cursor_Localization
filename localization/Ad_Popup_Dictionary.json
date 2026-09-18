@@ -1,6 +1,6 @@
 {
   "description": "Cursor 左下角通知/推广弹窗（Notification Toast）专用翻译。修改后重新运行 Cursor_Localization_Tool.py 注入生效。",
-  "updatedAt": "2026-07-15",
+  "updatedAt": "2026-09-18",
   "entries": [
     [
       "Automations in the Agents Window",
@@ -53,6 +53,14 @@
     [
       "Later",
       "稍后"
+    ],
+    [
+      "New update available",
+      "有可用更新"
+    ],
+    [
+      "Install Now",
+      "立即安装"
     ],
     [
       "Not now",

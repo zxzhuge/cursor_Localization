@@ -1,6 +1,6 @@
 {
   "description": "Cursor 通用界面主词典。修改后重新运行 Cursor_Localization_Tool.py 注入生效。",
-  "updatedAt": "2026-09-05",
+  "updatedAt": "2026-09-18",
   "sections": [
     {
       "id": "左侧导航栏",
@@ -7843,8 +7843,16 @@
           "已是最新版本"
         ],
         [
+          "New update available",
+          "有可用更新"
+        ],
+        [
           "Install update",
           "安装更新"
+        ],
+        [
+          "Install Now",
+          "立即安装"
         ],
         [
           "Installing",
