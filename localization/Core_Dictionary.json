@@ -7451,22 +7451,6 @@
           "命令中心"
         ],
         [
-          "Check for Updates",
-          "检查更新"
-        ],
-        [
-          "Check for Updates...",
-          "检查更新..."
-        ],
-        [
-          "Check for &&Updates...",
-          "检查更新..."
-        ],
-        [
-          "Checking for Updates...",
-          "正在检查更新..."
-        ],
-        [
           "Download Update",
           "下载更新"
         ],
@@ -7823,18 +7807,6 @@
           "关于"
         ],
         [
-          "Check for updates",
-          "检查更新"
-        ],
-        [
-          "Copy version info",
-          "复制版本信息"
-        ],
-        [
-          "Copy Version Info",
-          "复制版本信息"
-        ],
-        [
           "Copy version",
           "复制版本号"
         ],
@@ -7853,10 +7825,6 @@
         [
           "Checking...",
           "正在检查..."
-        ],
-        [
-          "No updates available",
-          "已是最新版本"
         ],
         [
           "New update available",

@@ -1308,15 +1308,15 @@
     ],
     [
       "Check for updates",
-      "检查更新"
+      "Check for updates"
     ],
     [
       "Check for Updates...",
-      "检查更新..."
+      "Check for Updates..."
     ],
     [
       "Copy version info",
-      "复制版本信息"
+      "Copy version info"
     ],
     [
       "Copy version",
@@ -1333,10 +1333,6 @@
     [
       "Checking…",
       "正在检查…"
-    ],
-    [
-      "No updates available",
-      "已是最新版本"
     ],
     [
       "Install update",
