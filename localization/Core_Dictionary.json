@@ -67,6 +67,14 @@
           "模型"
         ],
         [
+          "Voice",
+          "语音"
+        ],
+        [
+          "Source Control",
+          "源代码管理"
+        ],
+        [
           "Rules",
           "规则"
         ],
@@ -2669,6 +2677,182 @@
         [
           "Custom words that submit a voice prompt. Spaces and punctuation are ignored",
           "用于提交语音提示的自定义词语。忽略空格与标点"
+        ],
+        [
+          "Words that send your prompt while you dictate. Voice chats ignore them.",
+          "口述时用于提交提示的词语。语音对话会忽略它们。"
+        ],
+        [
+          "Words that send your prompt while you dictate",
+          "口述时用于提交提示的词语"
+        ],
+        [
+          "Agent Voice",
+          "智能体声音"
+        ],
+        [
+          "Default voice for voice chats. Changing the voice plays a short sample.",
+          "语音对话的默认声音。更改声音会播放一段简短示例。"
+        ],
+        [
+          "Default voice for voice chats",
+          "语音对话的默认声音"
+        ],
+        [
+          "Speed",
+          "语速"
+        ],
+        [
+          "How quickly the voice speaks in voice chats.",
+          "语音对话中的说话速度。"
+        ],
+        [
+          "How quickly the voice speaks in voice chats",
+          "语音对话中的说话速度"
+        ],
+        [
+          "Language",
+          "语言"
+        ],
+        [
+          "Language used in voice chats.",
+          "语音对话使用的语言。"
+        ],
+        [
+          "Language used in voice chats",
+          "语音对话使用的语言"
+        ],
+        [
+          "Microphone",
+          "麦克风"
+        ],
+        [
+          "Microphone used in voice chats.",
+          "语音对话使用的麦克风。"
+        ],
+        [
+          "Microphone used in voice chats",
+          "语音对话使用的麦克风"
+        ],
+        [
+          "Auto-detect",
+          "自动检测"
+        ],
+        [
+          "System Default",
+          "系统默认"
+        ],
+        [
+          "English",
+          "英语"
+        ],
+        [
+          "Arabic (Egypt)",
+          "阿拉伯语（埃及）"
+        ],
+        [
+          "Arabic (Saudi Arabia)",
+          "阿拉伯语（沙特阿拉伯）"
+        ],
+        [
+          "Arabic (United Arab Emirates)",
+          "阿拉伯语（阿联酋）"
+        ],
+        [
+          "Bengali",
+          "孟加拉语"
+        ],
+        [
+          "Catalan",
+          "加泰罗尼亚语"
+        ],
+        [
+          "Chinese (Simplified)",
+          "中文（简体）"
+        ],
+        [
+          "Danish",
+          "丹麦语"
+        ],
+        [
+          "Dutch",
+          "荷兰语"
+        ],
+        [
+          "Finnish",
+          "芬兰语"
+        ],
+        [
+          "French",
+          "法语"
+        ],
+        [
+          "German",
+          "德语"
+        ],
+        [
+          "Hindi",
+          "印地语"
+        ],
+        [
+          "Hungarian",
+          "匈牙利语"
+        ],
+        [
+          "Indonesian",
+          "印度尼西亚语"
+        ],
+        [
+          "Italian",
+          "意大利语"
+        ],
+        [
+          "Japanese",
+          "日语"
+        ],
+        [
+          "Korean",
+          "韩语"
+        ],
+        [
+          "Polish",
+          "波兰语"
+        ],
+        [
+          "Portuguese (Brazil)",
+          "葡萄牙语（巴西）"
+        ],
+        [
+          "Portuguese (Portugal)",
+          "葡萄牙语（葡萄牙）"
+        ],
+        [
+          "Russian",
+          "俄语"
+        ],
+        [
+          "Spanish (Mexico)",
+          "西班牙语（墨西哥）"
+        ],
+        [
+          "Spanish (Spain)",
+          "西班牙语（西班牙）"
+        ],
+        [
+          "Swedish",
+          "瑞典语"
+        ],
+        [
+          "Thai",
+          "泰语"
+        ],
+        [
+          "Turkish",
+          "土耳其语"
+        ],
+        [
+          "Vietnamese",
+          "越南语"
         ],
         [
           "Choose which models appear in the model picker",

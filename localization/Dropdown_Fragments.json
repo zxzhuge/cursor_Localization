@@ -1353,6 +1353,14 @@
     [
       "Copyright © 2026 Anysphere. All rights reserved.",
       "版权所有 © 2026 Anysphere。保留所有权利。"
+    ],
+    [
+      "Auto-detect",
+      "自动检测"
+    ],
+    [
+      "System Default",
+      "系统默认"
     ]
   ]
 }

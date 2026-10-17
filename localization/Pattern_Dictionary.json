@@ -1106,6 +1106,10 @@
       "regex": "^Search Subagents for (.+)\\.\\.\\.$",
       "flags": "i",
       "replacement": "搜索 $1 的子智能体..."
+    },
+    {
+      "regex": "^Microphone (\\d+)$",
+      "replacement": "麦克风 $1"
     }
   ]
 }
