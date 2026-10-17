@@ -1,6 +1,6 @@
 {
   "description": "Cursor 通用界面主词典。修改后重新运行 Cursor_Localization_Tool.py 注入生效。",
-  "updatedAt": "2026-09-18",
+  "updatedAt": "2026-10-17",
   "sections": [
     {
       "id": "左侧导航栏",
@@ -2649,6 +2649,46 @@
         [
           "Start Voice Chat",
           "开始语音对话"
+        ],
+        [
+          "Start voice chat",
+          "开始语音对话"
+        ],
+        [
+          "Hang up",
+          "挂断"
+        ],
+        [
+          "Voice chat",
+          "语音对话"
+        ],
+        [
+          "Voice chat in progress",
+          "语音对话进行中"
+        ],
+        [
+          "Voice chat transcript",
+          "语音对话记录"
+        ],
+        [
+          "Voice chat is using the microphone",
+          "语音对话正在使用麦克风"
+        ],
+        [
+          "Voice call",
+          "语音通话"
+        ],
+        [
+          "Processing voice input…",
+          "正在处理语音输入…"
+        ],
+        [
+          "Processing voice input...",
+          "正在处理语音输入..."
+        ],
+        [
+          "Voice input unavailable",
+          "语音输入不可用"
         ],
         [
           "Start Recording",

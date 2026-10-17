@@ -793,6 +793,11 @@
       "replacement": "语音输入 ($1)"
     },
     {
+      "regex": "^Voice chat with (.+)$",
+      "flags": "",
+      "replacement": "与 $1 语音对话"
+    },
+    {
       "regex": "^Fixed Width \\((.+)\\)$",
       "flags": "",
       "replacement": "固定宽度 ($1)"
